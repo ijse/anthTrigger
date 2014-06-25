@@ -1,6 +1,6 @@
 module.exports = {
 
-	shellDir: __dirname,
+	shellDir: __dirname + '/shells',
 
 	projects: {
 
