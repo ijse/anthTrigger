@@ -4,8 +4,18 @@
   "description": "Trigger events via http service",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --compilers coffee:coffee-script/register -R spec"
   },
   "author": "ijse",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "coffee-script": "~1.7.1",
+    "connect": "~3.0.1",
+    "express": "~4.4.4",
+    "body-parser": "~1.4.3"
+  },
+  "devDependencies": {
+    "mocha": "~1.20.1",
+    "supertest": "~0.13.0"
+  }
 }
