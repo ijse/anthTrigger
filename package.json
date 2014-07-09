@@ -12,7 +12,8 @@
     "coffee-script": "~1.7.1",
     "connect": "~3.0.1",
     "express": "~4.4.4",
-    "body-parser": "~1.4.3"
+    "body-parser": "~1.4.3",
+    "tiny": "0.0.10"
   },
   "devDependencies": {
     "mocha": "~1.20.1",
