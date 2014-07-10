@@ -1,6 +1,7 @@
 
 express = require 'express'
 session = require 'express-session'
+bodyParser = require 'body-parser'
 logger = require 'morgan'
 
 spawn = require('child_process').spawn
@@ -17,7 +18,7 @@ module.exports = (configs)->
 	  secret: 'AnthTrigger session secret'
 	})
 
-	app.use(require('body-parser')())
+	app.use(bodyParser())
 	app.use express.static(__dirname + '/../public')
 
 	app.get '/ping', (req, res)-> res.send('pong!')
