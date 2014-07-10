@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	<title>Admetro | UI Elements - Modal & Notification</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	
+	<!-- ================== GLOBAL STYLE START ================== -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+	<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+	<link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="assets/jquery-ui/jquery-ui-1.10.1.custom.css" rel="stylesheet" />
+	<link href="assets/css/style.min.css" rel="stylesheet" />
+	<link href="assets/css/style-responsive.min.css" rel="stylesheet" />
+	<!-- ================== GLOBAL STYLE END ================== -->
+	
+	<!-- ================== PAGE LEVEL STYLE START ================== -->
+	<link rel="stylesheet" href="assets/gritter/css/jquery.gritter.css" />
+	<!-- ================== PAGE LEVEL STYLE END ================== -->
+    
+    <!-- IE8 HTML5 COMPATIBILITY -->
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<body>
+	
+	<!-- Body Cover Image & Logo
+  	================================================== -->
+	<div class="body-cover"></div>
+	<div class="logo"><i class="icon-leaf"></i> ADMETRO</div>
+	
+	<!-- Top Navigation 
+  	================================================== -->
+	<div id="top-nav">
+		<div class="navbar">
+			<div class="navbar-inner">
+				<a href="#" class="btn btn-navbar pull-right" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<ul class="nav pull-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="icon-refresh"></i><span class="label label-info">5</span>
+						</a>
+						<ul class="dropdown-menu ">
+							<li><a href="#"><span class="label label-success"><i class="icon-plus-sign"></i></span> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+							<li><a href="#"><span class="label label-warning"><i class="icon-exclamation-sign"></i></span> Duis aliquet pharetra dapibus.</a></li>
+							<li><a href="#"><span class="label label-important"><i class="icon-shopping-cart"></i></span> Proin rhoncus ipsum a iaculis rutrum.</a></li>
+							<li><a href="#"><span class="label label-info"><i class="icon-hdd"></i></span> Pellentesque sollicitudin mi tellus, eget posuere metus rhoncus sed.</a></li>
+							<li class="divider"></li>
+							<li class="dropdown-footer"><a href="#"><span class="label"><i class="icon-circle-arrow-right"></i></span> View all updates</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><i class="icon-envelope"></i></a>
+					</li>
+					<li>
+						<a href="#"><i class="icon-exclamation-sign"></i></a>
+					</li>
+					<li class="divider-vertical"></li>
+			  		<li class="dropdown">
+			  			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			  				<img alt="" src="assets/img/user-profile-pic-0.png" /> <span class="hidden-phone">Sean Ngu</span>
+			  			</a>
+			  			<ul class="dropdown-menu">
+							<li><a href="layout_user_profile.html"><i class="icon-user"></i> My Profile</a></li>
+							<li><a href="#"><i class="icon-cogs"></i> Setting</a></li>
+							<li class="divider"></li>
+							<li><a href="login.html"><i class="icon-signout"></i> Logout</a></li>
+						</ul>
+			  		</li>
+				</ul>
+				<form class="navbar-search pull-right hidden-phone" />
+				  	<input type="text" class="search-query" placeholder="Search" />
+  					<button type="submit" class="btn"><i class="icon-search"></i></button>
+				</form>
+		  	</div><!-- end navbar inner -->
+		</div><!-- end navbar -->
+  	</div><!-- end #top-navigation -->
+	
+	<!-- Sidebar 
+  	================================================== -->
+	<div id="sidebar" class="nav-collapse collapse">
+		<ul class="nav">
+			<li><a href="index.html"><i class="icon-home"></i> Dashboard</a></li>
+			<li class="has-sub active">
+				<a href="#"><i class="icon-briefcase"></i> UI Elements <span class="label">6</span></a>
+				<ul class="dropdown-menu">
+					<li><a href="ui_general.html">General</a></li>
+					<li><a href="ui_tabs_accordions.html">Tabs & Accordions</a></li>
+					<li class="active"><a href="ui_modal_notification.html">Modal & Notification</a></li>
+					<li><a href="ui_widget_boxes.html">Widget Boxes</a></li>
+					<li><a href="ui_media_object.html">Media Object</a></li>
+					<li><a href="ui_predefined_css_classes.html">Predefined CSS Classes</a></li>
+				</ul>
+			</li>
+			<li><a href="buttons.html"><i class="icon-hand-up"></i> Buttons</a></li>
+			<li><a href="icons.html"><i class="icon-apple"></i> Icons</a></li>
+			<li><a href="typography.html"><i class="icon-font"></i> Typography</a></li>
+			<li class="has-sub">
+				<a href="#"><i class="icon-file-text"></i> Form Stuff <span class="label">5</span></a>
+				<ul class="dropdown-menu">
+					<li><a href="form_elements.html">Form Elements</a></li>
+					<li><a href="form_plugins.html">Form Plugins</a></li>
+					<li><a href="form_validation.html">Form Validation</a></li>
+					<li><a href="form_wizards.html">Wizards</a></li>
+					<li><a href="form_wysiwyg.html">WYSIWYG</a></li>
+				</ul>
+			</li>
+			<li class="has-sub">
+				<a href="#"><i class="icon-table"></i> Tables <span class="label">2</span></a>
+				<ul class="dropdown-menu">
+					<li><a href="table_basic.html">Basic Tables</a></li>
+					<li><a href="table_manage.html">Managed Tables</a></li>
+				</ul>
+			</li>
+			<li><a href="charts.html"><i class="icon-bar-chart"></i> Charts</a></li>
+			<li><a href="calendar.html"><i class="icon-calendar"></i> Calendar</a></li>
+			<li><a href="maps.html"><i class="icon-map-marker"></i> Maps</a></li>
+			<li><a href="gallery.html"><i class="icon-camera"></i> Gallery</a></li>
+			<li class="has-sub">
+				<a href="#"><i class="icon-file"></i> Pages <span class="label">2</span></a>
+				<ul class="dropdown-menu">
+					<li><a href="page_blank.html">Blank Page</a></li>
+					<li><a href="page_without_sidebar.html">Page Without Sidebar</a></li>
+				</ul>
+			</li>
+			<li class="has-sub">
+				<a href="#"><i class="icon-windows"></i> Layouts <span class="label">4</span></a>
+				<ul class="dropdown-menu">
+					<li><a href="layout_search_results.html">Search Results</a></li>
+					<li><a href="layout_invoice.html">Invoice</a></li>
+					<li><a href="layout_user_profile.html">User Profile</a></li>
+					<li><a href="layout_404_error.html">404 Error Page</a></li>
+				</ul>
+			</li>
+			<li><a href="login.html"><i class="icon-user"></i> Login</a></li>
+		</ul>
+	</div><!-- end #sidebar -->
+	
+	<!-- Content 
+  	================================================== -->
+	<div id="content">
+		<div class="container-fluid">
+			<h1 class="page-title">Modal & Notification <small>modal & notification setting</small></h1>
+			<div class="row-fluid">
+				<div class="span6">
+					<div class="widget">
+						<div class="widget-header">
+							<h4>Gritter Notification Boxes</h4>
+						</div>
+						<div class="widget-content">
+							<p><a href="#" id="add-regular" class="btn btn-primary">Add regular notification</a></p>
+							<p><span class="inline-help">Fades out after a certain amount of time, can be set for each notification.</span></p>
+							<p><a href="#" id="add-sticky" class="btn btn-primary">Add sticky notification</a></p>
+							<p>Doesn't run on a fade timer. Just sits there until the user manually removes it by clicking on the (X).</p>
+							<p><a href="#" id="add-without-image" class="btn btn-info">Add notification without image</a></p>
+							<p><a href="#" id="add-gritter-light" class="btn btn-info">Add a white notification</a></p>
+							<p>has a 'gritter-light' class_name applied to it.</p>
+							<p><a href="#" id="add-with-callbacks" class="btn btn-warning">Add notification (with callbacks)</a></p>
+							<p><a href="#" id="add-sticky-with-callbacks" class="btn btn-warning">Add a sticky notification (with callbacks)</a></p>
+							<p><a href="#" id="add-max" class="btn btn-warning">Add notification with max of 3</a></p>
+							<p>If there are 3 messages already on screen, it won't show another one.</p>
+							<p><a href="#" id="remove-all" class="btn">Remove all notifications</a></p>
+							<p><a href="#" id="remove-with-callbacks" class="btn">Remove all notifications (with callbacks)</a></p>
+						</div>
+					</div>
+				</div><!-- end span6 -->
+				<div class="span6">
+					<div class="widget">
+						<div class="widget-header">
+							<h4>Modal Dialog</h4>
+						</div>
+						<div class="widget-content">
+							<p><a href="#modal-dialog" class="btn btn-primary" data-toggle="modal">Modal Dialog</a></p>
+							<p>Default Modal Dialog Box.</p>
+							<p><a href="#modal-without-animation" class="btn" data-toggle="modal">Modal Without Fade Animation</a></p>
+							<p>Modal Dialog Box with fade out animation.</p>
+							<!-- #modal-dialog -->
+							<div class="modal hide fade" id="modal-dialog">
+								<div class="modal-header">
+									<h3>
+										Modal Dialog
+										<span class="close" data-dismiss="modal">&times;</span>
+									</h3>
+								</div>
+								<div class="modal-body">
+									Modal body content here...
+								</div>
+								<div class="modal-footer">
+									<a href="#" class="btn" data-dismiss="modal">Close</a>
+									<a href="#" class="btn btn-primary">Action</a>
+								</div>
+							</div>
+							<!-- #modal-without-animation -->
+							<div class="modal hide" id="modal-without-animation">
+								<div class="modal-header">
+									<h3>
+										Modal Without Animation
+										<span class="close" data-dismiss="modal">&times;</span>
+									</h3>
+								</div>
+								<div class="modal-body">
+									Modal body content here...
+								</div>
+								<div class="modal-footer">
+									<a href="#" class="btn" data-dismiss="modal">Close</a>
+								</div>
+							</div>
+							<p><a href="#modal-message" class="btn btn-primary" data-toggle="modal">Modal Message</a></p>
+							<p>Modal Dialog Box with full width white background.</p>
+							<p><a href="#modal-alert" class="btn" data-toggle="modal">Alert</a></p>
+							<p>Modal Dialog Box with alert message.</p>
+							<!-- #modal-message -->
+							<div class="modal modal-message hide fade" id="modal-message">
+								<div class="modal-header">
+									<h3>
+										Modal Message Header
+										<span class="close" data-dismiss="modal">&times;</span>
+									</h3>
+								</div>
+								<div class="modal-body">
+									<p>
+										Text in a modal
+									</p>
+									<p>
+										Do you want to turn on location services so GPS can use your location ?
+									</p>
+								</div>
+								<div class="modal-footer">
+									<a href="#" class="btn" data-dismiss="modal">Close</a>
+									<a href="#" class="btn btn-primary">Save Changes</a>
+								</div>
+							</div>
+							<!-- #modal-alert -->
+							<div class="modal hide fade" id="modal-alert">
+								<div class="modal-header">
+									<h3>
+										Alert Header
+										<span class="close" data-dismiss="modal">&times;</span>
+									</h3>
+								</div>
+								<div class="modal-body">
+									<div class="alert alert-info margin-bottom-0">
+										<i class="icon-info-sign icon-4x pull-left"></i> 
+										Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+									</div>
+								</div>
+								<div class="modal-footer">
+									<a href="#" class="btn" data-dismiss="modal">Close</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><!-- end span6 -->
+			</div><!-- end row-fluid -->
+		</div><!-- end container-fluid -->
+	</div><!-- end #content -->
+	
+	<!-- Footer 
+  	================================================== -->
+    <div id="footer">
+        <span id="scrollTop" class="pull-right">
+        	<a href="#top-navigation" class="btn btn-inverse btn-small" data-toggle="tooltip" data-title="Back to Top" data-placement="top">
+            	<i class="icon-chevron-up"></i>
+            </a>
+        </span> 
+    	&copy; 2013 Admetro Responsive Admin Template - Sean Ngu All Rights Reserved 
+    </div><!-- end #footer -->
+	
+	<!-- ================== GLOBAL PLUGINS START ================== -->
+	<script src="assets/js/jquery-1.8.2.min.js"></script>
+	<script src="assets/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/slimscroll/jquery.slimscroll.min.js"></script>
+	<!-- ================== GLOBAL PLUGINS START ================== -->
+	
+	<!-- ================== PAGE LEVEL PLUGINS START ================== -->
+	<script src="assets/gritter/js/jquery.gritter.js"></script>
+	<!-- ================== PAGE LEVEL PLUGINS END ================== -->
+	
+	<!-- Application Setting -->
+	<script src="assets/js/apps.js"></script>
+	<script>
+		$(document).ready(function() {
+			App.setPage('ui-modal-notification');
+			App.init();
+		});
+	</script>
+</body>
+</html>
+<!-- www.1freehosting.com Analytics Code -->
+<noscript><a title="Free hosting" href="http://www.1freehosting.com">Free hosting</a><a title="Web host free" href="http://www.1freehosting.com">Web host free</a><a title="Free websites hosting" href="http://www.1freehosting.com/free-website-and-hosting.html">Free websites hosting</a><a title="Pagerank SEO analytic" href="http://www.1pagerank.com">Pagerank SEO analytic</a></noscript>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-21588661-2']);
+  _gaq.push(['_setDomainName', window.location.host]);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+    var fga = document.createElement('script'); fga.type = 'text/javascript'; fga.async = true;
+    fga.src = ('https:' == document.location.protocol ? 'https://www' : 'http://www') + '.1freehosting.com/cdn/ga.js';
+    var fs = document.getElementsByTagName('script')[0]; fs.parentNode.insertBefore(fga, fs);
+
+  })();
+</script>
+<!-- End Of Analytics Code -->

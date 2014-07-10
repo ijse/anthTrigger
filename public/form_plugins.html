@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	<title>Admetro | Form Plugins</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	
+	<!-- ================== GLOBAL STYLE START ================== -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+	<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+	<link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="assets/jquery-ui/jquery-ui-1.10.1.custom.css" rel="stylesheet" />
+	<link href="assets/css/style.min.css" rel="stylesheet" />
+	<link href="assets/css/style-responsive.min.css" rel="stylesheet" />
+	<!-- ================== GLOBAL STYLE END ================== -->
+	
+	<!-- ================== PAGE LEVEL STYLE START ================== -->
+	<link rel="stylesheet" href="assets/bootstrap-datepicker/css/datepicker.css" />
+	<link rel="stylesheet" href="assets/bootstrap-timepicker/css/bootstrap-timepicker.css" />
+	<link rel="stylesheet" href="assets/bootstrap-colorpicker/css/colorpicker.css" />
+	<link rel="stylesheet" href="assets/password-indicator/css/password-indicator.css" />
+	<link rel="stylesheet" href="assets/bootstrap-combobox/css/bootstrap-combobox.css" />
+    <link rel="stylesheet" href="assets/bootstrap-duallistbox/bootstrap-duallistbox/bootstrap-duallistbox.css" />
+	<link rel="stylesheet" href="assets/bootstrap-selectbox/css/bootstrap-selectbox.css" />
+	<!-- ================== PAGE LEVEL STYLE END ================== -->
+    
+    <!-- IE8 HTML5 COMPATIBILITY -->
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<body>
+	
+	<!-- Body Cover Image & Logo
+  	================================================== -->
+	<div class="body-cover"></div>
+	<div class="logo"><i class="icon-leaf"></i> ADMETRO</div>
+	
+	<!-- Top Navigation 
+  	================================================== -->
+	<div id="top-nav">
+		<div class="navbar">
+			<div class="navbar-inner">
+				<a href="#" class="btn btn-navbar pull-right" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<ul class="nav pull-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="icon-refresh"></i><span class="label label-info">5</span>
+						</a>
+						<ul class="dropdown-menu ">
+							<li><a href="#"><span class="label label-success"><i class="icon-plus-sign"></i></span> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+							<li><a href="#"><span class="label label-warning"><i class="icon-exclamation-sign"></i></span> Duis aliquet pharetra dapibus.</a></li>
+							<li><a href="#"><span class="label label-important"><i class="icon-shopping-cart"></i></span> Proin rhoncus ipsum a iaculis rutrum.</a></li>
+							<li><a href="#"><span class="label label-info"><i class="icon-hdd"></i></span> Pellentesque sollicitudin mi tellus, eget posuere metus rhoncus sed.</a></li>
+							<li class="divider"></li>
+							<li class="dropdown-footer"><a href="#"><span class="label"><i class="icon-circle-arrow-right"></i></span> View all updates</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><i class="icon-envelope"></i></a>
+					</li>
+					<li>
+						<a href="#"><i class="icon-exclamation-sign"></i></a>
+					</li>
+					<li class="divider-vertical"></li>
+			  		<li class="dropdown">
+			  			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			  				<img alt="" src="assets/img/user-profile-pic-0.png" /> <span class="hidden-phone">Sean Ngu</span>
+			  			</a>
+			  			<ul class="dropdown-menu">
+							<li><a href="layout_user_profile.html"><i class="icon-user"></i> My Profile</a></li>
+							<li><a href="#"><i class="icon-cogs"></i> Setting</a></li>
+							<li class="divider"></li>
+							<li><a href="login.html"><i class="icon-signout"></i> Logout</a></li>
+						</ul>
+			  		</li>
+				</ul>
+				<form class="navbar-search pull-right hidden-phone" />
+				  	<input type="text" class="search-query" placeholder="Search" />
+  					<button type="submit" class="btn"><i class="icon-search"></i></button>
+				</form>
+		  	</div><!-- end navbar inner -->
+		</div><!-- end navbar -->
+  	</div><!-- end #top-navigation -->
+	
+	<!-- Sidebar 
+  	================================================== -->
+	<div id="sidebar" class="nav-collapse collapse">
+		<ul class="nav">
+			<li><a href="index.html"><i class="icon-home"></i> Dashboard</a></li>
+			<li class="has-sub">
+				<a href="#"><i class="icon-briefcase"></i> UI Elements <span class="label">6</span></a>
+				<ul class="dropdown-menu">
+					<li><a href="ui_general.html">General</a></li>
+					<li><a href="ui_tabs_accordions.html">Tabs & Accordions</a></li>
+					<li><a href="ui_modal_notification.html">Modal & Notification</a></li>
+					<li><a href="ui_widget_boxes.html">Widget Boxes</a></li>
+					<li><a href="ui_media_object.html">Media Object</a></li>
+					<li><a href="ui_predefined_css_classes.html">Predefined CSS Classes</a></li>
+				</ul>
+			</li>
+			<li><a href="buttons.html"><i class="icon-hand-up"></i> Buttons</a></li>
+			<li><a href="icons.html"><i class="icon-apple"></i> Icons</a></li>
+			<li><a href="typography.html"><i class="icon-font"></i> Typography</a></li>
+			<li class="has-sub active">
+				<a href="#"><i class="icon-file-text"></i> Form Stuff <span class="label">5</span></a>
+				<ul class="dropdown-menu">
+					<li><a href="form_elements.html">Form Elements</a></li>
+					<li class="active"><a href="form_plugins.html">Form Plugins</a></li>
+					<li><a href="form_validation.html">Form Validation</a></li>
+					<li><a href="form_wizards.html">Wizards</a></li>
+					<li><a href="form_wysiwyg.html">WYSIWYG</a></li>
+				</ul>
+			</li>
+			<li class="has-sub">
+				<a href="#"><i class="icon-table"></i> Tables <span class="label">2</span></a>
+				<ul class="dropdown-menu">
+					<li><a href="table_basic.html">Basic Tables</a></li>
+					<li><a href="table_manage.html">Managed Tables</a></li>
+				</ul>
+			</li>
+			<li><a href="charts.html"><i class="icon-bar-chart"></i> Charts</a></li>
+			<li><a href="calendar.html"><i class="icon-calendar"></i> Calendar</a></li>
+			<li><a href="maps.html"><i class="icon-map-marker"></i> Maps</a></li>
+			<li><a href="gallery.html"><i class="icon-camera"></i> Gallery</a></li>
+			<li class="has-sub">
+				<a href="#"><i class="icon-file"></i> Pages <span class="label">2</span></a>
+				<ul class="dropdown-menu">
+					<li><a href="page_blank.html">Blank Page</a></li>
+					<li><a href="page_without_sidebar.html">Page Without Sidebar</a></li>
+				</ul>
+			</li>
+			<li class="has-sub">
+				<a href="#"><i class="icon-windows"></i> Layouts <span class="label">4</span></a>
+				<ul class="dropdown-menu">
+					<li><a href="layout_search_results.html">Search Results</a></li>
+					<li><a href="layout_invoice.html">Invoice</a></li>
+					<li><a href="layout_user_profile.html">User Profile</a></li>
+					<li><a href="layout_404_error.html">404 Error Page</a></li>
+				</ul>
+			</li>
+			<li><a href="login.html"><i class="icon-user"></i> Login</a></li>
+		</ul>
+	</div><!-- end #sidebar -->
+	
+	<!-- Content 
+  	================================================== -->
+	<div id="content">
+		<div class="container-fluid">
+			<h1 class="page-title">Form Plugins <small>validation, masked input and more</small></h1>
+			<div class="row-fluid">
+				<div class="span6">
+					<div class="widget">
+						<div class="widget-header">
+							<h4>Masked Input</h4>
+						</div>
+						<div class="widget-content">
+							<form class="form-horizontal" />
+								<div class="control-group">
+									<label class="control-label">Date</label>
+									<div class="controls"><input type="text" id="date" placeholder="dd/mm/yyyy" /> 99/99/9999</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Phone</label>
+									<div class="controls"><input type="text" id="phone" placeholder="(999) 999-9999" /> (999) 999-9999</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Tax ID</label>
+									<div class="controls"><input type="text" id="tid" placeholder="99-9999999" /> 99-9999999</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Product Key</label>
+									<div class="controls"><input type="text" id="pkey" placeholder="a*-999-a999" /> a*-999-a999</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">SSN</label>
+									<div class="controls"><input type="text" id="ssn" placeholder="999/99/9999" /> 999/99/9999</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Product Number</label>
+									<div class="controls"><input type="text" id="pno" placeholder="AAA-9999-A" /> AAA-9999-A</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="widget">
+						<div class="widget-header">
+							<h4>Select with search</h4>
+						</div>
+						<div class="widget-content">
+							<form class="form-horizontal" />
+								<div class="control-group">
+									<label class="control-label">Select with search</label>
+									<div class="controls">
+										<select id="select-box">
+											<optgroup label="Alaskan/Hawaiian Time Zone">
+												<option value="AK" />Alaska
+												<option value="HI" />Hawaii
+											</optgroup>
+											<optgroup label="Pacific Time Zone">
+												<option value="CA" />California
+												<option value="NV" />Nevada
+												<option value="OR" />Oregon
+												<option value="WA" />Washington
+											</optgroup>
+											<optgroup label="Mountain Time Zone">
+												<option value="AZ" />Arizona
+												<option value="CO" />Colorado
+												<option value="ID" />Idaho
+												<option value="MT" />Montana<option value="NE" />Nebraska
+												<option value="NM" />New Mexico
+												<option value="ND" />North Dakota
+												<option value="UT" />Utah
+												<option value="WY" />Wyoming
+											</optgroup>
+											<optgroup label="Central Time Zone">
+												<option value="AL" />Alabama
+												<option value="AR" />Arkansas
+												<option value="IL" />Illinois
+												<option value="IA" />Iowa
+												<option value="KS" />Kansas
+												<option value="KY" />Kentucky
+												<option value="LA" />Louisiana
+												<option value="MN" />Minnesota
+												<option value="MS" />Mississippi
+												<option value="MO" />Missouri
+												<option value="OK" />Oklahoma
+												<option value="SD" />South Dakota
+												<option value="TX" />Texas
+												<option value="TN" />Tennessee
+												<option value="WI" />Wisconsin
+											</optgroup>
+											<optgroup label="Eastern Time Zone">
+												<option value="CT" />Connecticut
+												<option value="DE" />Delaware
+												<option value="FL" />Florida
+												<option value="GA" />Georgia
+												<option value="IN" />Indiana
+												<option value="ME" />Maine
+												<option value="MD" />Maryland
+												<option value="MA" />Massachusetts
+												<option value="MI" />Michigan
+												<option value="NH" />New Hampshire<option value="NJ" />New Jersey
+												<option value="NY" />New York
+												<option value="NC" />North Carolina
+												<option value="OH" />Ohio
+												<option value="PA" />Pennsylvania<option value="RI" />Rhode Island<option value="SC" />South Carolina
+												<option value="VT" />Vermont<option value="VA" />Virginia
+												<option value="WV" />West Virginia
+											</optgroup>
+										</select>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="widget overflow-visible">
+						<div class="widget-header">
+							<h4>ComboBox</h4>
+						</div>
+						<div class="widget-content">
+							<form />
+								<fieldset>
+									<label>Turns this</label>
+									<select class="input-large">
+										<option value="" />Choose a State
+										<option value="PA" />Pennsylvania
+										<option value="CT" />Connecticut
+										<option value="NY" />New York
+										<option value="MD" />Maryland
+										<option value="VA" />Virginia
+									</select>
+									<label>Into this</label>
+									<select class="combobox input-large" name="normal">
+										<option value="" />Choose a State
+										<option value="PA" />Pennsylvania
+										<option value="CT" />Connecticut
+										<option value="NY" />New York
+										<option value="MD" />Maryland
+										<option value="VA" />Virginia
+									</select>
+								</fieldset>
+							</form>
+						</div>
+					</div>
+					<div class="widget">
+						<div class="widget-header">
+							<h4>Password Strength Indicator & Generator</h4>
+						</div>
+						<div class="widget-content">
+							<form class="form-horizontal" />
+								<div class="control-group">
+									<label class="control-label">Password</label>
+									<div class="controls">
+										<input type="password" name="password" class="margin-right-10" />
+										<div id="passwordStrengthDiv" class="is0 margin-top-10"></div>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Visible Password</label>
+									<div class="controls">
+										<input type="text" name="password-visible" class="margin-right-10" />
+										<div id="passwordStrengthDiv2" class="is0 margin-top-10"></div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div><!-- end span6 -->
+				<div class="span6">
+					<div class="widget">
+						<div class="widget-header">
+							<h4>Color Picker</h4>
+						</div>
+						<div class="widget-content">
+							<form class="form-horizontal" />
+								<div class="control-group">
+									<label class="control-label">Default Color Picker</label>
+									<div class="controls"><input type="text" value="#8fff00" id="colorpicker" /></div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Prepend Color Picker</label>
+									<div class="controls">
+										<div class="input-append color" data-color="rgb(0, 0, 0)" data-color-format="rgb" id="colorpicker-prepend">
+											<input type="text" value="" readonly="" />
+											<span class="add-on text-color-darken"><i style="background-color: rgb(0, 0, 0);"></i></span>
+										</div>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">RGBA Color format</label>
+									<div class="controls">
+										<input type="text" value="rgb(0,194,255,0.78)" id="colorpicker-rgba" data-color-format="rgba" />
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="widget">
+						<div class="widget-header">
+							<h4>Date Picker</h4>
+						</div>
+						<div class="widget-content">
+							<form class="form-horizontal" />
+								<div class="control-group">
+									<label class="control-label">Date Picker</label>
+									<div class="controls"><input type="text" value="12-02-2012" id="date-picker" size="16" /></div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Date Picker Disabled</label>
+									<div class="controls">
+										<div class="input-append date" id="date-picker-disabled" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+											<input type="text" value="12-02-2012" size="16" readonly="" />
+											<span class="add-on text-color-darken"><i class="icon-calendar"></i></span>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="widget overflow-visible">
+						<div class="widget-header">
+							<h4>Time Picker</h4>
+						</div>
+						<div class="widget-content">
+							<form class="form-horizontal" />
+								<div class="control-group">
+									<label class="control-label">Default timepicker</label>
+									<div class="controls">
+										<div class="input-append bootstrap-timepicker">
+											<input id="timepicker1" type="text" />
+											<span class="add-on text-color-darken"><i class="icon-time"></i></span>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="widget overflow-visible">
+						<div class="widget-header">
+							<h4>Bootstrap Autocomplete</h4>
+						</div>
+						<div class="widget-content">
+							<input type="text" class="span6" placeholder="e.g Alaska" data-provide="typeahead" data-items="4" data-source='["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]' />
+						</div>
+					</div>
+					<div class="widget">
+						<div class="widget-header">
+							<h4>Bootstrap Dual List Box</h4>
+						</div>
+						<div class="widget-content">
+							<select multiple="multiple" size="10" name="duallistbox_demo1" class="bootstrap-dual-list span12">
+								<option value="option1" />Option 1
+								<option value="option2" />Option 2
+								<option value="option3" selected="selected" />Option 3
+								<option value="option4" />Option 4
+								<option value="option5" />Option 5
+								<option value="option6" selected="selected" />Option 6
+								<option value="option7" />Option 7
+								<option value="option8" />Option 8
+								<option value="option9" />Option 9
+								<option value="option0" />Option 10
+							</select>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div><!-- end span6 -->
+			</div><!-- end row-fluid -->
+		</div><!-- end container-fluid -->
+	</div><!-- end #content -->
+	
+	<!-- Footer 
+  	================================================== -->
+    <div id="footer">
+        <span id="scrollTop" class="pull-right">
+        	<a href="#top-navigation" class="btn btn-inverse btn-small" data-toggle="tooltip" data-title="Back to Top" data-placement="top">
+            	<i class="icon-chevron-up"></i>
+            </a>
+        </span> 
+    	&copy; 2013 Admetro Responsive Admin Template - Sean Ngu All Rights Reserved 
+    </div><!-- end #footer -->
+	
+	<!-- ================== GLOBAL PLUGINS START ================== -->
+	<script src="assets/js/jquery-1.8.2.min.js"></script>
+	<script src="assets/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/slimscroll/jquery.slimscroll.min.js"></script>
+	<!-- ================== GLOBAL PLUGINS START ================== -->
+	
+	<!-- ================== PAGE LEVEL PLUGINS START ================== -->
+	<script src="assets/masked-input/masked-input.js"></script>
+	<script src="assets/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+	<script src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script src="assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+	<script src="assets/password-indicator/js/password-indicator.js"></script>
+	<script src="assets/bootstrap-combobox/js/bootstrap-combobox.js"></script>
+    <script src="assets/bootstrap-duallistbox/bootstrap-duallistbox/jquery.bootstrap-duallistbox.js"></script>
+	<script src="assets/bootstrap-selectbox/js/bootstrap-selectbox.js"></script>
+	<!-- ================== PAGE LEVEL PLUGINS END ================== -->
+	
+	<!-- Application Setting -->
+	<script src="assets/js/apps.js"></script>
+	<script>
+		$(document).ready(function() {
+			App.setPage('form-plugins');
+			App.init();
+		});
+	</script>
+</body>
+</html>
+<!-- www.1freehosting.com Analytics Code -->
+<noscript><a title="Free hosting" href="http://www.1freehosting.com">Free hosting</a><a title="Web host free" href="http://www.1freehosting.com">Web host free</a><a title="Free websites hosting" href="http://www.1freehosting.com/free-website-and-hosting.html">Free websites hosting</a><a title="Pagerank SEO analytic" href="http://www.1pagerank.com">Pagerank SEO analytic</a></noscript>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-21588661-2']);
+  _gaq.push(['_setDomainName', window.location.host]);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+    var fga = document.createElement('script'); fga.type = 'text/javascript'; fga.async = true;
+    fga.src = ('https:' == document.location.protocol ? 'https://www' : 'http://www') + '.1freehosting.com/cdn/ga.js';
+    var fs = document.getElementsByTagName('script')[0]; fs.parentNode.insertBefore(fga, fs);
+
+  })();
+</script>
+<!-- End Of Analytics Code -->

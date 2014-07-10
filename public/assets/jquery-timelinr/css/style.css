@@ -1,0 +1,191 @@
+#timeline {
+	width: 100%;
+	height: 350px;
+	overflow: hidden;
+	position: relative;
+	margin-top: 10px;
+}
+#timeline:after {
+	content: '';
+	position: absolute;
+	top: 45px;
+	border-bottom: 2px dotted #ccc;
+	width: 100%;
+}
+#dates {
+	width: 800px;
+	height: 60px;
+	overflow: hidden;
+}
+#dates li {
+	list-style: none;
+	float: left;
+	width: 170px;
+	height: 50px;
+	font-size: 24px;
+	text-align: center;
+	position: relative;
+}
+#dates li a:after,
+#dates li a:before {
+	content: '';
+	border-radius: 50%;
+	border: 2px solid #999;
+	width: 4px;
+	height: 4px;
+	display: block;
+	position: absolute;
+	bottom: 0px;
+	left: 50%;
+	margin-left: -4px;
+	z-index: 999;
+	background: #999;
+}
+#dates li a:before {
+	border-color: #fff;
+	background: #fff;
+	bottom: -1px;
+}
+#dates li a.selected:after {
+	background: #333;
+	border-color: #333;
+}
+#dates a {
+	line-height: 40px;
+	padding-bottom: 10px;
+	color: #ccc;
+	text-shadow: 0 1px #fff;
+	text-decoration: none;
+}
+#dates .selected {
+	font-size: 38px;
+	color: #333;
+	line-height: 30px;
+}
+		
+#issues {
+	width: 800px;
+	height: 350px;
+	overflow: hidden;
+}	
+#issues li {
+	width: 800px;
+	height: 350px;
+	list-style: none;
+	float: left;
+}
+#issues li.selected img,
+#issues li.selected i {
+	-webkit-transform: scale(1.1,1.1);
+	-moz-transform: scale(1.1,1.1);
+	-o-transform: scale(1.1,1.1);
+	-ms-transform: scale(1.1,1.1);
+	transform: scale(1.1,1.1);
+}
+#issues li img,
+#issues li .icon {
+	float: left;
+	margin: 10px;
+	background: transparent;
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF,endColorstr=#00FFFFFF)"; /* IE 8 */   
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF,endColorstr=#00FFFFFF);/* IE 6 & 7 */      
+	zoom: 1;
+	-webkit-transition: all 2s ease-in-out;
+	-moz-transition: all 2s ease-in-out;
+	-o-transition: all 2s ease-in-out;
+	-ms-transition: all 2s ease-in-out; 
+	transition: all 2s ease-in-out;
+	-webkit-transform: scale(0.7,0.7);
+	-moz-transform: scale(0.7,0.7);
+	-o-transform: scale(0.7,0.7);
+	-ms-transform: scale(0.7,0.7);
+	transform: scale(0.7,0.7);
+	width: 200px;
+	height: 200px;
+	font-size: 240px;
+	text-shadow: 0 1px #fff;
+	text-align: center;
+}
+#issues li h1 {
+	font-size: 48px;
+	margin: 20px 0;
+	text-shadow: 0 1px #fff;
+}
+#issues li p {
+	font-size: 14px;
+	margin-right: 70px;
+	font-weight: normal;
+	line-height: 22px;
+	text-shadow: 0 1px #fff;
+}
+
+#next,
+#prev {
+	position: absolute;
+	top: 0;
+	font-size: 70px;
+	top: 50%;
+	margin-top: -20px;
+	width: 25px;
+	height: 60px;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	overflow: hidden;
+	color: #000;
+	text-shadow: 0 1px #fff;
+}
+#next:hover,
+#prev:hover {
+	background-position: 0 -76px;
+}
+#next {
+	right: 0;
+}
+#prev {
+	left: 0;
+}
+#next.disabled,
+#prev.disabled {
+	opacity: 0.2;
+}
+
+@media (max-width: 767px) {
+	#issues li {
+		width: 700px;
+	}
+}
+
+@media (max-width: 480px) {
+	#dates .selected {
+		font-size: 24px;
+		color: #333;
+		line-height: 30px;
+	}
+	#dates li {
+		list-style: none;
+		float: left;
+		width: 100px;
+		height: 50px;
+		font-size: 18px;
+		text-align: center;
+		position: relative;
+	}
+	#issues li img, #issues li .icon {
+		margin: 10px;
+		width: 100px;
+		height: 100px;
+		font-size: 120px;
+		text-shadow: 0 1px #fff;
+	}
+	#issues li h1 {
+		font-size: 28px;
+		margin: 10px 0 0 0;
+		text-shadow: 0 1px #fff;
+	}
+	#issues li p {
+		font-size: 12px;
+	}
+	#issues li {
+		width: 400px;
+	}
+}
