@@ -22,6 +22,14 @@ module.exports = (configs)->
 	app.use express.static(__dirname + '/../public')
 
 	app.get '/ping', (req, res)-> res.send('pong!')
+
+
+	# Load routes
+	rUser = require './users'
+	app.post '/login', rUser.login
+
+
+
 	app.post '/hook', (req, res)->
 		shellOutput = ''
 		projectName = req.body.repository.name

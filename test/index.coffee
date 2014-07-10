@@ -33,3 +33,5 @@ describe 'Test case 1', ->
 				done()
 
 
+describe 'Test functions', ->
+	require './testUser.coffee'

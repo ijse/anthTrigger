@@ -1,5 +1,6 @@
 module.exports = {
 	shellDir: __dirname,
+	dbDir: __dirname + "/database",
 	listen: 5678,
 	projects: {
 
