@@ -1,5 +1,6 @@
 module.exports = {
 
+	listen: 5678,
 	shellDir: __dirname + '/shells',
 
 	projects: {
