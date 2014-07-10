@@ -1,17 +1,27 @@
 
 express = require 'express'
+session = require 'express-session'
+logger = require 'morgan'
+
 spawn = require('child_process').spawn
 path = require 'path'
 module.exports = (configs)->
 
 	app = express()
-	app.use(require('body-parser')())
+	app.use logger('dev')
 
+	# session support
+	app.use session({
+	  resave: false, # don't save session if unmodified
+	  saveUninitialized: false, # don't create session until something stored
+	  secret: 'AnthTrigger session secret'
+	})
+
+	app.use(require('body-parser')())
+	app.use express.static(__dirname + '/../public')
 
 	app.get '/ping', (req, res)-> res.send('pong!')
-
 	app.post '/hook', (req, res)->
-
 		shellOutput = ''
 		projectName = req.body.repository.name
 		projectConfig = configs.projects[projectName]
@@ -37,4 +47,3 @@ module.exports = (configs)->
 			res.end shellOutput
 
 	return app
-
