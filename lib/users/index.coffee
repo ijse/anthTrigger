@@ -26,10 +26,12 @@ exports.login = (req, res)->
     util.usedb('User').then (cont, db)->
       db.get username, (err, user)->
         if user and user.pass is password
-          cont(null, true)
+          cont(null, true, user)
         else
           cont(null, false)
-    .then (cont, match)->
+    .then (cont, match, user)->
+      delete user.password
+      req.session.user = user
       res.json {
         success: match
       }
@@ -46,6 +48,9 @@ exports.add = (req, res)->
   .fail (err)->
     res.json { success: false, err: err }
 
+exports.auth = (req, res, next)->
+  return next() if req.session.user
+  res.send(401)
 
 exports.find = (req, res)->
   name = req.param('name')

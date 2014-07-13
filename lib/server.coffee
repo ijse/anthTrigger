@@ -20,8 +20,6 @@ module.exports = (configs)->
 
 	app.use(bodyParser())
 
-
-
 	# Load routes
 	router.attach(app)
 
