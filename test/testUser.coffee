@@ -32,6 +32,7 @@ describe 'User', ->
         username: 'ijse'
         password: 'wrongPass'
       }
+      session: {}
     }, {
       json: (data)->
         data.success.should.be.false
@@ -41,7 +42,9 @@ describe 'User', ->
   it 'should login successful with the right password', (done)->
     User.login {
       body: { username: 'ijse', password: '123' }
+      session: {}
     }, {
+      cookie: ->
       json: (resp)->
         resp.success.should.be.true
         done()

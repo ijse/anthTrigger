@@ -32,6 +32,8 @@ exports.login = (req, res)->
     .then (cont, match, user)->
       delete user.password
       req.session.user = user
+      res.cookie 'user', user._key
+
       res.json {
         success: match
         user: user

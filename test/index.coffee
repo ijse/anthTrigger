@@ -13,12 +13,12 @@ describe 'Test case 1', ->
 			.expect(200, 'pong!')
 			.end done
 
-	it 'missing project configurations, got 404 error', (done)->
+	it 'missing project configurations, got 500 error', (done)->
 
 		request(app)
 			.post '/hook'
 			.send data.d1
-			.expect 404
+			.expect 500
 			.end done
 
 	it 'find the project configs, execute the shell.', (done)->
