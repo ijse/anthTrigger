@@ -19,15 +19,15 @@ module.exports = (configs)->
 	})
 
 	app.use(bodyParser())
-	app.use express.static(__dirname + '/../public')
 
-	app.get '/ping', (req, res)-> res.send('pong!')
 
 
 	# Load routes
+	app.get '/ping', (req, res)-> res.send('pong!')
+	app.get '/page/*', 
+
 	rUser = require './users'
 	app.post '/login', rUser.login
-
 
 
 	app.post '/hook', (req, res)->
@@ -54,5 +54,8 @@ module.exports = (configs)->
 		execution.on 'close', (code)->
 			return res.send(500, shellOutput) if code isnt 0
 			res.end shellOutput
+
+
+	app.use express.static(__dirname + '/../public')
 
 	return app
