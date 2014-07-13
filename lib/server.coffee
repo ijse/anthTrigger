@@ -3,7 +3,7 @@ express = require 'express'
 session = require 'express-session'
 bodyParser = require 'body-parser'
 logger = require 'morgan'
-
+path = require 'path'
 router = require './router'
 
 module.exports = (configs)->
@@ -24,6 +24,8 @@ module.exports = (configs)->
 	router.attach(app)
 
 	app.use express.static(__dirname + '/../public')
+	app.get '*', (req, res, next)->
+		res.sendfile path.join(__dirname, '../public/index.html')
 
 	# 404
 	app.use (req, res, next)->
@@ -32,7 +34,6 @@ module.exports = (configs)->
 
 	# 500, When next(err)...
 	app.use (err, req, res, next)->
-		__logger.error err
 		res.status(500)
 		res.json {
 			status: err.status or 500

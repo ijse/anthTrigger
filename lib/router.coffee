@@ -7,8 +7,8 @@ exports.attach = (app)->
 	app.get '/ping', (req, res)-> res.send('pong!')
 
 	# Static pages
-	app.get '/page/*', (req, res)->
-		res.sendfile(path.join(__dirname, '/../public/', req.url))
+	# app.get '/page/*', (req, res)->
+	# 	res.sendfile(path.join(__dirname, '/../public/', req.url))
 
 	rUser = require './users'
 	app.post '/login', rUser.login
