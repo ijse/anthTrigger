@@ -34,6 +34,7 @@ exports.login = (req, res)->
       req.session.user = user
       res.json {
         success: match
+        user: user
       }
     .fail (cont, err)->
       res.json {
