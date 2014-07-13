@@ -25,4 +25,18 @@ module.exports = (configs)->
 
 	app.use express.static(__dirname + '/../public')
 
+	# 404
+	app.use (req, res, next)->
+		res.status(404)
+		res.json { status: 404, url: req.url }
+
+	# 500, When next(err)...
+	app.use (err, req, res, next)->
+		__logger.error err
+		res.status(500)
+		res.json {
+			status: err.status or 500
+			error: err
+		}
+
 	return app
