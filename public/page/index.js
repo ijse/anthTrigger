@@ -11,24 +11,23 @@ angular
 	$locationProvider.html5Mode(true).hashPrefix('!');
 
 	$routeProvider
-		// .when("/", {
-		// 	redirectTo: "/index.html"
-		// })
 		.when('/shell_list', {
 			templateUrl: '/page/shell_list/index.html',
 			auth: true
 		})
 		.otherwise({
-			redirectTo: "/"
+			redirectTo: "/",
+			auth: true
 		});
 })
 .run(function($rootScope, $location, $cookies) {
-	// function checkLogin() {
-	// 	return !!$cookies.user;
-	// }
-	// $rootScope.$on('$routeChangeStart', function(event, next) {
-	// 	if(next.auth && !checkLogin()) {
-	// 		$location.path('/login');
-	// 	}
-	// });
+	function checkLogin() {
+		console.log($cookies.user);
+		return !!$cookies.user;
+	}
+	$rootScope.$on('$routeChangeStart', function(event, next) {
+		if(next.auth && !checkLogin()) {
+			location.href = '/page/login.html';
+		}
+	});
 });
