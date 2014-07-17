@@ -11,6 +11,10 @@ angular
 	$locationProvider.html5Mode(true).hashPrefix('!');
 
 	$routeProvider
+		.when('/', {
+			templateUrl: '/page/partials/index.html',
+			auth: true
+		})
 		.when('/shell_list', {
 			templateUrl: '/page/shell_list/index.html',
 			auth: true
