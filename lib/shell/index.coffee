@@ -27,12 +27,13 @@ exports.addScript = (script)->
     }, (err)->
       return cb(err) if err
       script._key = key
-      cb(null, script)
+      db.compact -> cb(null, script)
 
 exports.editScript = (id, updates)->
   util.usedb('scripts').then (cb, db)->
     db.get id, (err, doc)->
       console.log arguments
+      db.compact()
 
 exports.listScript = ()->
   util.usedb('scripts').then (cb, db)->
@@ -40,3 +41,8 @@ exports.listScript = ()->
     list = []
     db.each (doc)-> list.push doc
     cb(null, list)
+
+exports.deleteScript = (key)->
+  util.usedb('scripts').then (cb, db)->
+    db.remove key, (err)->
+      db.compact -> cb(err)

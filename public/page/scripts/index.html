@@ -30,11 +30,24 @@
                 </tr>
             </thead>
             <tbody>
+                <tr ng-if="status.list == 'loading'">
+                    <td colspan='4' style="text-align: center">
+                        Loading...
+                    </td>
+                </tr>
                 <tr ng-repeat="script in list">
-                    <td>{{script.title}}</td>
+                    <td>
+                        <a href ng-click="viewScript(script)">
+                            {{script.title}}
+                        </a>
+                    </td>
                     <td>1265</td>
                     <td>{{script.createAt}}</td>
-                    <td>$321.33</td>
+                    <td>
+                        <a ng-click="editScript(script)" class="btn btn-primary">编辑</a>
+                        <a ng-click="deleteScript(script, $index)" class="btn btn-danger">删除</a>
+                        <a ng-click="runScript(script)" class="btn btn-success">执行</a>
+                    </td>
                 </tr>
             </tbody>
         </table>

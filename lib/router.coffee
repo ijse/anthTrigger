@@ -46,6 +46,21 @@ exports.attach = (app)->
 				list: []
 			}
 
+	app.delete '/scripts/delete/:key', (req, res)->
+		key = req.param('key')
+
+		rShell
+		.deleteScript(key)
+		.then (cb, result)->
+			res.json {
+				success: true
+			}
+		.fail (cb, err)->
+			res.json {
+				success: false
+				error: err
+			}
+
 
 	app.post '/hook', (req, res)->
 		shellOutput = ''
