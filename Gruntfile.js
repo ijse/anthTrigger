@@ -10,9 +10,6 @@ module.exports = function(grunt) {
         },
 
         express: {
-            options: {
-                port: 5678
-            },
             dev: {
                 options: {
                     script: 'index.js'
