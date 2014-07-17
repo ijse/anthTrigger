@@ -6,8 +6,30 @@ exports.attach = (app)->
 
 	app.get '/ping', (req, res)-> res.send('pong!')
 
+####### User
 	rUser = require './users'
 	app.post '/login', rUser.login
+
+####### Shell
+	rShell = require './shell'
+
+	app.post '/scripts/create', (req, res)->
+
+		console.log(req.body)
+
+		rShell
+		.addScript(req.body)
+		.then (cb, script)->
+			res.json {
+				success: true
+				script: script
+			}
+		.fail (cb, err)->
+			res.json {
+				success: false
+				error: err
+			}
+
 
 	app.post '/hook', (req, res)->
 		shellOutput = ''
@@ -16,20 +38,19 @@ exports.attach = (app)->
 
 		# Missing project configs
 		if not projectConfig
-			res.send 404, 'Project not configured.'
-			return
+		  res.send 404, 'Project not configured.'
+		  return
+		  shellFile = path.join(configs.shellDir, projectConfig.shell)
 
-		shellFile = path.join(configs.shellDir, projectConfig.shell)
 
-		# Execute shell file
-		execution = spawn projectConfig.cmd, [
-			shellFile,
-			JSON.stringify(req.body)
-		]
+		  # Execute shell file
+		  execution = spawn projectConfig.cmd, [
+		    shellFile,
+		    JSON.stringify(req.body)
+		  ]
 
-		# Collection outputs
-		execution.stdout.on 'data', (data)-> shellOutput += data
-		execution.stderr.on 'data', (data)-> shellOutput += data
-		execution.on 'close', (code)->
-			return res.send(500, shellOutput) if code isnt 0
-			res.end shellOutput
+		  # Collection outputs
+		  execution.stdout.on 'data', (data)-> shellOutput += data
+		  execution.stderr.on 'data', (data)-> shellOutput += data
+		  execution.on 'close', (code)->
+		    return res.send(500, shellOutput) if code isnt 0

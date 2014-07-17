@@ -20,6 +20,7 @@ angular
 		})
 		.when('/scripts/create', {
 			templateUrl: '/page/scripts/add_scripts.html',
+			controller: 'editScriptController',
 			auth: true
 		})
 		.otherwise({

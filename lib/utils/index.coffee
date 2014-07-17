@@ -17,3 +17,8 @@ exports.usedb = (dbname)->
     else
 
       cb(null, pool[dbname])
+
+exports.generateId = ()->
+	d = new Date().getTime()
+	d = '' + d + Math.round(Math.random()*1000)
+	return d
