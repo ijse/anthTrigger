@@ -4,7 +4,8 @@
   "description": "Trigger events via http service",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers coffee:coffee-script/register -R spec"
+    "test": "mocha --compilers coffee:coffee-script/register -R spec",
+    "start": "node index.js"
   },
   "author": "ijse",
   "license": "MIT",
