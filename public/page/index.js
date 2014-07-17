@@ -12,21 +12,18 @@ angular
 
 	$routeProvider
 		.when('/', {
-			templateUrl: '/page/partials/index.html',
-			auth: true
+			templateUrl: '/page/partials/welcome.html'
 		})
 		.when('/shell_list', {
 			templateUrl: '/page/shell_list/index.html',
 			auth: true
 		})
 		.otherwise({
-			redirectTo: "/",
-			auth: true
+			redirectTo: "/"
 		});
 })
 .run(function($rootScope, $location, $cookies) {
 	function checkLogin() {
-		console.log($cookies.user);
 		return !!$cookies.user;
 	}
 	$rootScope.$on('$routeChangeStart', function(event, next) {
