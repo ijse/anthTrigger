@@ -18,3 +18,4 @@ angular.module('anthTrigger')
 
 				$location.url('/scripts') if result.success
 
+	return

@@ -30,10 +30,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>ddd</td>
+                <tr ng-repeat="script in list">
+                    <td>{{script.title}}</td>
                     <td>1265</td>
-                    <td>32.3%</td>
+                    <td>{{script.createAt}}</td>
                     <td>$321.33</td>
                 </tr>
             </tbody>

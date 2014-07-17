@@ -30,6 +30,22 @@ exports.attach = (app)->
 				error: err
 			}
 
+	app.get '/scripts/list', (req, res)->
+
+		rShell
+		.listScript()
+		.then (cb, list)->
+			res.json {
+				success: true
+				list: list.reverse()
+			}
+		.fail (cb, err)->
+			res.json {
+				success: false
+				error: err
+				list: []
+			}
+
 
 	app.post '/hook', (req, res)->
 		shellOutput = ''

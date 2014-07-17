@@ -16,6 +16,7 @@ angular
 		})
 		.when('/scripts', {
 			templateUrl: '/page/scripts/index.html',
+			controller: 'listScriptController',
 			auth: true
 		})
 		.when('/scripts/create', {

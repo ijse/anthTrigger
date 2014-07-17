@@ -34,3 +34,9 @@ exports.editScript = (id, updates)->
     db.get id, (err, doc)->
       console.log arguments
 
+exports.listScript = ()->
+  util.usedb('scripts').then (cb, db)->
+
+    list = []
+    db.each (doc)-> list.push doc
+    cb(null, list)
