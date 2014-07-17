@@ -28,7 +28,7 @@ module.exports = function(grunt) {
         watch: {
             coffee: {
                 files: ['<%= yeoman.public %>/page/**/*.coffee'],
-                tasks: ['coffee:dist']
+                tasks: ['coffee:dev']
             },
             express: {
                 files: [
@@ -45,7 +45,7 @@ module.exports = function(grunt) {
             },
             less: {
                 files: ['<%= yeoman.public %>/page/**/*.less'],
-                tasks: ['less:test']
+                tasks: ['less:dev']
             }
         },
 
