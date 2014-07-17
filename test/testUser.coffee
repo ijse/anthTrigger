@@ -1,60 +1,26 @@
 
-should = require 'should'
+util = require '../lib/utils'
+userMdl = require '../lib/users'
 
-Tiny = require 'tiny'
-global.__config = require './configs.js'
+describe 'Test User', ->
 
-User = require '../lib/users'
+	before (done)->
+		util
+		.connectDB 'mongodb://127.0.0.1:27017/anthTrigger'
+		.then -> done()
 
-describe 'User', ->
-  db = null
+	it 'Create one user', (done)->
 
-  before (done)->
-    Tiny __config.dbDir + '/User.db', (err, _db)->
-      db = _db
-      db.remove 'ijse', (err)->
-        db.compact done
-
-  it 'add one user named ijse', (done)->
-    User.add {
-      body: {
-        name: 'ijse'
-        pass: '123'
-      }
-    }, {
-      json: (resp)->
-        done()
-    }
-
-  it 'should login failed for wrong password', (done)->
-    User.login {
-      body: {
-        username: 'ijse'
-        password: 'wrongPass'
-      }
-      session: {}
-    }, {
-      json: (data)->
-        data.success.should.be.false
-        done()
-    }
-
-  it 'should login successful with the right password', (done)->
-    User.login {
-      body: { username: 'ijse', password: '123' }
-      session: {}
-    }, {
-      cookie: ->
-      json: (resp)->
-        resp.success.should.be.true
-        done()
-    }
-
-  it 'should return the user data with the name ijse', (done)->
-    User.find {
-      param: -> 'ijse'
-    }, {
-      json: (resp)->
-        resp.name.should.be.eql('ijse')
-        done()
-    }
+		userMdl.addUser {
+			name: 'admin'
+			password: '123'
+			role: 'admin'
+		}
+		.then (cb, user)->
+			console.log user.toObject()
+			cb()
+		.fail (err)->
+			console.log err
+			throw err
+		.fin (cb, err, result)->
+			done()

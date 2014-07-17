@@ -5,8 +5,12 @@ bodyParser = require 'body-parser'
 logger = require 'morgan'
 path = require 'path'
 router = require './router'
+utils = require './utils'
 
 module.exports = (configs)->
+
+	# connect mongodb
+	utils.connectDB(configs.mongodb)
 
 	app = express()
 	app.use logger('dev')
