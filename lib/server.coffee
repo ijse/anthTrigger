@@ -25,7 +25,7 @@ module.exports = (configs)->
 
 	app.use express.static(__dirname + '/../.tmp')
 	app.use express.static(__dirname + '/../public')
-	app.get '*', (req, res, next)->
+	app.get "*", (req, res, next)->
 		res.sendfile path.join(__dirname, '../public/index.html')
 
 	# 404

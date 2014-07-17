@@ -14,8 +14,12 @@ angular
 		.when('/', {
 			templateUrl: '/page/partials/welcome.html'
 		})
-		.when('/shell_list', {
-			templateUrl: '/page/shell_list/index.html',
+		.when('/scripts', {
+			templateUrl: '/page/scripts/index.html',
+			auth: true
+		})
+		.when('/scripts/create', {
+			templateUrl: '/page/scripts/add_scripts.html',
 			auth: true
 		})
 		.otherwise({
