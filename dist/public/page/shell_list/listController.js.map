@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "listController.js",
+  "sourceRoot": "",
+  "sources": [
+    "listController.coffee"
+  ],
+  "names": [],
+  "mappings": "AAAA;AAAA;AAAA"
+}
