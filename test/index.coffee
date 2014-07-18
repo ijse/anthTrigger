@@ -35,3 +35,6 @@ describe 'Test case 1', ->
 
 describe 'Test user case', ->
 	require './testUser'
+
+describe 'Test script case', ->
+	require './testScript'

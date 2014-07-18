@@ -42,7 +42,7 @@
                     <td>{{script.createAt}}</td>
                     <td>{{script.lastRunAt}}</td>
                     <td>
-                        <a ng-click="editScript(script)" class="btn btn-primary">编辑</a>
+                        <a ng-href="/scripts/edit/{{script._id}}" class="btn btn-primary">编辑</a>
                         <a ng-click="deleteScript(script, $index)" class="btn btn-danger">删除</a>
                         <a ng-click="runScript(script)" class="btn btn-success">执行</a>
                     </td>

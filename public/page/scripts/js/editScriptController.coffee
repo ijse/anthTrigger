@@ -1,21 +1,46 @@
 
 angular.module('anthTrigger')
 .controller 'editScriptController',
-($scope, $http, $location)->
+($scope, $http, $location, id)->
 
 	_st = {}
 	$scope.status = _st
 	$scope.script = {}
-	$scope.save = ->
-		_st.save = 'saving'
+
+
+	mode = if id then 'edit' else 'create'
+
+	if mode is 'create'
+		$scope.save = ->
+			_st.save = 'saving'
+			$http
+				.post '/scripts/create', $scope.script
+				.success (result)->
+
+					_st.save = if result.success then 'done' else 'error'
+
+					$scope.script = result.script
+
+					$location.url('/scripts') if result.success
+	else
+		_st.data = 'loading'
 		$http
-			.post '/scripts/create', $scope.script
+			.get '/scripts/find/' + id
 			.success (result)->
+				if result.success
+					_st.data = 'loaded'
+					return $scope.script = result.script 
+				else
+					_st.data = 'error'
 
-				_st.save = if result.success then 'done' else 'error'
+		$scope.save = ->
+			_st.save = 'saving'
+			$http
+				.post '/scripts/edit/' + id, $scope.script
+				.success (result)->
+					_st.save = if result.success then 'done' else 'error'
 
-				$scope.script = result.script
+					$location.url('/scripts') if result.success
 
-				$location.url('/scripts') if result.success
 
 	return

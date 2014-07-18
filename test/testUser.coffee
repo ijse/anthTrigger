@@ -4,7 +4,7 @@ should = require 'should'
 mongoose = require 'mongoose'
 configs = require './configs.js'
 util = require '../lib/utils'
-userMdl = require '../lib/users'
+userMdl = require '../lib/users/controller'
 describe 'Test User', ->
 
 	before (done)->

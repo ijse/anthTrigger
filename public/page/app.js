@@ -19,9 +19,19 @@ angular
     auth: true
   })
   .when('/scripts/create', {
-    templateUrl: '/page/scripts/add_scripts.html',
+    templateUrl: '/page/scripts/edit_scripts.html',
     controller: 'editScriptController',
     auth: true
+  })
+  .when('/scripts/edit/:id', {
+    templateUrl: '/page/scripts/edit_scripts.html',
+    controller: 'editScriptController',
+    auth: true,
+    resolve: {
+      id: function($route) {
+        return $route.current.params.id;
+      }
+    }
   })
   // .otherwise({
   //   redirectTo: "/"

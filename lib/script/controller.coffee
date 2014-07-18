@@ -27,19 +27,20 @@ exports.findById = (id)->
   Thenjs (cont)->
     scriptModel.findById id, (err, doc)->
       return cont(err) if err
-      return cont(new Exception('Not found.')) if not doc
+      return cont(new Error('Not found.')) if not doc
       cont(null, doc)
 
 exports.editScript = (id, updates)->
   delete updates._id
+  console.log id, updates
   Thenjs (cont)->
     scriptModel.update {
-      id: id
+      _id: '' + id
     }, {
       $set: updates
     }, (err, count)->
       return cont(err) if err
-      cont(null)
+      cont(null, count)
 
 exports.listScript = (crital)->
 
@@ -55,6 +56,6 @@ exports.deleteScript = (key)->
       _id: key
     }, (err, count)->
       return cont(err) if err
-      return cont(new Exception('Not found')) if count <= 0
-      cont(null)
+      return cont(new Error('Not found')) if count <= 0
+      cont(null, count)
 

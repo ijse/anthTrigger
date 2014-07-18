@@ -7,8 +7,6 @@ exports.route = (app)->
 
 	app.post '/scripts/create', (req, res)->
 
-		console.log(req.body)
-
 		Ctrl
 		.addScript(req.body)
 		.then (cb, script)->
@@ -21,6 +19,25 @@ exports.route = (app)->
 				success: false
 				error: err
 			}
+
+	app.get '/scripts/find/:id', (req, res)->
+
+		scriptId = req.param('id')
+
+		Ctrl
+		.findById '' + scriptId #'53c8f792a8848500001488d5'
+		.then (cb, script)->
+			res.json {
+				success: true
+				script: script
+			}
+		.fail (cb, err)->
+			res.json {
+				success: false
+				error: err
+			}
+		.fin ->
+			console.log arguments
 
 	app.get '/scripts/list', (req, res)->
 
@@ -36,6 +53,20 @@ exports.route = (app)->
 				success: false
 				error: err
 				list: []
+			}
+
+	app.post '/scripts/edit/:id', (req, res)->
+		sid = '' + req.param('id')
+		Ctrl
+		.editScript(sid, req.body)
+		.then (cb, result)->
+			res.json {
+				success: true
+			}
+		.fail (cb, err)->
+			res.json {
+				success: false
+				error: err
 			}
 
 	app.delete '/scripts/delete/:key', (req, res)->
