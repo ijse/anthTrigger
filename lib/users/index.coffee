@@ -13,9 +13,25 @@ exports.route = (app)->
 			# write to session
 			req.session.user = user
 			res.cookie 'user', user.name
+			console.log '>>', user._id
+			res.cookie 'uid', '' + user._id
 
 			delete user.password
 			res.json {
 				success: true
 				user: user
+			}
+	app.get '/user/find', (req, res)->
+		uid = req.param('id')
+		Ctrl
+		.findUser { _id: uid }
+		.then (cont, user)->
+			res.json {
+				success: true
+				user: user
+			}
+		.fail (cont, err)->
+			res.json {
+				success: false
+				error: err
 			}

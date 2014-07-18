@@ -22,6 +22,7 @@
                     <th>脚本名称 </th>
                     <th>脚本说明 </th>
                     <th>创建时间 </th>
+                    <th>上次运行时间 </th>
                     <th>操作 </th>
                 </tr>
             </thead>
@@ -37,8 +38,9 @@
                             {{script.title}}
                         </a>
                     </td>
-                    <td>1265</td>
+                    <td>{{script.description}}</td>
                     <td>{{script.createAt}}</td>
+                    <td>{{script.lastRunAt}}</td>
                     <td>
                         <a ng-click="editScript(script)" class="btn btn-primary">编辑</a>
                         <a ng-click="deleteScript(script, $index)" class="btn btn-danger">删除</a>
