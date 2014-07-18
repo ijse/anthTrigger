@@ -8,7 +8,24 @@ exports.attach = (app)->
 
 ####### User
 	rUser = require './users'
-	app.post '/login', rUser.login
+	app.post '/login', (req, res)->
+		rUser
+		.login req.body.username, req.body.password
+		.fin (cont, err, user)->
+
+			return res.json {
+				success: false
+			} if err
+			# write to session
+			req.session.user = user
+			res.cookie 'user', user.name
+
+			delete user.password
+			res.json {
+				success: true
+				user: user
+			}
+
 
 ####### Shell
 	rShell = require './shell'

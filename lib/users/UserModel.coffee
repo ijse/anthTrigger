@@ -2,7 +2,10 @@
 mongoose = require 'mongoose'
 
 schema = mongoose.Schema {
-	name: String
+	name: {
+		type: String
+		unique: true
+	}
 	password: String
 	role: {
 		type: String
