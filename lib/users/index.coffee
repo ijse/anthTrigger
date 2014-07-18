@@ -13,7 +13,6 @@ exports.route = (app)->
 			# write to session
 			req.session.user = user
 			res.cookie 'user', user.name
-			console.log '>>', user._id
 			res.cookie 'uid', '' + user._id
 
 			delete user.password
@@ -35,3 +34,10 @@ exports.route = (app)->
 				success: false
 				error: err
 			}
+
+	app.get '/logout', (req, res)->
+		req.session.user = null
+		res.clearCookie('user')
+		res.clearCookie('uid')
+
+		res.redirect '/'

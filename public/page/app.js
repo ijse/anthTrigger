@@ -23,9 +23,9 @@ angular
     controller: 'editScriptController',
     auth: true
   })
-  .otherwise({
-    redirectTo: "/"
-  });
+  // .otherwise({
+  //   redirectTo: "/"
+  // });
 })
 .run(function($rootScope, $location, $cookies, $http) {
   function getServerLocation() {
@@ -50,6 +50,9 @@ angular
     return !!$cookies.user;
   }
   $rootScope.$on('$routeChangeStart', function(event, next) {
+    if(!next) {
+      return location.href = $location.url()
+    }
     if (next.auth && !checkLogin()) {
       location.href = '/page/login.html';
     }
