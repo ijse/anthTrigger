@@ -1,15 +1,19 @@
 
 should = require 'should'
+
+configs = require './configs.js'
 util = require '../lib/utils'
 userMdl = require '../lib/users'
-
 describe 'Test User', ->
 
 	before (done)->
 		util
-		.connectDB 'mongodb://127.0.0.1:27017/anthTrigger'
+		.connectDB configs.mongodb
 		.then ->
 			userMdl.model.remove {}, done
+		.fail (err)->
+			console.log arguments
+			throw err
 
 	it 'Create one user', (done)->
 
@@ -48,6 +52,12 @@ describe 'Test User', ->
 	it 'User login fail with wrong name', (done)->
 
 		userMdl.login  'xxx','123'
+		.fin (cb, err)->
+			err.should.be.ok;
+			done()
+	it 'User login fail with wrong password', (done)->
+
+		userMdl.login  'admin','12345'
 		.fin (cb, err)->
 			err.should.be.ok;
 			done()
