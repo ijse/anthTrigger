@@ -28,7 +28,7 @@ angular.module 'anthTrigger'
 	$scope.deleteScript = (script, index)->
 
 		$http
-		.delete "/scripts/delete/#{script._key}"
+		.delete "/scripts/delete/#{script._id}"
 		.success (result)->
 			if result.success
 				# remove from local list

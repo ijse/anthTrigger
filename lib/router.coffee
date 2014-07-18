@@ -28,7 +28,7 @@ exports.attach = (app)->
 
 
 ####### Shell
-	rShell = require './shell'
+	rShell = require './script'
 
 	app.post '/scripts/create', (req, res)->
 
