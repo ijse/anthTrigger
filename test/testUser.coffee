@@ -1,12 +1,16 @@
 
 should = require 'should'
 
+mongoose = require 'mongoose'
 configs = require './configs.js'
 util = require '../lib/utils'
 userMdl = require '../lib/users'
 describe 'Test User', ->
 
 	before (done)->
+		if mongoose.connection.db
+			userMdl.model.remove {}, done
+			return
 		util
 		.connectDB configs.mongodb
 		.then ->
