@@ -1,34 +1,21 @@
-Thenjs = require 'thenjs'
-userModel = require './UserModel'
 
-exports.model = userModel
+Ctrl = require './controller'
 
-exports.login = (uname, upass)->
-  # todo...
+exports.route = (app)->
+	app.post '/login', (req, res)->
+		Ctrl
+		.login req.body.username, req.body.password
+		.fin (cont, err, user)->
 
-  userModel.find {
-  	name: uname
-  	password: upass
-  }, (err, doc)->
+			return res.json {
+				success: false
+			} if err
+			# write to session
+			req.session.user = user
+			res.cookie 'user', user.name
 
-
-exports.addUser = (user)->
-
-	Thenjs (cont)->
-		user = new userModel(user)
-		user.save cont
-
-exports.findUser = (critcal)->
-	Thenjs (cont)->
-		userModel.findOne critcal, cont
-
-exports.login = (name, pass)->
-	Thenjs (cont)->
-		userModel.findOne {
-			name: name,
-			password: pass
-		}, (err, doc)->
-			return cont(err) if err
-			return cont(new Error('Password wrong!')) if not doc
-			return cont(null, doc)
-
+			delete user.password
+			res.json {
+				success: true
+				user: user
+			}

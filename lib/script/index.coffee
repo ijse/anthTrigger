@@ -1,60 +1,79 @@
 
-Thenjs = require 'thenjs'
-scriptModel = require './ScriptModel'
+Ctrl = require './controller.coffee'
 spawn = require('child_process').spawn
+path = require 'path'
 
-exports.runshell = (shellObj, cb)->
-  # Execute shell file
-  execution = spawn shellObj.cmd, [
-    shellObj.file,
-    JSON.stringify(shellObj.param)
-  ]
+exports.route = (app)->
 
-  # Collection outputs
-  execution.stdout.on 'data', (data)-> shellOutput += data
-  execution.stderr.on 'data', (data)-> shellOutput += data
-  execution.on 'close', (code)->
-    cb?(code, shellOutput)
+	app.post '/scripts/create', (req, res)->
 
-exports.addScript = (script)->
+		console.log(req.body)
 
-  Thenjs (cont)->
-    sc = new scriptModel(script)
-    sc.save (err)->
-      cont(err, sc)
+		Ctrl
+		.addScript(req.body)
+		.then (cb, script)->
+			res.json {
+				success: true
+				script: script
+			}
+		.fail (cb, err)->
+			res.json {
+				success: false
+				error: err
+			}
 
-exports.findById = (id)->
-  Thenjs (cont)->
-    scriptModel.findById id, (err, doc)->
-      return cont(err) if err
-      return cont(new Exception('Not found.')) if not doc
-      cont(null, doc)
+	app.get '/scripts/list', (req, res)->
 
-exports.editScript = (id, updates)->
-  delete updates._id
-  Thenjs (cont)->
-    scriptModel.update {
-      id: id
-    }, {
-      $set: updates
-    }, (err, count)->
-      return cont(err) if err
-      cont(null)
+		Ctrl
+		.listScript()
+		.then (cb, list)->
+			res.json {
+				success: true
+				list: list.reverse()
+			}
+		.fail (cb, err)->
+			res.json {
+				success: false
+				error: err
+				list: []
+			}
 
-exports.listScript = (crital)->
+	app.delete '/scripts/delete/:key', (req, res)->
+		key = req.param('key')
 
-  Thenjs (cont)->
-    scriptModel.find crital, (err, docs)->
-      return cont(err) if err
-      cont(null, docs)
+		Ctrl
+		.deleteScript(key)
+		.then (cb, result)->
+			res.json {
+				success: true
+			}
+		.fail (cb, err)->
+			res.json {
+				success: false
+				error: err
+			}
 
-exports.deleteScript = (key)->
 
-  Thenjs (cont)->
-    scriptModel.remove {
-      _id: key
-    }, (err, count)->
-      return cont(err) if err
-      return cont(new Exception('Not found')) if count <= 0
-      cont(null)
+	app.post '/hook', (req, res)->
+		shellOutput = ''
+		projectName = req.body.repository.name
+		projectConfig = configs.projects[projectName]
 
+		# Missing project configs
+		if not projectConfig
+		  res.send 404, 'Project not configured.'
+		  return
+		  shellFile = path.join(configs.shellDir, projectConfig.shell)
+
+
+		  # Execute shell file
+		  execution = spawn projectConfig.cmd, [
+		    shellFile,
+		    JSON.stringify(req.body)
+		  ]
+
+		  # Collection outputs
+		  execution.stdout.on 'data', (data)-> shellOutput += data
+		  execution.stderr.on 'data', (data)-> shellOutput += data
+		  execution.on 'close', (code)->
+		    return res.send(500, shellOutput) if code isnt 0
