@@ -29,6 +29,6 @@ exports.login = (name, pass)->
 			password: pass
 		}, (err, doc)->
 			return cont(err) if err
-			return cont(new Error('Password wrong!')) if not doc
+			return cont('Password wrong!') if not doc
 			return cont(null, doc)
 
