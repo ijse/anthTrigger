@@ -34,6 +34,20 @@ angular
       }
     }
   })
+  .when('/scriptLogs', {
+    templateUrl: '/page/scriptLogs/index.html',
+    controller: 'listLogsController'
+  })
+  .when('/scriptLogs/view/:id', {
+    templateUrl: '/page/scriptLogs/logs_view.html',
+    controller: 'viewLogsController',
+    auth: true,
+    resolve: {
+      id: function($route) {
+        return $route.current.params.id;
+      }
+    }
+  })
   // .otherwise({
   //   redirectTo: "/"
   // });

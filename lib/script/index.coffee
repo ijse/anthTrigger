@@ -90,6 +90,7 @@ exports.route = (app)->
 		.then (cb, result, doc)->
 			res.json {
 				success: true,
+				error: result.error
 				script: doc
 				code: result.code
 				logs: result.logs

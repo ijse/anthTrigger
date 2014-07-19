@@ -6,6 +6,10 @@ schema = mongoose.Schema {
 		type: mongoose.Schema.Types.ObjectId
 		default: null
 	}
+	snapshot: {
+		type: mongoose.Schema.Types.Mixed
+		default: {}
+	}
 	pid: {
 		type: Number
 		default: null

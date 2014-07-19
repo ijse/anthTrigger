@@ -1,0 +1,53 @@
+<div class="col-lg-12">
+    <h1> 执行历史
+        <small>脚本执行历史日志记录</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="index.html"><i class="icon-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active"><i class="icon-file-alt"></i> 执行历史 </li>
+    </ol>
+</div>
+
+<div class="col-lg-12">
+
+	<div class="col-lg-12 well text-right">
+	</div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover tablesorter">
+            <thead>
+                <tr>
+                    <th>id/pid</th>
+                    <th>执行脚本</th>
+                    <th>执行时间</th>
+                    <th>结束时间</th>
+                    <th>操作 </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="status.list == 'loading'">
+                    <td colspan='4' style="text-align: center">
+                        Loading...
+                    </td>
+                </tr>
+                <tr ng-repeat="slog in list">
+                    <td>
+                        {{slog._id.substring(0, 7)}}/{{slog.pid}}
+                    </td>
+                    <td>
+                        <a href ng-click="viewScript(script)">
+                            {{slog.snapshot.title}}
+                        </a>
+                    </td>
+                    <td>{{slog.startAt}}</td>
+                    <td>{{slog.endAt}}</td>
+                    <td>
+                        <a ng-href="/scriptLogs/view/{{slog._id}}">详细日志</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

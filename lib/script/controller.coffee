@@ -1,7 +1,7 @@
 
 Thenjs = require 'thenjs'
 scriptModel = require './ScriptModel'
-logsModel = require './logsModel'
+logsModel = require '../scriptLogs/logsModel'
 spawn = require('child_process').spawn
 fs = require 'fs'
 path = require 'path'
@@ -129,6 +129,17 @@ exports.runScript = (id, arg=[], options={})->
         return cont(err) if err
         cont(null, doc, scriptLogs)
 
+  # Snapshot everything,, for storing everything about the execution
+  _createSnapshot = (cont, script, scriptLogs)->
+    scriptLogs.snapshot = {}
+    scriptLogs.snapshot.title = script.title
+    scriptLogs.snapshot.runOptions = options
+    scriptLogs.snapshot.args = arg
+    scriptLogs.snapshot.codes = script.codes
+    scriptLogs.save (err)->
+      return cont(err) if err
+
+      cont(null, script, scriptLogs)
 
   # Write the codes of script to a temporary file, and get ready to run
   _createTmpScriptFile = (cont, script, scriptLogs)->
@@ -172,22 +183,26 @@ exports.runScript = (id, arg=[], options={})->
 
   .then _findScriptAndLock
 
+  .then _createSnapshot
+
   .then _createTmpScriptFile
 
   # Run script and collect logs
   .then _runScriptFile
 
-  .fin (cont, err, result, doc, scriptLogs)->
+  .fin (cont, err1, result, doc, scriptLogs)->
     # Reset script status
     doc.lastRunEnd = new Date()
     doc.status = 'ready'
 
     scriptLogs.endAt = new Date()
-    scriptLogs.save()
 
-    doc.save (err)->
-      # Got error when update status after script run
-      result.error = err if err
-      cont(err, result, doc)
+    console.log scriptLogs
+    scriptLogs.save (err2)->
+      console.log arguments
+      doc.save (err3)->
+        # Got error when update status after script run
+        result.error = [ err1, err2, err3 ]
+        cont(null, result, doc)
 
 

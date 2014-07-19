@@ -12,3 +12,4 @@ exports.attach = (app)->
 
 	require('./users').route(app)
 	require('./script').route(app)
+	require('./scriptLogs').route(app)

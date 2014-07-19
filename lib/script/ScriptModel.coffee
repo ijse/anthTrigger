@@ -6,10 +6,6 @@ schema = mongoose.Schema {
 		type: String
 	}
 	codes: String
-	description: {
-		type: String
-		default: ''
-	}
 	createAt: {
 		type: Date
 		default: Date.now
