@@ -4,5 +4,12 @@ module.exports = {
 
 	mongodb: process.env.MONGODB || "mongodb://127.0.0.1:27017/anthTrigger",
 	shellDir: __dirname + '/shells',
-	dbDir: __dirname + '/database'
+	dbDir: __dirname + '/database',
+
+	spawnOptions: {
+		shell: 'sh',
+		cwd: process.env.HOME,
+		env: process.env
+	}
+
 }

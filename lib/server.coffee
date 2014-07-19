@@ -14,6 +14,7 @@ module.exports = (configs)->
 
 	app = express()
 	app.use logger('dev')
+	app.set 'configs', configs
 
 	# session support
 	app.use session({

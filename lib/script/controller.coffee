@@ -62,8 +62,9 @@ exports.deleteScript = (key)->
       cont(null, count)
 
 
-exports.runScript = (id, arg=[])->
+exports.runScript = (id, arg=[], options={})->
 
+  options.shell = options.shell or 'sh'
   exports
     .findById(id)
     .then (cont, doc)->
@@ -77,9 +78,9 @@ exports.runScript = (id, arg=[])->
         return cont(err) if err
 
         shellOutput = ''
-        exc = spawn 'sh', [
+        exc = spawn options.shell, [
           tmpShellFile
-        ].concat(arg)
+        ].concat(arg), options
 
         exc.stdout.on 'data', (data)-> shellOutput += data
         exc.stderr.on 'data', (data)-> shellOutput += data

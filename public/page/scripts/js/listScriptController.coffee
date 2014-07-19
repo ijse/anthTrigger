@@ -41,4 +41,9 @@ angular.module 'anthTrigger'
 		$http
 		.put '/scripts/run/' + script._id
 		.success (result)->
-			console.log result.data
+			$modal.open {
+				template: "<pre>{{content}}</pre>"
+				controller: ['$scope', (scope)->
+					scope.content = result.data
+				]
+			}

@@ -88,7 +88,7 @@ exports.route = (app)->
 		sid = '' + req.param('id')
 
 		Ctrl
-		.runScript sid
+		.runScript sid, [], app.get('configs').spawnOptions
 		.then (cb, result)->
 			res.json {
 				success: true,
