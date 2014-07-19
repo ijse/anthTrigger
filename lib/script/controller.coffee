@@ -213,9 +213,7 @@ exports.runScript = (id, arg=[], options={})->
 
     scriptLogs.endAt = new Date()
 
-    console.log scriptLogs
     scriptLogs.save (err2)->
-      console.log arguments
       doc.save (err3)->
         # Got error when update status after script run
         result.error = [ err1, err2, err3 ]
