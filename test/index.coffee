@@ -1,6 +1,7 @@
 
 request = require 'supertest'
 
+Thenjs = require 'thenjs'
 configs = require './configs'
 app = require('../lib/server')(configs)
 data = require './data'

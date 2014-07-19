@@ -84,6 +84,14 @@ exports.route = (app)->
 				error: err
 			}
 
+	app.put '/scripts/run/:id', (req, res)->
+		sid = '' + req.param('id')
+
+		Ctrl
+		.runScript sid
+		.then (cb, result)->
+			# Get script log
+
 
 	app.post '/hook', (req, res)->
 		shellOutput = ''

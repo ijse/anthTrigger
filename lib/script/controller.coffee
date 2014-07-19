@@ -2,6 +2,9 @@
 Thenjs = require 'thenjs'
 scriptModel = require './ScriptModel'
 spawn = require('child_process').spawn
+fs = require 'fs'
+path = require 'path'
+os = require 'os'
 
 exports.runshell = (shellObj, cb)->
   # Execute shell file
@@ -57,4 +60,34 @@ exports.deleteScript = (key)->
       return cont(err) if err
       return cont(new Error('Not found')) if count <= 0
       cont(null, count)
+
+
+exports.runScript = (id, arg)->
+
+  exports
+    .findById(id)
+    .then (cont, doc)->
+      # Get the codes
+      codes = doc.codes
+
+      # Make tmp shell file
+      tmpDir = os.tmpDir()
+      tmpShellFile = path.join(tmpDir, 'shell-' + doc._id + '.sh')
+      fs.writeFile tmpShellFile, codes, (err)->
+        return cont(err) if err
+
+        shellOutput = ''
+        exc = spawn 'sh', [
+          tmpShellFile
+        ].concat(arg)
+
+        exc.stdout.on 'data', (data)-> shellOutput += data
+        exc.stderr.on 'data', (data)-> shellOutput += data
+        exc.on 'close', (code)->
+          # Remove tmpfile
+          fs.unlink tmpShellFile
+
+          return cont(code) if code
+          cont(null, shellOutput)
+
 

@@ -1,3 +1,4 @@
+should = require 'should'
 
 request = require 'supertest'
 mongoose = require 'mongoose'
@@ -30,7 +31,7 @@ describe "Test scripts", ->
 		scriptCtrl
 			.addScript {
 				title: 'hello script'
-				codes: 'codes here'
+				codes: 'echo hello - $1'
 			}
 			.fin (cont, err, result)->
 				(err is null).should.be.ok
@@ -54,6 +55,14 @@ describe "Test scripts", ->
 			.fin (cont, err, result)->
 				(err is null).should.be.ok
 				result.should.be.above(0)
+				done()
+
+	it 'Run the script and get the result.', (done)->
+		scriptCtrl
+			.runScript scriptId, [ 'arg1']
+			.fin (cont, err, result)->
+				(err is null).should.be.ok
+				result.should.be.eql 'hello - arg1\n'
 				done()
 
 	it 'Delete the script', (done)->
