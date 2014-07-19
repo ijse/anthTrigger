@@ -62,7 +62,7 @@ exports.deleteScript = (key)->
       cont(null, count)
 
 
-exports.runScript = (id, arg)->
+exports.runScript = (id, arg=[])->
 
   exports
     .findById(id)
@@ -87,7 +87,10 @@ exports.runScript = (id, arg)->
           # Remove tmpfile
           fs.unlink tmpShellFile
 
-          return cont(code) if code
+          return cont({
+            code: code
+            logs: shellOutput
+          }) if code
           cont(null, shellOutput)
 
 

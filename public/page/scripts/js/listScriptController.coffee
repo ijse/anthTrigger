@@ -35,3 +35,10 @@ angular.module 'anthTrigger'
 				$scope.list.splice(index, 1)
 		.error ->
 			console.log arguments
+
+	$scope.runScript = (script)->
+
+		$http
+		.put '/scripts/run/' + script._id
+		.success (result)->
+			console.log result.data

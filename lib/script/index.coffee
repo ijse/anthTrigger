@@ -90,7 +90,16 @@ exports.route = (app)->
 		Ctrl
 		.runScript sid
 		.then (cb, result)->
-			# Get script log
+			res.json {
+				success: true,
+				data: result
+			}
+		.fail (cb, err, result)->
+			res.json {
+				success: false
+				error: err.code
+				data: err.logs
+			}
 
 
 	app.post '/hook', (req, res)->
