@@ -54,6 +54,22 @@ exports.listScript = (crital)->
       return cont(err) if err
       cont(null, docs)
 
+exports.listByPage = (crital, page=1, pageSize=10)->
+  skipCount = (page - 1) * pageSize
+  Thenjs (cont)->
+    scriptModel
+    .find crital, null, {
+      skip: skipCount
+      limit: pageSize
+    }, (err, list)->
+      return cont(err) if err
+      cont(null, list)
+  .then (cont, list)->
+    # Get total count
+    scriptModel.count crital, (err, count)->
+      return cont(err) if err
+      cont(null, list, count)
+
 exports.deleteScript = (key)->
 
   Thenjs (cont)->

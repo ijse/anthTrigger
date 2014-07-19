@@ -12,12 +12,6 @@ exports.route = (app)->
 
 		Ctrl
 		.listByPage {}, page, pageSize
-		.then (cont, list)->
-			Ctrl
-			.count {}
-			.then (cont2, total)->
-				total = total or 0
-				cont(null, list, total)
 		.fin (cont, err, list, total)->
 
 			res.json {

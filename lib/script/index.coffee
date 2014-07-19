@@ -38,20 +38,22 @@ exports.route = (app)->
 			}
 
 	app.get '/scripts/list', (req, res)->
+		page = req.param('page')
+		page = parseInt(page) or 1
+
+		pageSize = req.param('pageSize')
+		pageSize = parseInt(pageSize) or 10
 
 		Ctrl
-		.listScript()
-		.then (cb, list)->
+		.listByPage {}, page, pageSize
+		.fin (cont, err, list, total)->
+
 			res.json {
-				success: true
-				list: list.reverse()
+				success: !!!err
+				total: total
+				list: list or []
 			}
-		.fail (cb, err)->
-			res.json {
-				success: false
-				error: err
-				list: []
-			}
+
 
 	app.post '/scripts/edit/:id', (req, res)->
 		sid = '' + req.param('id')

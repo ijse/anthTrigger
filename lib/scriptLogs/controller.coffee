@@ -18,6 +18,11 @@ exports.listByPage = (crital, page=1, pageSize=10)->
 		}, (err, list)->
 			return cont(err) if err
 			cont(null, list)
+	.then (cont, list)->
+		# Get total count
+		logsModel.count crital, (err, count)->
+			return cont(err) if err
+			cont(null, list, count)
 
 exports.count = (crital)->
 	Thenjs (cont)->

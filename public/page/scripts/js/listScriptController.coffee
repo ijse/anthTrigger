@@ -6,15 +6,28 @@ angular.module 'anthTrigger'
 	$scope.status = _st = {}
 	$scope.list = []
 
-	loadList = ->
+	$scope.page = 1
+	$scope.totalItems = 0
+	$scope.pageSize = 10
+
+
+	loadList = (page)->
 		_st.list = 'loading'
 		$http
-		.get '/scripts/list'
+		.get '/scripts/list', {
+			params: {
+				page: page
+				pageSize: $scope.pageSize
+			}
+		}
 		.success (result)->
 			_st.list = if result.success then 'done' else 'error'
+			$scope.totalItems = result.total
 			$scope.list = result.list
 
-	loadList()
+	loadList(1)
+	$scope.pageChange = ->
+		loadList($scope.page)
 
 	$scope.viewScript = (script)->
 
