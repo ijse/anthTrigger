@@ -36,8 +36,6 @@ exports.route = (app)->
 				success: false
 				error: err
 			}
-		.fin ->
-			console.log arguments
 
 	app.get '/scripts/list', (req, res)->
 
@@ -102,6 +100,18 @@ exports.route = (app)->
 				error: err
 			}
 
+	app.post '/scripts/kill/:scriptId', (req, res)->
+		sid = '' + req.param('scriptId')
+
+		Ctrl
+		.killScript sid
+		.fin (cb, err, script, logs)->
+			res.json {
+				success: !!!err
+				error: err
+				script: script
+				logs: logs
+			}
 
 	app.post '/hook', (req, res)->
 		shellOutput = ''

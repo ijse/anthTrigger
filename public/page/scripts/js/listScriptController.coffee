@@ -55,8 +55,8 @@ angular.module 'anthTrigger'
 
 		$http
 		.post '/scripts/kill/' + script._id
-		.succes (result)->
+		.success (result)->
 			if result.success
-				$scope.list[index] = result.doc
+				$scope.list[index] = result.script
 
 

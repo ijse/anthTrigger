@@ -65,6 +65,14 @@ describe "Test scripts", ->
 				result.logs.should.be.eql 'hello - arg1\n'
 				done()
 
+	it 'Kill the process with scriptId ' + scriptId, (done)->
+		scriptCtrl
+			.killScript scriptId
+			.fin (cont, err, result)->
+				(err is null).should.be.ok
+				result.success.should.be.ok
+				done()
+
 	it 'Delete the script', (done)->
 		scriptCtrl
 			.deleteScript scriptId

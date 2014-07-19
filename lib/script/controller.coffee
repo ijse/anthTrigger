@@ -7,6 +7,8 @@ fs = require 'fs'
 path = require 'path'
 os = require 'os'
 
+killProcess = (pid)-> spawn 'pkill', [ '-P', pid ]
+
 exports.runshell = (shellObj, cb)->
   # Execute shell file
   execution = spawn shellObj.cmd, [
@@ -62,6 +64,39 @@ exports.deleteScript = (key)->
       return cont(new Error('Not found')) if count <= 0
       cont(null, count)
 
+# We cant ensure pid be unique, but for sure we have scriptId when kill the script running
+exports.killScript = (scriptId)->
+
+  exports
+  .findById(scriptId)
+
+  # Update the script status
+  .then (cont, script)->
+    # Reset script status
+    script.lastRunEnd = new Date()
+    script.status = 'ready'
+    script.save (err)->
+      return cont(err) if err
+      cont(null, script)
+
+  # Find the logs record of the pid
+  .then (cont, script)->
+    logsModel.findById script.lastRunLogs, (err, logs)->
+      return cont(err) if err
+      return cont('Logs of script ' + script._id + ' does not exist.') if not logs
+      cont(null, logs, script)
+
+  # Kill the process of pid
+  .then (cont, logs, script)->
+    # Kill the process whatever succeed
+    killProcess(logs.pid)
+
+    # Update logs record info
+    logs.endAt = new Date()
+    logs.save()
+
+    # Return whatever logs updates
+    cont(null, script, logs)
 
 
 
@@ -70,39 +105,42 @@ exports.runScript = (id, arg=[], options={})->
 
   options.shell = options.shell or 'sh'
 
+
+  # Create logs model for recording the executation of script
+  _createLogsModel = (cont)->
+    scriptLogs = new logsModel {
+      scriptId: id
+    }
+    scriptLogs.save (err)->
+      return cont(err) if err
+      cont(null, scriptLogs)
+
   # Find script by id, and check its status;
   # if everything is ok, update the status and go on
-  _findScriptAndLock = (cont)->
+  _findScriptAndLock = (cont, scriptLogs)->
     scriptModel.findById id, (err, doc)->
       return cont(err) if err
       return cont('Script not found.') if not doc
       return cont('Script isnt ready.') if doc.status isnt 'ready'
       doc.status = 'running'
       doc.lastRunAt = new Date()
+      doc.lastRunLogs = scriptLogs._id
       doc.save (err)->
         return cont(err) if err
-        cont(null, doc)
+        cont(null, doc, scriptLogs)
 
-  # Create logs model for recording the executation of script
-  _createLogsModel = (cont, script)->
-    scriptLogs = new logsModel {
-      scriptId: script._id
-    }
-    scriptLogs.save (err)->
-      return cont(err) if err
-      cont(null, script, scriptLogs)
 
   # Write the codes of script to a temporary file, and get ready to run
-  _createTmpScriptFile = (cont, doc, scriptLogs)->
+  _createTmpScriptFile = (cont, script, scriptLogs)->
     # Get the codes
-    codes = doc.codes
+    codes = script.codes
 
     # Make tmp shell file
     tmpDir = os.tmpDir()
-    tmpShellFile = path.join(tmpDir, 'shell-' + doc._id + '.sh')
+    tmpShellFile = path.join(tmpDir, 'shell-' + script._id + '.sh')
     fs.writeFile tmpShellFile, codes, (err)->
       return cont(err) if err
-      cont(null, tmpShellFile, doc, scriptLogs)
+      cont(null, tmpShellFile, script, scriptLogs)
 
   # Run the tmp script file and collect the logs
   _runScriptFile = (cont, shellFile, doc, scriptLogs)->
@@ -130,9 +168,9 @@ exports.runScript = (id, arg=[], options={})->
         logs: shellOutput
       }, doc, scriptLogs)
 
-  Thenjs _findScriptAndLock
+  Thenjs _createLogsModel
 
-  .then _createLogsModel
+  .then _findScriptAndLock
 
   .then _createTmpScriptFile
 

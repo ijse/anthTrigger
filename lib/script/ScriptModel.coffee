@@ -26,6 +26,10 @@ schema = mongoose.Schema {
 		type: mongoose.Schema.Types.ObjectId
 		default: null
 	}
+	lastRunLogs: {
+		type: mongoose.Schema.Types.ObjectId
+		default: null
+	}
 	lastRunAt: {
 		type: Date
 		default: null
