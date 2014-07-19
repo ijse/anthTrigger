@@ -13,12 +13,14 @@
 
 	<div class="col-lg-12 well">
         <a class="btn btn-default" href="/scriptLogs">返回</a>
-
 	</div>
 
 
     <tabset>
-        <tab heading="日志内容">
+        <tab>
+            <tab-heading>
+                <span>日志内容</span>
+            </tab-heading>
             <pre style="word-wrap: normal;">{{logs.content}}
             </pre>
         </tab>
@@ -26,6 +28,20 @@
             <pre style="word-wrap: normal;">{{logs.snapshot.codes}}
             </pre>
         </tab>
+        <div class="pull-right">
+            <label>
+            ( <input type="checkbox"
+                ng-model="autoReload"
+                ng-change="setAuto(autoReload)"
+                 />
+            自动刷新
+                <i class="fa fa-refresh"
+                    ng-class="{ 'fa-spin': status.load == 'loading' }">
+                </i>
+            )
+            </label>
+
+        </div>
     </tabset>
 
 </div>
