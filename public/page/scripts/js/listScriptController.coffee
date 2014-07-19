@@ -27,6 +27,8 @@ angular.module 'anthTrigger'
 
 	$scope.deleteScript = (script, index)->
 
+		return if not confirm("确定要【删除】脚本:\n\n'#{script.title}'\n\n吗?")
+
 		$http
 		.delete "/scripts/delete/#{script._id}"
 		.success (result)->
@@ -37,6 +39,7 @@ angular.module 'anthTrigger'
 			console.log arguments
 
 	$scope.runScript = (script, index)->
+		return if not confirm("确定要【执行】脚本:\n\n'#{script.title}'\n\n吗?")
 
 		script.status = 'running'
 
