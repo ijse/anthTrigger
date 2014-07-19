@@ -20,8 +20,9 @@ angular
   })
   .when('/scripts/create', {
     templateUrl: '/page/scripts/edit_scripts.html',
-    controller: 'editScriptController',
-    auth: true
+    controller: 'createScriptController',
+    auth: true,
+    resolve: { id: function() {} }
   })
   .when('/scripts/edit/:id', {
     templateUrl: '/page/scripts/edit_scripts.html',
