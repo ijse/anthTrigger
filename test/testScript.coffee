@@ -62,7 +62,7 @@ describe "Test scripts", ->
 			.runScript scriptId, [ 'arg1']
 			.fin (cont, err, result)->
 				(err is null).should.be.ok
-				result.should.be.eql 'hello - arg1\n'
+				result.logs.should.be.eql 'hello - arg1\n'
 				done()
 
 	it 'Delete the script', (done)->

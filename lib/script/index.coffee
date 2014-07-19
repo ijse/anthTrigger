@@ -92,13 +92,13 @@ exports.route = (app)->
 		.then (cb, result)->
 			res.json {
 				success: true,
-				data: result
+				code: result.code
+				data: result.logs
 			}
-		.fail (cb, err, result)->
+		.fail (cb, err)->
 			res.json {
 				success: false
-				error: err.code
-				data: err.logs
+				error: err
 			}
 
 

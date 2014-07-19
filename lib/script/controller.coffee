@@ -67,7 +67,10 @@ exports.runScript = (id, arg=[], options={})->
   options.shell = options.shell or 'sh'
   exports
     .findById(id)
+
+    # Create tmp script file
     .then (cont, doc)->
+
       # Get the codes
       codes = doc.codes
 
@@ -76,22 +79,24 @@ exports.runScript = (id, arg=[], options={})->
       tmpShellFile = path.join(tmpDir, 'shell-' + doc._id + '.sh')
       fs.writeFile tmpShellFile, codes, (err)->
         return cont(err) if err
+        cont(null, tmpShellFile, doc)
+
+    # Run script and collect logs
+    .then (cont, shellFile, doc)->
 
         shellOutput = ''
         exc = spawn options.shell, [
-          tmpShellFile
+          shellFile
         ].concat(arg), options
 
         exc.stdout.on 'data', (data)-> shellOutput += data
         exc.stderr.on 'data', (data)-> shellOutput += data
         exc.on 'close', (code)->
           # Remove tmpfile
-          fs.unlink tmpShellFile
+          fs.unlink shellFile
 
-          return cont({
+          return cont(null, {
             code: code
             logs: shellOutput
-          }) if code
-          cont(null, shellOutput)
-
+          })
 
