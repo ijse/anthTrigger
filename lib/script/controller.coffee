@@ -32,7 +32,6 @@ exports.findById = (id)->
 
 exports.editScript = (id, updates)->
   delete updates._id
-  console.log id, updates
   Thenjs (cont)->
     scriptModel.update {
       _id: '' + id
