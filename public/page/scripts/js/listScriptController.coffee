@@ -27,7 +27,7 @@ angular.module 'anthTrigger'
 
 	$scope.deleteScript = (script, index)->
 
-		return if not confirm("确定要【删除】脚本:\n\n'#{script.title}'\n\n吗?")
+		return if not confirm("确定要【删除】脚本:\n\n\t'#{script.title}'\n\n吗?")
 
 		$http
 		.delete "/scripts/delete/#{script._id}"
@@ -35,11 +35,9 @@ angular.module 'anthTrigger'
 			if result.success
 				# remove from local list
 				$scope.list.splice(index, 1)
-		.error ->
-			console.log arguments
 
 	$scope.runScript = (script, index)->
-		return if not confirm("确定要【执行】脚本:\n\n'#{script.title}'\n\n吗?")
+		return if not confirm("确定要【执行】脚本:\n\n\t'#{script.title}'\n\n吗?")
 
 		script.status = 'running'
 
@@ -55,6 +53,9 @@ angular.module 'anthTrigger'
 			}
 
 	$scope.killScript = (script, index)->
+
+		return if not confirm("确定要【Kill】脚本:\n\n\t'#{script.title}'\n\n的此次执行吗?")
+
 
 		$http
 		.post '/scripts/kill/' + script._id
