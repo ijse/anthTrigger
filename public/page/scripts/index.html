@@ -44,7 +44,28 @@
                     <td>
                         <a ng-href="/scripts/edit/{{script._id}}" class="btn btn-primary">编辑</a>
                         <a ng-click="deleteScript(script, $index)" class="btn btn-danger">删除</a>
-                        <a ng-click="runScript(script)" class="btn btn-success">执行</a>
+                        <button
+                            ng-click="runScript(script, $index)"
+                            ng-if="script.status == 'ready'"
+                            class="btn btn-success">执行</button>
+
+                        <div class="btn-group" dropdown ng-if="script.status !== 'ready'">
+                            <button type="button" disabled class="btn btn-success">
+                                运行中
+                            </button>
+                            <button type="button"
+                                class="btn btn-success dropdown-toggle">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href ng-click="killScript(script, $index)">
+                                    <i class="fa fa-times"></i> Kill
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
                     </td>
                 </tr>
             </tbody>

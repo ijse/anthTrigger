@@ -1,6 +1,7 @@
 
 Thenjs = require 'thenjs'
 scriptModel = require './ScriptModel'
+logsModel = require './logsModel'
 spawn = require('child_process').spawn
 fs = require 'fs'
 path = require 'path'
@@ -82,8 +83,17 @@ exports.runScript = (id, arg=[], options={})->
         return cont(err) if err
         cont(null, doc)
 
+  # Create logs model for recording the executation of script
+  _createLogsModel = (cont, script)->
+    scriptLogs = new logsModel {
+      scriptId: script._id
+    }
+    scriptLogs.save (err)->
+      return cont(err) if err
+      cont(null, script, scriptLogs)
+
   # Write the codes of script to a temporary file, and get ready to run
-  _createTmpScriptFile = (cont, doc)->
+  _createTmpScriptFile = (cont, doc, scriptLogs)->
     # Get the codes
     codes = doc.codes
 
@@ -92,17 +102,25 @@ exports.runScript = (id, arg=[], options={})->
     tmpShellFile = path.join(tmpDir, 'shell-' + doc._id + '.sh')
     fs.writeFile tmpShellFile, codes, (err)->
       return cont(err) if err
-      cont(null, tmpShellFile, doc)
+      cont(null, tmpShellFile, doc, scriptLogs)
 
   # Run the tmp script file and collect the logs
-  _runScriptFile = (cont, shellFile, doc)->
+  _runScriptFile = (cont, shellFile, doc, scriptLogs)->
     shellOutput = ''
     exc = spawn options.shell, [
       shellFile
     ].concat(arg), options
 
-    exc.stdout.on 'data', (data)-> shellOutput += data
-    exc.stderr.on 'data', (data)-> shellOutput += data
+    scriptLogs.pid = exc.pid
+    receiveOutput = (data)->
+      shellOutput += data
+      # save to mongodb
+      scriptLogs.content = shellOutput
+      scriptLogs.endAt = new Date()
+      scriptLogs.save() #! Async problem?
+
+    exc.stdout.on 'data', receiveOutput
+    exc.stderr.on 'data', receiveOutput
     exc.on 'close', (code)->
       # Remove tmpfile
       fs.unlink shellFile
@@ -110,22 +128,28 @@ exports.runScript = (id, arg=[], options={})->
       return cont(null, {
         code: code
         logs: shellOutput
-      }, doc)
+      }, doc, scriptLogs)
 
   Thenjs _findScriptAndLock
+
+  .then _createLogsModel
 
   .then _createTmpScriptFile
 
   # Run script and collect logs
   .then _runScriptFile
 
-  .fin (cont, err, result, doc)->
+  .fin (cont, err, result, doc, scriptLogs)->
     # Reset script status
     doc.lastRunEnd = new Date()
     doc.status = 'ready'
+
+    scriptLogs.endAt = new Date()
+    scriptLogs.save()
+
     doc.save (err)->
       # Got error when update status after script run
       result.error = err if err
-      cont(err, result)
+      cont(err, result, doc)
 
 

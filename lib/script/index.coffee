@@ -89,11 +89,12 @@ exports.route = (app)->
 
 		Ctrl
 		.runScript sid, [], app.get('configs').spawnOptions
-		.then (cb, result)->
+		.then (cb, result, doc)->
 			res.json {
 				success: true,
+				script: doc
 				code: result.code
-				data: result.logs
+				logs: result.logs
 			}
 		.fail (cb, err)->
 			res.json {

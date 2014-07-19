@@ -36,7 +36,9 @@ angular.module 'anthTrigger'
 		.error ->
 			console.log arguments
 
-	$scope.runScript = (script)->
+	$scope.runScript = (script, index)->
+
+		script.status = 'running'
 
 		$http
 		.put '/scripts/run/' + script._id
@@ -44,6 +46,17 @@ angular.module 'anthTrigger'
 			$modal.open {
 				template: "<pre>{{content}}</pre>"
 				controller: ['$scope', (scope)->
-					scope.content = result.data
+					scope.content = result.logs
+					$scope.list[index] = result.script
 				]
 			}
+
+	$scope.killScript = (script, index)->
+
+		$http
+		.post '/scripts/kill/' + script._id
+		.succes (result)->
+			if result.success
+				$scope.list[index] = result.doc
+
+
