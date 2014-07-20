@@ -22,6 +22,7 @@
     "angular-route": "~1.2.20",
     "angular-cookies": "~1.2.20",
     "angular-resource": "~1.2.20",
-    "jquery": "~2.1.1"
+    "jquery": "~2.1.1",
+    "angular-moment": "~0.7.1"
   }
 }

@@ -40,8 +40,16 @@
                             {{slog.snapshot.title}}
                         </a>
                     </td>
-                    <td>{{slog.startAt}}</td>
-                    <td>{{slog.endAt}}</td>
+                    <td am-time-ago="slog.startAt"
+                        title="{{slog.startAt}}"></td>
+                    <td>
+                        <span ng-if="slog.endAt"
+                        am-time-ago="slog.endAt"
+                        title="{{slog.endAt}}"></span>
+                        <span ng-if="!slog.endAt" class="label label-info">执行中。。</span>
+
+
+                    </td>
                     <td>
                         <a ng-href="/scriptLogs/view/{{slog._id}}">详细日志</a>
                     </td>

@@ -37,8 +37,16 @@
                             {{script.title}}
                         </a>
                     </td>
-                    <td>{{script.createAt}}</td>
-                    <td>{{script.lastRunAt}}</td>
+                    <td>
+                        <span am-time-ago="script.createAt"
+                            title="{{script.createAt}}">
+                        </span>
+                    </td>
+                    <td>
+                        <span am-time-ago="script.lastRunAt"
+                            title="{{script.lastRunAt}}">
+                        </span>
+                    </td>
                     <td>
                         <a ng-href="/scripts/edit/{{script._id}}" class="btn btn-primary">编辑</a>
                         <a ng-click="deleteScript(script, $index)" class="btn btn-danger">删除</a>

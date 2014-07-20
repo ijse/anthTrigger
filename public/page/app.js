@@ -3,6 +3,7 @@ angular
   'ngRoute',
   'ngResource',
   'ngCookies',
+  'angularMoment',
   'ui.bootstrap'
   ])
 .config(function($routeProvider, $locationProvider) {
@@ -52,7 +53,8 @@ angular
   //   redirectTo: "/"
   // });
 })
-.run(function($rootScope, $location, $cookies, $http) {
+.run(function($rootScope, $location, $cookies, $http, amMoment) {
+  amMoment.changeLanguage('de');
   function getServerLocation() {
     $http
     .get('/whereAmI')

@@ -15,7 +15,7 @@ exports.route = (app)->
 			skip: (page-1)*pageSize
 			limit: pageSize
 			sort: {
-				endAt: -1
+				startAt: -1
 			}
 		}
 		.fin (cont, err, list, total)->
