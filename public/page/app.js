@@ -85,6 +85,12 @@ angular
       location.href = '/page/login.html';
     }
   });
+  $rootScope.$on('$locationChangeStart', function(event, next) {
+    $rootScope.pageLoading = true;
+  });
+  $rootScope.$on('$locationChangeSuccess', function(event, next) {
+    $rootScope.pageLoading = false;
+  });
 
   getServerLocation();
   getUser();
