@@ -5,6 +5,7 @@ angular.module 'anthTrigger'
 	$scope.status = _st = {}
 	$scope.logs = {}
 	t = null
+	$scope.autoReload = false
 
 	loadLogs = ->
 		_st.load = 'loading'
@@ -12,6 +13,9 @@ angular.module 'anthTrigger'
 		.get '/scriptLogs/find/' + id
 		.success (result)->
 			$scope.logs = result.data
+			if $scope.logs.endAt
+				$scope.autoReload = false
+				$scope.setAuto(false)
 			_st.load = 'done'
 
 	loadLogs()
