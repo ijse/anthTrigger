@@ -47,7 +47,8 @@ exports.editScript = (id, updates, uid)->
       $set: updates
     }, (err, count)->
       return cont(err) if err
-      cont(null, count)
+      updates._id = id
+      cont(null, updates)
 
 exports.listScript = (crital)->
 
@@ -217,6 +218,6 @@ exports.runScript = (id, arg=[], options={}, uid)->
       doc.save (err3)->
         # Got error when update status after script run
         result.error = [ err1, err2, err3 ]
-        cont(null, result, doc)
+        cont(err1 or err2 or err3, result, doc, scriptLogs)
 
 

@@ -37,7 +37,8 @@ angular
   })
   .when('/scriptLogs', {
     templateUrl: '/page/scriptLogs/index.html',
-    controller: 'listLogsController'
+    controller: 'listLogsController',
+    auth: true
   })
   .when('/scriptLogs/view/:id', {
     templateUrl: '/page/scriptLogs/logs_view.html',

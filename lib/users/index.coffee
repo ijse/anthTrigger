@@ -7,9 +7,13 @@ exports.route = (app)->
 		.login req.body.username, req.body.password
 		.fin (cont, err, user)->
 
-			return res.json {
-				success: false
-			} if err
+			if err
+				_evt.user_login user.name, false
+
+				res.json {
+					success: false
+				}
+				return
 			# write to session
 			req.session.user = user
 			res.cookie 'user', user.name
@@ -20,24 +24,26 @@ exports.route = (app)->
 				success: true
 				user: user
 			}
+			_evt.user_login user.name, true
+
 	app.get '/user/find', (req, res)->
-		uid = req.param('id')
+		uid = '' + req.param('id')
 		Ctrl
 		.findUser { _id: uid }
-		.then (cont, user)->
+		.fin (cont, err, user)->
+			console.log ">>>", err
 			res.json {
-				success: true
+				success: !!!err and user
 				user: user
-			}
-		.fail (cont, err)->
-			res.json {
-				success: false
 				error: err
 			}
+		.fail ->
 
 	app.get '/logout', (req, res)->
+		_evt.user_logout req.cookies.user
 		req.session.user = null
 		res.clearCookie('user')
 		res.clearCookie('uid')
+
 
 		res.redirect '/'

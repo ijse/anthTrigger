@@ -8,32 +8,25 @@ exports.route = (app)->
 	app.post '/scripts/create', (req, res)->
 		Ctrl
 		.addScript(req.body, req.cookies.uid)
-		.then (cb, script)->
+		.fin (cb, err, script)->
 			res.json {
-				success: true
-				script: script
-			}
-		.fail (cb, err)->
-			res.json {
-				success: false
+				success: !!!err
+				script: script,
 				error: err
 			}
+			_evt.script_add req.cookies.user, !!!err, script
 
 	app.get '/scripts/find/:id', (req, res)->
 
 		scriptId = req.param('id')
 
 		Ctrl
-		.findById '' + scriptId #'53c8f792a8848500001488d5'
-		.then (cb, script)->
+		.findById '' + scriptId
+		.fin (cb, err, script)->
 			res.json {
-				success: true
-				script: script
-			}
-		.fail (cb, err)->
-			res.json {
-				success: false
+				success: !!!err
 				error: err
+				script: script
 			}
 
 	app.get '/scripts/list', (req, res)->
@@ -64,37 +57,33 @@ exports.route = (app)->
 		sid = '' + req.param('id')
 		Ctrl
 		.editScript(sid, req.body, req.cookies.uid)
-		.then (cb, result)->
+
+		.fin (cont, err, script)->
 			res.json {
-				success: true
-			}
-		.fail (cb, err)->
-			res.json {
-				success: false
+				success: !!!err
+				script: script
 				error: err
 			}
+			_evt.script_edit req.cookies.user, !!!err, script
 
 	app.delete '/scripts/delete/:key', (req, res)->
 		key = req.param('key')
 
 		Ctrl
 		.deleteScript(key)
-		.then (cb, result)->
+		.fin (cont, err, result)->
 			res.json {
-				success: true
-			}
-		.fail (cb, err)->
-			res.json {
-				success: false
+				success: !!!err
 				error: err
 			}
+			_evt.script_delete req.cookies.user, !!!err, script
 
 	app.put '/scripts/run/:id', (req, res)->
 		sid = '' + req.param('id')
 
 		Ctrl
 		.runScript sid, [], app.get('configs').spawnOptions, req.cookies.uid
-		.then (cb, result, doc)->
+		.then (cb, result, doc, logs)->
 			res.json {
 				success: true,
 				error: result.error
@@ -102,11 +91,7 @@ exports.route = (app)->
 				code: result.code
 				logs: result.logs
 			}
-		.fail (cb, err)->
-			res.json {
-				success: false
-				error: err
-			}
+			_evt.script_run req.cookies.user, true, doc, logs
 
 	app.post '/scripts/kill/:scriptId', (req, res)->
 		sid = '' + req.param('scriptId')
@@ -120,6 +105,8 @@ exports.route = (app)->
 				script: script
 				logs: logs
 			}
+			_evt.script_kill req.cookies.user, !!!err, logs
+
 
 	app.post '/hook', (req, res)->
 		shellOutput = ''
