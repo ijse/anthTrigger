@@ -177,7 +177,7 @@ exports.runScript = (id, arg=[], options={})->
       shellOutput += data
       # save to mongodb
       scriptLogs.content = shellOutput
-      scriptLogs.endAt = new Date()
+      # scriptLogs.endAt = new Date()
       scriptLogs.save() #! Async problem?
 
     exc.stdout.on 'data', receiveOutput

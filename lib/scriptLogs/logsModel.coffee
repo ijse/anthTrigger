@@ -24,7 +24,6 @@ schema = mongoose.Schema {
 	}
 	endAt: {
 		type: Date
-		default: Date.now
 	}
 	content: String
 }

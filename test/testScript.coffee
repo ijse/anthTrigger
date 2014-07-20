@@ -70,7 +70,7 @@ describe "Test scripts", ->
 			.killScript scriptId
 			.fin (cont, err, result)->
 				(err is null).should.be.ok
-				result.success.should.be.ok
+				result.should.be.ok
 				done()
 
 	it 'Delete the script', (done)->

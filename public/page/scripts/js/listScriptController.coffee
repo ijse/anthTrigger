@@ -1,7 +1,7 @@
 
 angular.module 'anthTrigger'
 .controller 'listScriptController',
-($scope, $http, $modal)->
+($scope, $location, $http, $modal)->
 
 	$scope.status = _st = {}
 	$scope.list = []
@@ -77,3 +77,9 @@ angular.module 'anthTrigger'
 				$scope.list[index] = result.script
 
 
+	$scope.viewLogs = (script)->
+
+		$http
+		.get '/scripts/find/' + script._id
+		.success (result)->
+			$location.url("/scriptLogs/view/#{result.script.lastRunLogs}") if result.success
