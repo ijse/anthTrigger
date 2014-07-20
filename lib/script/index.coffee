@@ -45,7 +45,13 @@ exports.route = (app)->
 		pageSize = parseInt(pageSize) or 10
 
 		Ctrl
-		.listByPage {}, page, pageSize
+		.listByPage {}, {
+			skip: (page-1)*pageSize
+			limit: pageSize
+			sort: {
+				lastRunAt: -1
+			}
+		}
 		.fin (cont, err, list, total)->
 
 			res.json {

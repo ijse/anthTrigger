@@ -8,14 +8,10 @@ exports.list = (crital={})->
 			return cont(err) if err
 			cont(null, list)
 
-exports.listByPage = (crital, page=1, pageSize=10)->
-	skipCount = (page - 1) * pageSize
+exports.listByPage = (crital, opts)->
 	Thenjs (cont)->
 		logsModel
-		.find crital, null, {
-			skip: skipCount
-			limit: pageSize
-		}, (err, list)->
+		.find crital, null, opts, (err, list)->
 			return cont(err) if err
 			cont(null, list)
 	.then (cont, list)->
