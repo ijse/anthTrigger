@@ -50,6 +50,11 @@ angular
       }
     }
   })
+  .when('/eventLogs', {
+    templateUrl: '/page/eventLogs/index.html',
+    controller: 'eventLogsController',
+    auth: true
+  })
   // .otherwise({
   //   redirectTo: "/"
   // });

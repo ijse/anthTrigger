@@ -4,7 +4,7 @@ exports.route = (app)->
 	# set up events recorder
 	global._evt = Ctrl.record
 
-	app.get '/events', (req, res)->
+	app.get '/eventLogs/list', (req, res)->
 		page = req.param('page')
 		page = parseInt(page) or 1
 
@@ -24,7 +24,7 @@ exports.route = (app)->
 				list: list
 				total: total
 			}
-	app.put '/events/add', (req, res)->
+	app.put '/eventLogs/add', (req, res)->
 		uname = req.cookies.user
 		msg = req.param('msg')
 		Ctrl

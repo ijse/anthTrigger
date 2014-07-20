@@ -16,11 +16,11 @@ exports.listByPage = (crital, opts)->
 		.find crital, null, opts, (err, list)->
 			return cont(err) if err
 			cont(null, list)
-			.then (cont, list)->
-    # Get total count
-    scriptModel.count crital, (err, count)->
-    	return cont(err) if err
-    	cont(null, list, count)
+	.then (cont, list)->
+	    # Get total count
+	    eventModel.count crital, (err, count)->
+	    	return cont(err) if err
+	    	cont(null, list, count)
 
 exports.record = {
 	user_login: (name, success)->
