@@ -2,6 +2,7 @@
 express = require 'express'
 session = require 'express-session'
 bodyParser = require 'body-parser'
+cookieParser = require 'cookie-parser'
 logger = require 'morgan'
 path = require 'path'
 router = require './router'
@@ -16,6 +17,7 @@ module.exports = (configs)->
 	app.use logger('dev')
 	app.set 'configs', configs
 
+	app.use cookieParser('anthTrigger')
 	# session support
 	app.use session({
 	  resave: false, # don't save session if unmodified

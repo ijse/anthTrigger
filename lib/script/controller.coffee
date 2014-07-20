@@ -22,10 +22,11 @@ exports.runshell = (shellObj, cb)->
   execution.on 'close', (code)->
     cb?(code, shellOutput)
 
-exports.addScript = (script)->
-
+exports.addScript = (script, uid)->
   Thenjs (cont)->
     sc = new scriptModel(script)
+    sc.createByUser = uid
+    sc.lastUpdateByUser = uid
     sc.save (err)->
       cont(err, sc)
 
@@ -36,8 +37,9 @@ exports.findById = (id)->
       return cont('Not found.') if not doc
       cont(null, doc)
 
-exports.editScript = (id, updates)->
+exports.editScript = (id, updates, uid)->
   delete updates._id
+  updates.lastUpdateByUser = uid
   Thenjs (cont)->
     scriptModel.update {
       _id: '' + id
@@ -113,7 +115,7 @@ exports.killScript = (scriptId)->
 
 
 
-exports.runScript = (id, arg=[], options={})->
+exports.runScript = (id, arg=[], options={}, uid)->
 
   options.shell = options.shell or 'sh'
 
@@ -121,7 +123,8 @@ exports.runScript = (id, arg=[], options={})->
   # Create logs model for recording the executation of script
   _createLogsModel = (cont)->
     scriptLogs = new logsModel {
-      scriptId: id
+      scriptId: id,
+      runByUser: uid
     }
     scriptLogs.save (err)->
       return cont(err) if err
@@ -137,6 +140,7 @@ exports.runScript = (id, arg=[], options={})->
       doc.status = 'running'
       doc.lastRunAt = new Date()
       doc.lastRunLogs = scriptLogs._id
+      doc.lastRunByUser = uid
       doc.save (err)->
         return cont(err) if err
         cont(null, doc, scriptLogs)

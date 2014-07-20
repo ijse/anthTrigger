@@ -14,6 +14,10 @@ schema = mongoose.Schema {
 		type: Date
 		default: Date.now
 	}
+	createByUser: {
+		type: mongoose.Schema.Types.ObjectId
+		default: null
+	}
 	lastRunByUser: {
 		type: mongoose.Schema.Types.ObjectId
 		default: null

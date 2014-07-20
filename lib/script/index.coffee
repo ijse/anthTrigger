@@ -6,9 +6,8 @@ path = require 'path'
 exports.route = (app)->
 
 	app.post '/scripts/create', (req, res)->
-
 		Ctrl
-		.addScript(req.body)
+		.addScript(req.body, req.cookies.uid)
 		.then (cb, script)->
 			res.json {
 				success: true
@@ -64,7 +63,7 @@ exports.route = (app)->
 	app.post '/scripts/edit/:id', (req, res)->
 		sid = '' + req.param('id')
 		Ctrl
-		.editScript(sid, req.body)
+		.editScript(sid, req.body, req.cookies.uid)
 		.then (cb, result)->
 			res.json {
 				success: true
@@ -94,7 +93,7 @@ exports.route = (app)->
 		sid = '' + req.param('id')
 
 		Ctrl
-		.runScript sid, [], app.get('configs').spawnOptions
+		.runScript sid, [], app.get('configs').spawnOptions, req.cookies.uid
 		.then (cb, result, doc)->
 			res.json {
 				success: true,
