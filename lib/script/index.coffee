@@ -71,7 +71,7 @@ exports.route = (app)->
 
 		Ctrl
 		.deleteScript(key)
-		.fin (cont, err, result)->
+		.fin (cont, err, script)->
 			res.json {
 				success: !!!err
 				error: err
@@ -105,7 +105,7 @@ exports.route = (app)->
 				script: script
 				logs: logs
 			}
-			_evt.script_kill req.cookies.user, !!!err, logs
+			_evt.script_kill req.cookies.user, logs
 
 
 	app.post '/hook', (req, res)->

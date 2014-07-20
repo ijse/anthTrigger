@@ -69,15 +69,19 @@ exports.listByPage = (crital, opts)->
       return cont(err) if err
       cont(null, list, count)
 
-exports.deleteScript = (key)->
+exports.deleteScript = (id)->
 
   Thenjs (cont)->
+    scriptModel.findById id, (err, script)->
+      return cont(err) if err
+      cont(null, script)
+  .then (cont, script)->
     scriptModel.remove {
-      _id: key
+      _id: id
     }, (err, count)->
       return cont(err) if err
       return cont(new Error('Not found')) if count <= 0
-      cont(null, count)
+      cont(null, script)
 
 # We cant ensure pid be unique, but for sure we have scriptId when kill the script running
 exports.killScript = (scriptId)->
