@@ -5,6 +5,10 @@ schema = mongoose.Schema {
 	title: {
 		type: String
 	}
+	description: {
+		type: String
+		default: ''
+	}
 	codes: String
 	createAt: {
 		type: Date

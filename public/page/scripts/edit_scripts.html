@@ -17,8 +17,8 @@
             ng-disabled="status.save == 'saving'">Save</button>
     </div>
 
-    <div>
-        <form role='form'>
+    <div class="col-lg-12">
+        <form role='form' class="form-horizontal">
             <div class="form-group">
                 <label for="title" class="col-sm-2 control-label text-right">脚本名称</label>
                 <div class="col-sm-10">
@@ -26,9 +26,16 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="description" class="col-sm-2 control-label text-right">备注说明</label>
+                <div class="col-sm-10">
+                    <textarea name="description" ng-model="script.description" class="form-control" rows="5"></textarea>
+
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="codes" class="col-sm-2 control-label text-right">脚本代码</label>
                 <div class="col-sm-10">
-                    <textarea name="codes" ng-model="script.codes" class="form-control" cols="30" rows="10"></textarea>
+                    <textarea name="codes" ng-model="script.codes" class="form-control" cols="30" rows="20"></textarea>
                 </div>
             </div>
         </form>
