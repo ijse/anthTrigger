@@ -12,7 +12,7 @@ angular
 
   $routeProvider
   .when('/', {
-    templateUrl: '/page/partials/welcome.html'
+    templateUrl: '/page/globals/welcome.html'
   })
   .when('/scripts', {
     templateUrl: '/page/scripts/index.html',
