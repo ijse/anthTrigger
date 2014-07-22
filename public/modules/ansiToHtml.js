@@ -194,7 +194,7 @@ angular.module('ansiToHtml', ['ngSanitize'])
             scope: {
                 value: '='
             },
-            template: "<pre style='word-wrap: normal;' ng-bind-html='txt'>{{txt}}</pre>",
+            template: "<pre style='word-wrap: normal; background-color: black; color: white;' ng-bind-html='txt'>{{txt}}</pre>",
             replace: true,
             link: function(scope, elem, attrs) {
 
