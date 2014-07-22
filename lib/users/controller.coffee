@@ -16,7 +16,9 @@ exports.addUser = (user)->
 
 	Thenjs (cont)->
 		user = new userModel(user)
-		user.save cont
+		user.save (err)->
+			return cont(err) if err
+			return cont(null, user)
 
 exports.findUser = (critcal)->
 	Thenjs (cont)->

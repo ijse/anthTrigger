@@ -68,8 +68,8 @@
                 </li>
             </ul>
         </li>
-        <li class="dropdown user-dropdown" ng-if="user">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{user.name}} <b class="caret"></b></a>
+        <li class="dropdown user-dropdown" ng-if="CurrentUser">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{CurrentUser.name}} <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li><a href="#"><i class="fa fa-user"></i> Profile</a>
                 </li>
@@ -81,7 +81,7 @@
                 </li>
             </ul>
         </li>
-        <li ng-if="!user">
+        <li ng-if="!CurrentUser">
             <a href="/page/login.html">登陆</a>
         </li>
     </ul>

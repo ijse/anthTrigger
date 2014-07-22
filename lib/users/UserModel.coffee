@@ -10,6 +10,7 @@ schema = mongoose.Schema {
 	role: {
 		type: String
 		default: 'user'
+		enum: 'user,manager,admin'.split(',')
 	}
 	lastLoginAt: Date
 }

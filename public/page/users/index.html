@@ -10,7 +10,12 @@
 </div>
 
 <div class="col-lg-12">
-	
+
+	<div class="well clearfix">
+		<button class="btn btn-primary pull-right" ng-click="addUser()">
+			添加用户
+		</button>
+	</div>
 
 	<table class="table table-striped table-bordered table-condensed table-hover">
 		<thead>
@@ -23,12 +28,26 @@
 		</thead>
 
 		<tbody>
-			<tr ng-repeat="user in list">
-				<td>{{user._id.substring(0,7)}}</td>
-				<td>{{user.name}}</td>
-				<td>{{user.lastLoginAt}}</td>
+			<tr ng-repeat="u in list">
+				<td>{{u._id.substring(0,7)}}</td>
+				<td>{{u.name}}</td>
 				<td>
-					
+					<span am-time-ago="u.lastLoginAt" title="{{u.lastLoginAt}}">
+					</span>
+				</td>
+				<td width="356">
+					<button class="btn btn-primary" ng-click="changePassword(u)">
+						修改密码
+					</button>
+					<a ng-href="/scriptLogs?uid={{u._id}}" class="btn btn-info" >
+						操作记录
+					</a>
+					<button class="btn btn-default" ng-click="changePermission(u)">
+						修改权限
+					</button>
+					<button class="btn btn-danger" ng-click="disable(u)">
+						禁用用户
+					</button>
 				</td>
 			</tr>
 		</tbody>

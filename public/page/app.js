@@ -82,7 +82,7 @@ angular
     .get('/user/find?id=' + $cookies.uid)
     .success(function(data) {
       if (data.success)
-        $rootScope.user = data.user;
+        $rootScope.CurrentUser = data.user;
     });
   }
 

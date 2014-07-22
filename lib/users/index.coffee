@@ -26,6 +26,17 @@ exports.route = (app)->
 			}
 			_evt.user_login user.name, true
 
+	app.post '/user/add', (req, res)->
+
+		Ctrl
+		.addUser req.body
+		.fin (cont, err, user)->
+			res.json {
+				success: !!!err and user
+				user: user
+				error: err
+			}
+
 	app.get '/user/find', (req, res)->
 		uid = '' + req.param('id')
 		Ctrl
