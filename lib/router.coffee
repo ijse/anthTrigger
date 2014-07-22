@@ -1,5 +1,7 @@
 
 os = require 'os'
+Package = require '../package.json'
+
 exports.attach = (app)->
 
 	app.get '/ping', (req, res)-> res.send('pong!')
@@ -8,6 +10,7 @@ exports.attach = (app)->
 		res.json {
 			ip: req.socket.localAddress
 			hostname: os.hostname()
+			version: Package.version
 		}
 
 	require('./users').route(app)
