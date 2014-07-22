@@ -57,6 +57,11 @@ angular
     controller: 'eventLogsController',
     auth: true
   })
+  .when('/users', {
+    templateUrl: '/page/users/index.html',
+    controller: 'userController',
+    auth: true
+  })
   // .otherwise({
   //   redirectTo: "/"
   // });

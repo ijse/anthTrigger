@@ -38,6 +38,17 @@ exports.route = (app)->
 			}
 		.fail ->
 
+	app.get '/user/list', (req, res)->
+		Ctrl
+		.listUser()
+		.fin (cont, err, list)->
+			res.json {
+				success: !!!err and list
+				list: list
+				error: err
+			}
+		.fail ->
+
 	app.get '/logout', (req, res)->
 		_evt.user_logout req.cookies.user
 		req.session.user = null

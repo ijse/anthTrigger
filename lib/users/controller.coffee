@@ -32,3 +32,9 @@ exports.login = (name, pass)->
 			return cont('Password wrong!') if not doc
 			return cont(null, doc)
 
+exports.listUser = ()->
+	Thenjs (cont)->
+		userModel.find {}, (err, list)->
+			return cont(err) if err
+			return cont(null, list or [])
+
