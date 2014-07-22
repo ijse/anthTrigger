@@ -3,10 +3,14 @@ angular
   'ngRoute',
   'ngResource',
   'ngCookies',
+  'ngSanitize',
+  'ansiToHtml',
   'angularMoment',
   'ui.bootstrap'
   ])
-.config(function($routeProvider, $locationProvider) {
+.config(function($routeProvider, $locationProvider, $sceProvider) {
+
+  $sceProvider.enabled(false);
 
   $locationProvider.html5Mode(true).hashPrefix('!');
 
@@ -59,7 +63,7 @@ angular
   //   redirectTo: "/"
   // });
 })
-.run(function($rootScope, $location, $cookies, $http, amMoment) {
+.run(function($rootScope, $location, $cookies, $http, amMoment, ansi2html) {
   amMoment.changeLanguage('de');
   function getServerLocation() {
     $http
@@ -96,6 +100,8 @@ angular
   $rootScope.$on('$locationChangeSuccess', function(event, next) {
     $rootScope.pageLoading = false;
   });
+
+  $rootScope.ansi2html = ansi2html;
 
   getServerLocation();
   getUser();

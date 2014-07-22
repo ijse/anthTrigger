@@ -21,8 +21,9 @@
             <tab-heading>
                 <span>日志内容</span>
             </tab-heading>
-            <pre style="word-wrap: normal;">{{logs.content}}
+            <pre  style="word-wrap: normal;" ng-bind-html="logs.content">
             </pre>
+
         </tab>
         <tab heading="执行代码">
             <pre style="word-wrap: normal;">{{logs.snapshot.codes}}
