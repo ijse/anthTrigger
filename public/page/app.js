@@ -67,7 +67,7 @@ angular
     $http
     .get('/whereAmI')
     .success(function(data) {
-      $rootScope.SERVER_IP = data.ip;
+      $rootScope.SERVER_INFO = data;
     });
 
   }

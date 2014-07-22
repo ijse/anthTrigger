@@ -1,13 +1,14 @@
 
+os = require 'os'
 exports.attach = (app)->
 
 	app.get '/ping', (req, res)-> res.send('pong!')
 
 	app.get '/whereAmI', (req, res)->
+		console.log req.socket
 		res.json {
-			ip: req.ip
-			ips: req.ips
-			host: req.host
+			ip: req.socket.localAddress
+			hostname: os.hostname()
 		}
 
 	require('./users').route(app)
