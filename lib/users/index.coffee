@@ -51,7 +51,7 @@ exports.route = (app)->
 
 	app.get '/user/list', (req, res)->
 		Ctrl
-		.listUser()
+		.listUser {}, { password: 0 }, { sort: { lastLoginAt: -1 } }
 		.fin (cont, err, list)->
 			res.json {
 				success: !!!err and list

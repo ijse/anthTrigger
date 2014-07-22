@@ -38,9 +38,8 @@ exports.login = (name, pass)->
 		doc.lastLoginAt = new Date()
 		doc.save (err)-> cont(err, doc)
 
-exports.listUser = ()->
+exports.listUser = (critcal, fields, opts={})->
 	Thenjs (cont)->
-		userModel.find {}, (err, list)->
+		userModel.find critcal, fields, opts, (err, list)->
 			return cont(err) if err
 			return cont(null, list or [])
-
