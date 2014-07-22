@@ -11,6 +11,7 @@ schema = mongoose.Schema {
 		type: String
 		default: 'user'
 	}
+	lastLoginAt: Date
 }
 
 User = mongoose.model 'user', schema

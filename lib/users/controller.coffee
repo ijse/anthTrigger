@@ -31,6 +31,10 @@ exports.login = (name, pass)->
 			return cont(err) if err
 			return cont('Password wrong!') if not doc
 			return cont(null, doc)
+	.then (cont, doc)->
+		# Update last login time
+		doc.lastLoginAt = new Date()
+		doc.save (err)-> cont(err, doc)
 
 exports.listUser = ()->
 	Thenjs (cont)->
