@@ -8,9 +8,7 @@ angular
   'angularMoment',
   'ui.bootstrap'
   ])
-.config(function($routeProvider, $locationProvider, $sceProvider) {
-
-  $sceProvider.enabled(false);
+.config(function($routeProvider, $locationProvider) {
 
   $locationProvider.html5Mode(true).hashPrefix('!');
 
