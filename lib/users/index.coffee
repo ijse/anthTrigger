@@ -31,7 +31,6 @@ exports.route = (app)->
 		Ctrl
 		.findUser { _id: uid }
 		.fin (cont, err, user)->
-			console.log ">>>", err
 			res.json {
 				success: !!!err and user
 				user: user

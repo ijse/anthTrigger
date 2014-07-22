@@ -5,7 +5,6 @@ exports.attach = (app)->
 	app.get '/ping', (req, res)-> res.send('pong!')
 
 	app.get '/whereAmI', (req, res)->
-		console.log req.socket
 		res.json {
 			ip: req.socket.localAddress
 			hostname: os.hostname()
