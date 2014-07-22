@@ -13,14 +13,6 @@ angular.module 'anthTrigger'
 		.success (result)->
 			$scope.logs = result.data
 
-			# html = ''
-			# for t in result.data.content?.split('\n')
-			# 	html += '<p>' + ansi2html.ansi_to_html(t) + '</p>'
-
-			# $scope.logs.content = html
-
-			# $scope.logs.content = $sce.trustAsHtml($scope.logs.content).toString()
-
 			if $scope.logs.endAt
 				$scope.autoReload = false
 				$scope.setAuto(false)
@@ -38,4 +30,3 @@ angular.module 'anthTrigger'
 		$interval.cancel t if angular.isDefined(t)
 
 	return
-
