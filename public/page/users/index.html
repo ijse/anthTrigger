@@ -24,6 +24,7 @@
 				<th width="100">用户名</th>
 				<th width="50">角色</th>
 				<th>上次登陆</th>
+				<th>权限标签</th>
 				<th>操作</th>
 			</tr>
 		</thead>
@@ -41,6 +42,12 @@
 				</td>
 				<td>
 					<span am-time-ago="u.lastLoginAt" title="{{u.lastLoginAt}}">
+					</span>
+				</td>
+				<td>
+					<span class="label label-success"
+						ng-repeat="t in u.tags.split(',')">
+						{{t}}
 					</span>
 				</td>
 				<td width="356">

@@ -4,6 +4,7 @@ angular
   'ngResource',
   'ngCookies',
   'ngSanitize',
+  'ngTagsInput',
   'ansiToHtml',
   'angularMoment',
   'ui.bootstrap'
