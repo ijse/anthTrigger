@@ -19,11 +19,12 @@
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <th>脚本名称 </th>
-                    <th>创建时间 </th>
-                    <th>上次运行时间 </th>
+                    <th width="200">脚本名称 </th>
+                    <th width="80">创建时间 </th>
+                    <th width="120">上次运行时间 </th>
                     <th>备注说明 </th>
-                    <th>操作 </th>
+                    <th>权限标签 </th>
+                    <th width="200">操作 </th>
                 </tr>
             </thead>
             <tbody>
@@ -33,17 +34,17 @@
                     </td>
                 </tr>
                 <tr ng-repeat="script in list">
-                    <td class="col-md-2">
+                    <td>
                         <a href ng-click="viewScript(script)">
                             {{script.title}}
                         </a>
                     </td>
-                    <td class="col-md-1">
+                    <td>
                         <span am-time-ago="script.createAt"
                             title="{{script.createAt}}">
                         </span>
                     </td>
-                    <td class="col-md-1">
+                    <td>
                         <span am-time-ago="script.lastRunAt"
                             title="{{script.lastRunAt}}">
                         </span>
@@ -51,7 +52,11 @@
                     <td>
                         <pre>{{script.description}}</pre>
                     </td>
-                    <td class="col-md-2">
+                    <td>
+                        <span class="label label-success"
+                            ng-repeat="t in script.tags.split(',')">{{t}}</span>
+                    </td>
+                    <td>
                         <a ng-href="/scripts/edit/{{script._id}}" class="btn btn-primary">编辑</a>
                         <a ng-click="deleteScript(script, $index)" class="btn btn-danger">删除</a>
                         <button

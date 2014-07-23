@@ -28,7 +28,6 @@ angular.module('anthTrigger')
 			if result.success
 				_st.data = 'loaded'
 				result.script.tags = convertTags result.script.tags
-				console.log result.script.tags
 				return $scope.script = result.script
 			else
 				_st.data = 'error'
