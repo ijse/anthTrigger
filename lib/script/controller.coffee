@@ -50,6 +50,19 @@ exports.editScript = (id, updates, uid)->
       updates._id = id
       cont(null, updates)
 
+exports.getTags = (q)->
+  Thenjs (cont)->
+    scriptModel.distinct 'tags', {
+          "tags": {
+            "$regex": "^" + q
+            "$options": "i"
+          }
+    }, (err, list)->
+      return cont(err) if err
+      reg = new RegExp('^' + q)
+      result = list.filter (v)-> reg.test(v)
+      cont(null, result)
+
 exports.listScript = (crital)->
 
   Thenjs (cont)->

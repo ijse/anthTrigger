@@ -1,7 +1,7 @@
 
 angular.module('anthTrigger')
 .controller 'editScriptController',
-($scope, $http, $location, notify, id)->
+($scope, $http, $location, $q, notify, id)->
 
 	_st = {}
 	$scope.status = _st
@@ -28,6 +28,15 @@ angular.module('anthTrigger')
 				_st.data = 'error'
 
 	loadScript()
+
+	$scope.loadTags = (query)->
+		deferred = $q.defer()
+		$http
+		.get '/scripts/tags?q=' + query
+		.success (data)->
+			deferred.resolve(data.map (v)-> { text: v })
+
+		return deferred.promise
 
 	$scope.save = ->
 		_st.save = 'saving'

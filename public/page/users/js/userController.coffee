@@ -1,5 +1,5 @@
 angular.module('anthTrigger')
-.controller 'userController', ($scope, $http, $modal)->
+.controller 'userController', ($scope, $http, $modal, $q)->
 
 	$scope.st = _st = {}
 	$scope.list = []
@@ -32,6 +32,7 @@ angular.module('anthTrigger')
 				scope.options = opt
 				scope.user = angular.copy opt.user
 				scope.user.tags = convertTags opt.user.tags
+				scope.loadTags = $scope.loadTags
 			]
 		}
 		.result
@@ -67,11 +68,13 @@ angular.module('anthTrigger')
 				alert "编辑用户出错！"
 
 
-	$scope.loadScriptTags = (query)->
+	$scope.loadTags = (query)->
 		deferred = $q.defer()
-		# $http.get '/script/tags?q=' + query
-		# .success (data)->
-		deferred.resolve([])
+		$http
+		.get '/scripts/tags?q=' + query
+		.success (data)->
+			deferred.resolve(data.map (v)-> { text: v })
+
 		return deferred.promise
 
 

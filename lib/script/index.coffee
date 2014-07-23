@@ -29,6 +29,14 @@ exports.route = (app)->
 				script: script
 			}
 
+	app.get '/scripts/tags', (req, res)->
+		q = req.param('q')
+
+		Ctrl
+		.getTags q
+		.fin (cb, err, list)->
+			res.json list
+
 	app.get '/scripts/list', (req, res)->
 		page = req.param('page')
 		page = parseInt(page) or 1

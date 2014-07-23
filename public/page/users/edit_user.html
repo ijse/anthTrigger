@@ -44,7 +44,7 @@
 			<label for="tags" class="col-sm-2 control-label">权限标签</label>
 			<div class="col-sm-10">
 				<tags-input ng-model="user.tags">
-					<auto-complete source="loadScriptTags($query)"></auto-complete>
+					<auto-complete source="loadTags($query)" min-length="1"></auto-complete>
 				</tags-input>
 			</div>
 		</div>
