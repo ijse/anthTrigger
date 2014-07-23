@@ -43,11 +43,16 @@ exports.route = (app)->
 		}
 
 		critical = {
-			"tags": {
-				"$elemMatch": {
-					$in: user.tags
+			"$or": [
+				{ 'createByUser': user._id },
+				{
+					"tags": {
+						"$elemMatch": {
+							$in: user.tags
+						}
+					}
 				}
-			}
+			]
 		} if user.role isnt 'admin'
 
 		Ctrl
