@@ -5,6 +5,7 @@ angular
   'ngCookies',
   'ngSanitize',
   'ngTagsInput',
+  'cgNotify',
   'ansiToHtml',
   'angularMoment',
   'ui.bootstrap'
@@ -67,7 +68,7 @@ angular
   //   redirectTo: "/"
   // });
 })
-.run(function($rootScope, $location, $cookies, $http, amMoment, ansi2html) {
+.run(function($rootScope, $location, $cookies, $http, amMoment, ansi2html, notify) {
   amMoment.changeLanguage('de');
   function getServerLocation() {
     $http
@@ -79,11 +80,18 @@ angular
   }
 
   function getUser() {
+    if(!$cookies.uid) {
+      return notify('请先登陆！');
+    }
+
     $http
     .get('/user/find?id=' + $cookies.uid)
     .success(function(data) {
-      if (data.success)
+      if (data.success) {
+        ldate = moment(data.user.lastLoginAt).format('YYYY-MM-DD HH:mm:ss');
         $rootScope.CurrentUser = data.user;
+        notify('欢迎回来，' + data.user.name + '. 上次登陆时间：' + ldate);
+      }
     });
   }
 
@@ -109,4 +117,9 @@ angular
 
   getServerLocation();
   getUser();
+
+  notify.config({
+    duration: 60000,
+    template: "/page/globals/notify-template.html"
+  });
 });
