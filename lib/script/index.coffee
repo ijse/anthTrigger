@@ -36,8 +36,16 @@ exports.route = (app)->
 		pageSize = req.param('pageSize')
 		pageSize = parseInt(pageSize) or 10
 
+		user = req.session.user
+		if not user then return res.json {
+			success: false
+			error: 400
+		}
+
+
 		Ctrl
-		.listByPage {}, {
+		.listByPage {
+		}, {
 			skip: (page-1)*pageSize
 			limit: pageSize
 			sort: {

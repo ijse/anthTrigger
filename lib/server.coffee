@@ -1,6 +1,7 @@
 
 express = require 'express'
 session = require 'express-session'
+MongoStore = require('connect-mongo')(session)
 bodyParser = require 'body-parser'
 cookieParser = require 'cookie-parser'
 logger = require 'morgan'
@@ -12,6 +13,7 @@ module.exports = (configs)->
 
 	# connect mongodb
 	utils.connectDB(configs.mongodb)
+	dbName = configs.mongodb.match(/\/([^\/]+)$/)[1]
 
 	app = express()
 	app.use logger('dev')
@@ -23,7 +25,9 @@ module.exports = (configs)->
 	  resave: false, # don't save session if unmodified
 	  saveUninitialized: false, # don't create session until something stored
 	  secret: 'AnthTrigger session secret'
+	  store: new MongoStore({ db: dbName })
 	})
+
 
 	app.use(bodyParser())
 
