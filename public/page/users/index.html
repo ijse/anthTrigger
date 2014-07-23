@@ -13,7 +13,7 @@
 
 	<div class="well clearfix">
 		<button class="btn btn-primary pull-right" ng-click="addUser()">
-			添加用户
+			<i class="fa fa-plus-square"></i> 添加用户
 		</button>
 	</div>
 
@@ -32,7 +32,9 @@
 		<tbody>
 			<tr ng-repeat="u in list">
 				<td>{{u._id.substring(0,7)}}</td>
-				<td>{{u.name}}</td>
+				<td>{{u.name}}
+					<span ng-if="u.frozen">【停用】</span>
+				</td>
 				<td>
 					<span class="label label-{{{
 						admin: 'primary',
@@ -52,13 +54,13 @@
 				</td>
 				<td width="356">
 					<button class="btn btn-primary" ng-click="editUser(u)">
-						修改信息
+						<i class="fa fa-edit"></i> 修改信息
 					</button>
 					<a ng-href="/scriptLogs?uid={{u._id}}" class="btn btn-info" >
-						操作记录
+						<i class="fa fa-history"></i> 操作记录
 					</a>
-					<button class="btn btn-danger" ng-click="disable(u)">
-						禁用用户
+					<button class="btn btn-danger" ng-class="{ active: u.frozen }" ng-click="frozeUser(u)">
+						 禁用用户
 					</button>
 				</td>
 			</tr>

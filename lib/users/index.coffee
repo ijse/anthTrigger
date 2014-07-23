@@ -3,17 +3,30 @@ Ctrl = require './controller'
 
 exports.route = (app)->
 	app.post '/login', (req, res)->
+		uname = req.body.username
+		upass = req.body.password
+
 		Ctrl
-		.login req.body.username, req.body.password
+		.login uname, upass
 		.fin (cont, err, user)->
 
 			if err
-				_evt.user_login user.name, false
+				_evt.user_login uname, false
 
 				res.json {
 					success: false
+					error: "server error"
 				}
 				return
+
+			if user.frozen
+				_evt.user_login uname, false
+				res.json {
+					success: false
+					error: 'frozen user'
+				}
+				return
+
 			# write to session
 			req.session.user = user
 			res.cookie 'user', user.name
@@ -47,6 +60,16 @@ exports.route = (app)->
 				req.session.user = user
 			res.json {
 				success: !!!err and numberAffected > 0
+				error: err
+			}
+
+	app.put '/user/frozen', (req, res)->
+		uid = req.param('uid')
+		Ctrl
+		.frozeUser uid
+		.fin (cont, err)->
+			res.json {
+				success: !!!err
 				error: err
 			}
 

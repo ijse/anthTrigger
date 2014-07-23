@@ -37,6 +37,17 @@ exports.editUser = (user)->
 			return cont(err) if err
 			cont(null, na, user)
 
+exports.frozeUser = (id)->
+	Thenjs (cont)->
+		userModel.findById id, (err, user)->
+			return cont(err) if err
+			cont(null, user)
+	.then (cont, user)->
+		user.frozen = not user.frozen
+		user.save (err)->
+			return cont(err) if err
+			cont(null)
+
 exports.login = (name, pass)->
 	Thenjs (cont)->
 		userModel.findOne {

@@ -14,6 +14,10 @@ schema = mongoose.Schema {
 	}
 	tags: Array
 	lastLoginAt: Date
+	frozen: {
+		type: Boolean
+		default: false
+	}
 }
 
 User = mongoose.model 'user', schema

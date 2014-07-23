@@ -73,3 +73,12 @@ angular.module('anthTrigger')
 		# .success (data)->
 		deferred.resolve([])
 		return deferred.promise
+
+
+	$scope.frozeUser = (user)->
+		$http
+		.put '/user/frozen?uid=' + user._id
+		.success (result)->
+			loadList()
+		.error ->
+			alert "禁用用户失败！"
