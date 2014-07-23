@@ -33,8 +33,9 @@ exports.editUser = (user)->
 		}, {
 			$set: user
 		}, (err, na)->
+			user._id = id
 			return cont(err) if err
-			cont(null, na)
+			cont(null, na, user)
 
 exports.login = (name, pass)->
 	Thenjs (cont)->

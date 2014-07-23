@@ -42,10 +42,16 @@ exports.route = (app)->
 			error: 400
 		}
 
+		critical = {
+			"tags": {
+				"$elemMatch": {
+					$in: user.tags
+				}
+			}
+		} if user.role isnt 'admin'
 
 		Ctrl
-		.listByPage {
-		}, {
+		.listByPage critical, {
 			skip: (page-1)*pageSize
 			limit: pageSize
 			sort: {

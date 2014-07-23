@@ -41,7 +41,10 @@ exports.route = (app)->
 
 		Ctrl
 		.editUser req.body
-		.fin (cont, err, numberAffected)->
+		.fin (cont, err, numberAffected, user)->
+			# Refresh session user
+			if user._id is req.session.user._id
+				req.session.user = user
 			res.json {
 				success: !!!err and numberAffected > 0
 				error: err
