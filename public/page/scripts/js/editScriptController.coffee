@@ -10,16 +10,10 @@ angular.module('anthTrigger')
 	_st.data = 'loading'
 
 	# Convert tags data format between object[] and string
-	# eg: [{ text: 'aaa' }, {text: 'bbb' }] => 'aaa,bbb'
+	# eg: [{ text: 'aaa' }, {text: 'bbb' }] => ['aaa', 'bbb']
 	convertTags = (data)->
-		result = null
-		if typeof data is 'string'
-			result = data.split(',').map (v)-> { text: v }
-		else if data instanceof Array
-			result = data.map (v)-> v.text
-			result = result.join(',')
+		return data?.map? (v)-> if v.text then v.text else { text: v }
 
-		return result
 
 	loadScript = ->
 		$http

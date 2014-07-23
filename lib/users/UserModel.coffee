@@ -12,10 +12,7 @@ schema = mongoose.Schema {
 		default: 'user'
 		enum: 'user,manager,admin'.split(',')
 	}
-	tags: {
-		type: String
-		default: ''
-	}
+	tags: Array
 	lastLoginAt: Date
 }
 

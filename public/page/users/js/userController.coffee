@@ -18,18 +18,10 @@ angular.module('anthTrigger')
 
 	loadList()
 
-
 	# Convert tags data format between object[] and string
-	# eg: [{ text: 'aaa' }, {text: 'bbb' }] => 'aaa,bbb'
+	# eg: [{ text: 'aaa' }, {text: 'bbb' }] => ['aaa', 'bbb']
 	convertTags = (data)->
-		result = null
-		if typeof data is 'string'
-			result = data.split(',').map (v)-> { text: v }
-		else if data instanceof Array
-			result = data.map (v)-> v.text
-			result = result.join(',')
-
-		return result
+		return data?.map? (v)-> if v.text then v.text else { text: v }
 
 	editModal = (opt)->
 		$modal.open {
@@ -38,7 +30,7 @@ angular.module('anthTrigger')
 			templateUrl: "/page/users/edit_user.html"
 			controller: ['$scope', (scope)->
 				scope.options = opt
-				scope.user = opt.user
+				scope.user = angular.copy opt.user
 				scope.user.tags = convertTags opt.user.tags
 			]
 		}
@@ -65,7 +57,6 @@ angular.module('anthTrigger')
 			user: preUser
 		}
 		.then (user)->
-			debugger
 			# to string
 			user.tags = convertTags(user.tags)
 			$http
