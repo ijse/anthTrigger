@@ -11,8 +11,11 @@ exports.route = (app)->
 		pageSize = req.param('pageSize')
 		pageSize = parseInt(pageSize) or 10
 
+		critical = req.param('critical')
+		critical = JSON.parse(critical)
+
 		Ctrl
-		.listByPage {}, {
+		.listByPage critical, {
 			skip: (page-1) * pageSize
 			limit: pageSize
 			sort: { timeAt: -1 }
