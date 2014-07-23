@@ -27,13 +27,13 @@ module.exports = function(grunt) {
 
         watch: {
             coffee: {
-                files: ['<%= yeoman.public %>/page/**/*.coffee'],
+                files: ['<%= yeoman.public %>/**/*.coffee'],
                 tasks: ['coffee:dev']
             },
             express: {
                 files: [
                     '<%= yeoman.public %>/{,*//*}*.html',
-                    '{.tmp,<%= yeoman.public %>}/page/{,*//*}*.{css,less,js,coffee}',
+                    '{.tmp,<%= yeoman.public %>}/{,*//*}*.{css,less,js,coffee}',
                     'server.js',
                     'lib/{,*//*}*'
                 ],
@@ -44,7 +44,7 @@ module.exports = function(grunt) {
                 }
             },
             less: {
-                files: ['<%= yeoman.public %>/page/**/*.less'],
+                files: ['<%= yeoman.public %>/**/*.less'],
                 tasks: ['less:dev']
             }
         },
@@ -61,6 +61,12 @@ module.exports = function(grunt) {
                     src: '{,**/}*.coffee',
                     dest: '.tmp/page',
                     ext: '.js'
+                }, {
+                    expand: true,
+                    cwd: '<%= yeoman.public %>/modules',
+                    src: '{,**/}*.coffee',
+                    dest: '.tmp/modules',
+                    ext: '.js'
                 }]
             },
             dist: {
@@ -69,6 +75,12 @@ module.exports = function(grunt) {
                     cwd: '<%= yeoman.public %>/page',
                     src: '{,**/}*.coffee',
                     dest: 'dist/public/page',
+                    ext: '.js'
+                }, {
+                    expand: true,
+                    cwd: '<%= yeoman.public %>/modules',
+                    src: '{,**/}*.coffee',
+                    dest: 'dist/public/modules',
                     ext: '.js'
                 }]
             }
