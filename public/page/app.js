@@ -68,7 +68,7 @@ angular
   //   redirectTo: "/"
   // });
 })
-.run(function($rootScope, $location, $cookies, $http, amMoment, ansi2html, notify) {
+.run(function($rootScope, $location, $cookies, $http, amMoment, begService, ansi2html, notify) {
   amMoment.changeLanguage('de');
   function getServerLocation() {
     $http
@@ -91,6 +91,13 @@ angular
         ldate = moment(data.user.lastLoginAt).format('YYYY-MM-DD HH:mm:ss');
         $rootScope.CurrentUser = data.user;
         notify('欢迎回来，' + data.user.name + '. 上次登陆时间：' + ldate);
+      }
+
+      // Check permissions after we have got current user infomation
+      var viewPath = location.pathname;
+      var NO = begService.beg(viewPath);
+      if(NO) {
+        location.href='/'
       }
     });
   }

@@ -12,7 +12,7 @@
 <div class="col-lg-12">
 
 	<div class="col-lg-12 well text-right">
-		<a class="btn btn-primary" ng-href="/scripts/create">添加脚本</a>
+		<a class="btn btn-primary" ng-href="/scripts/create" beg="script_add">添加脚本</a>
 	</div>
 
     <div class="table-responsive">
@@ -58,11 +58,12 @@
                 ng-repeat="t in script.tags">{{t}}</span>
             </td>
             <td>
-                <a ng-href="/scripts/edit/{{script._id}}" class="btn btn-primary">编辑</a>
-                <a ng-click="deleteScript(script, $index)" class="btn btn-danger">删除</a>
+                <a beg="script_edit" ng-href="/scripts/edit/{{script._id}}" class="btn btn-primary">编辑</a>
+                <button beg="script_delete" ng-click="deleteScript(script, $index)" class="btn btn-danger">删除</button>
                 <button
                 ng-click="runScript(script, $index)"
                 ng-if="script.status == 'ready'"
+                beg="script_run"
                 class="btn btn-success">执行</button>
 
                 <div class="btn-group" dropdown ng-if="script.status !== 'ready'">
