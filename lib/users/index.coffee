@@ -9,7 +9,6 @@ exports.route = (app)->
 		Ctrl
 		.login uname, upass
 		.fin (cont, err, user)->
-
 			if err
 				_evt.user_login uname, false
 
@@ -38,6 +37,9 @@ exports.route = (app)->
 				user: user
 			}
 			_evt.user_login user.name, true
+		.fail ->
+			res.json { success: false }
+
 
 	app.post '/user/add', (req, res)->
 

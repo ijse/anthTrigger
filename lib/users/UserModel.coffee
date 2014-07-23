@@ -10,9 +10,9 @@ schema = mongoose.Schema {
 	role: {
 		type: String
 		default: 'user'
-		enum: 'user,manager,admin'.split(',')
+		enum: 'tester,manager,admin'.split(',')
 	}
-	tags: Array
+	tags: [ String ]
 	lastLoginAt: Date
 	frozen: {
 		type: Boolean
