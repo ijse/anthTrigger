@@ -10,6 +10,7 @@ schema = mongoose.Schema {
 		default: ''
 	}
 	codes: String
+	tags: String
 	createAt: {
 		type: Date
 		default: Date.now

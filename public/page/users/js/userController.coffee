@@ -1,5 +1,5 @@
 angular.module('anthTrigger')
-.controller 'userController', ($scope, $http, $modal, $q)->
+.controller 'userController', ($scope, $http, $modal)->
 
 	$scope.st = _st = {}
 	$scope.list = []
