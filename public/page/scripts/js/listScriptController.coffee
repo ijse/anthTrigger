@@ -1,7 +1,7 @@
 
 angular.module 'anthTrigger'
 .controller 'listScriptController',
-($scope, $location, $http, $modal)->
+($scope, $location, $http, $modal, notify)->
 
 	$scope.status = _st = {}
 	$scope.list = []
@@ -30,7 +30,6 @@ angular.module 'anthTrigger'
 		loadList($scope.page)
 
 	$scope.viewScript = (script)->
-
 		$modal.open {
 			templateUrl: '/page/scripts/view_scripts.html'
 			controller: ['$scope', (scope)->
@@ -46,35 +45,37 @@ angular.module 'anthTrigger'
 		.delete "/scripts/delete/#{script._id}"
 		.success (result)->
 			if result.success
+				notify "删除脚本 (#{script.title}) 成功！"
 				# remove from local list
 				$scope.list.splice(index, 1)
+			else
+				notify "删除脚本 (#{script.title}) 失败！"
+
 
 	$scope.runScript = (script, index)->
 		return if not confirm("确定要【执行】脚本:\n\n\t'#{script.title}'\n\n吗?")
 
 		script.status = 'running'
+		notify "正在执行脚本 (#{script.title})..."
 
 		$http
 		.put '/scripts/run/' + script._id
 		.success (result)->
-			$modal.open {
-				template: "<ansi-html value='content'> </ansi-html>"
-				controller: ['$scope', (scope)->
-					scope.content = result.logs
-					$scope.list[index] = result.script
-				]
-			}
+			notify "脚本(#{result.script.title})执行完成！请到【执行历史】中查看！"
+			$scope.list[index] = result.script
 
 	$scope.killScript = (script, index)->
 
 		return if not confirm("确定要【Kill】脚本:\n\n\t'#{script.title}'\n\n的此次执行吗?")
 
-
 		$http
 		.post '/scripts/kill/' + script._id
 		.success (result)->
 			if result.success
+				notify "中止脚本 (#{script.title}) 成功!"
 				$scope.list[index] = result.script
+			else
+				notify "中止脚本 (#{script.title}) 失败!"
 
 
 	$scope.viewLogs = (script)->

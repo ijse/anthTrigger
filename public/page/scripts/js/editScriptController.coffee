@@ -1,7 +1,7 @@
 
 angular.module('anthTrigger')
 .controller 'editScriptController',
-($scope, $http, $location, id)->
+($scope, $http, $location, notify, id)->
 
 	_st = {}
 	$scope.status = _st
@@ -24,6 +24,7 @@ angular.module('anthTrigger')
 				result.script.tags = convertTags result.script.tags
 				return $scope.script = result.script
 			else
+				notify "脚本载入失败！"
 				_st.data = 'error'
 
 	loadScript()
@@ -33,12 +34,18 @@ angular.module('anthTrigger')
 		script = angular.copy $scope.script
 		script.tags = convertTags script.tags
 
+		notify "正在保存脚本 (#{script.title})..."
+
 		$http
 		.post '/scripts/edit/' + id, script
 		.success (result)->
 			_st.save = if result.success then 'done' else 'error'
 
-			$location.url('/scripts') if result.success
+			if result.success
+				notify "脚本 (#{script.title}) 保存成功！"
+				$location.url('/scripts')
+			else
+				notify "脚本 (#{script.title}) 保存失败！"
 
 
 	return
