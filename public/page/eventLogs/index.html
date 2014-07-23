@@ -18,7 +18,7 @@
         <span ng-if="!critical.byUser">
             全部记录数据：
         </span>
-	</div>
+    </div>
 
     <div class="table-responsive">
         <table class="table table-bordered table-hover tablesorter">
@@ -37,28 +37,28 @@
                 </tr>
                 <tr ng-repeat="evt in list">
                     <td>
-                            {{evt.byUser}}
+                        {{evt.byUser}}
                     </td>
                     <td>
                         <span am-time-ago="evt.timeAt"
-                            title="{{evt.timeAt}}">
-                        </span>
-                    </td>
-                    <td>
-                        {{evt.message}}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        title="{{evt.timeAt}}">
+                    </span>
+                </td>
+                <td>
+                    {{evt.message}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-        <div class="text-center">
-            <pagination
-                ng-model="page"
-                total-items="totalItems"
-                items-per-page="pageSize"
-                ng-change="pageChange()"></pagination>
-        </div>
-
+    <div class="text-center">
+        <pagination
+        ng-model="page"
+        total-items="totalItems"
+        items-per-page="pageSize"
+        ng-change="pageChange()"></pagination>
     </div>
+
+</div>
 
 </div>
