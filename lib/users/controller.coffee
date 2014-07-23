@@ -24,6 +24,18 @@ exports.findUser = (critcal)->
 	Thenjs (cont)->
 		userModel.findOne critcal, cont
 
+exports.editUser = (user)->
+	Thenjs (cont)->
+		id = user._id
+		delete user._id
+		userModel.update {
+			_id: id
+		}, {
+			$set: user
+		}, (err, na)->
+			return cont(err) if err
+			cont(null, na)
+
 exports.login = (name, pass)->
 	Thenjs (cont)->
 		userModel.findOne {

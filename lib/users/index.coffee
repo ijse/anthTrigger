@@ -37,6 +37,16 @@ exports.route = (app)->
 				error: err
 			}
 
+	app.post '/user/edit', (req, res)->
+
+		Ctrl
+		.editUser req.body
+		.fin (cont, err, numberAffected)->
+			res.json {
+				success: !!!err and numberAffected > 0
+				error: err
+			}
+
 	app.get '/user/find', (req, res)->
 		uid = '' + req.param('id')
 		Ctrl

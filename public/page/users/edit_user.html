@@ -11,7 +11,7 @@
 				<input type="text"
 					class="form-control"
 					ng-pattern="/^[a-zA-Z0-9]+$/"
-					ng-model="user.name" />
+					ng-model="user.name" ng-disabled="options.mode=='edit'" />
 			</div>
 		</div>
 		<div class="form-group">
@@ -19,6 +19,7 @@
 			<div class="col-sm-10">
 				<input type="text"
 					class="form-control"
+					ng-required="options.mode=='add'"
 					ng-model="user.password" />
 			</div>
 		</div>
@@ -39,9 +40,15 @@
 			</div>
 		</div>
 
-		<div class="form-group text-center">
+		<div class="form-group">
+			<label for="tags" class="col-sm-2 control-label">权限标签</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" ng-modal="user.tags" />
+			</div>
+		</div>
 
-			<button class="btn btn-primary" ng-click="$close(user)">保存</button>
+		<div class="form-group text-center">
+			<button class="btn btn-primary" ng-click="$close(user)" ng-disabled="userForm.$invalid">保存</button>
 			<button class="btn btn-default" ng-click="$dismiss()">放弃</button>
 		</div>
 	</form>
