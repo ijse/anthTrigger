@@ -25,4 +25,6 @@ angular.module('anthTrigger')
         notify "登陆失败！"
     .error ->
       notify "登陆失败，服务器错误！"
+    .finally ->
+      loadStatistic()
   return
