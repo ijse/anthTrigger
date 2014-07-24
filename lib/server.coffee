@@ -13,7 +13,6 @@ module.exports = (configs)->
 
 	# connect mongodb
 	utils.connectDB(configs.mongodb)
-	dbName = configs.mongodb.match(/\/([^\/]+)$/)[1]
 
 	app = express()
 	app.use logger('dev')
@@ -25,7 +24,8 @@ module.exports = (configs)->
 	  resave: false, # don't save session if unmodified
 	  saveUninitialized: false, # don't create session until something stored
 	  secret: 'AnthTrigger session secret'
-	  store: new MongoStore({ db: dbName })
+	  url: configs.mongodb
+	  auto_reconnect: true
 	})
 
 
