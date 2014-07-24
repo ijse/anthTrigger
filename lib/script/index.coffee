@@ -44,13 +44,27 @@ exports.route = (app)->
 		pageSize = req.param('pageSize')
 		pageSize = parseInt(pageSize) or 10
 
+		q = req.param('q')
+
 		user = req.session.user
 		if not user then return res.json {
 			success: false
 			error: 400
 		}
 
-		critical = {
+		q_reg = new RegExp(q)
+		searchStr_critical = {
+			"$or": [
+				{ 'title': q_reg },
+				{
+					'tags': {
+						'$elemMatch': { $in: [q_reg] }
+					}
+				}
+			]
+		}
+
+		userPermission_critical = if user and user.role isnt 'admin' then {
 			"$or": [
 				{ 'createByUser': user._id },
 				{
@@ -61,7 +75,14 @@ exports.route = (app)->
 					}
 				}
 			]
-		} if user.role isnt 'admin'
+		} else {}
+
+		critical = {
+			"$and": [
+				userPermission_critical,
+				searchStr_critical
+			]
+		}
 
 		Ctrl
 		.listByPage critical, {

@@ -6,28 +6,37 @@ angular.module 'anthTrigger'
 	$scope.status = _st = {}
 	$scope.list = []
 
+	searchParams = $location.search()
+	$scope.critical = searchParams
+
+	$scope.q = searchParams.q or ''
 	$scope.page = 1
-	$scope.totalItems = 0
 	$scope.pageSize = 10
+	$scope.totalItems = 0
 
-
-	loadList = (page)->
+	loadList = ()->
 		_st.list = 'loading'
+
+		params = {
+			q: $scope.q
+			page: $scope.page
+			pageSize: $scope.pageSize
+		}
+
 		$http
 		.get '/scripts/list', {
-			params: {
-				page: page
-				pageSize: $scope.pageSize
-			}
+			params: params
 		}
 		.success (result)->
 			_st.list = if result.success then 'done' else 'error'
 			$scope.totalItems = result.total
 			$scope.list = result.list
 
-	loadList(1)
-	$scope.pageChange = ->
-		loadList($scope.page)
+	loadList()
+
+	$scope.pageChange = -> loadList()
+	$scope.search = (q)->
+		$location.url('/scripts?q=' + $scope.q)
 
 	$scope.viewScript = (script)->
 		$modal.open {

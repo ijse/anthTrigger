@@ -47,11 +47,11 @@ module.exports = (configs)->
 		res.json { status: 404, url: req.url }
 
 	# 500, When next(err)...
-	app.use (err, req, res, next)->
-		res.status(500)
-		res.json {
-			status: err.status or 500
-			error: err
-		}
+	# app.use (err, req, res, next)->
+	# 	res.status(500)
+	# 	res.json {
+	# 		status: err.status or 500
+	# 		error: err
+	# 	}
 
 	return app
