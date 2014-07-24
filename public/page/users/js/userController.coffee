@@ -1,5 +1,5 @@
 angular.module('anthTrigger')
-.controller 'userController', ($scope, $http, $modal, $q)->
+.controller 'userController', ($scope, $http, $modal, $q, notify)->
 
 	$scope.st = _st = {}
 	$scope.list = []
@@ -49,8 +49,9 @@ angular.module('anthTrigger')
 			.post "/user/add", user
 			.success (data)->
 				loadList()
+				notify "添加用户 #{user.name} 成功！"
 			.error ->
-				alert "添加用户失败！"
+				notify "添加用户失败！"
 
 	$scope.editUser = (preUser)->
 		editModal {
@@ -64,8 +65,9 @@ angular.module('anthTrigger')
 			.post "/user/edit", user
 			.success (data)->
 				loadList()
+				notify "编辑用户 #{user.name} 成功！"
 			.error ->
-				alert "编辑用户出错！"
+				notify "编辑用户出错！"
 
 
 	$scope.loadTags = (query)->
@@ -84,4 +86,4 @@ angular.module('anthTrigger')
 		.success (result)->
 			loadList()
 		.error ->
-			alert "禁用用户失败！"
+			notify "禁用用户失败！"
