@@ -23,29 +23,29 @@
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
         <li>
-            <a href="/"><i class="fa fa-dashboard"></i> 首页</a>
+            <a ng-href="/"><i class="fa fa-dashboard"></i> 首页</a>
         </li>
         <li>
-            <a href="/scripts"><i class="fa fa-file-code-o"></i> 脚本管理</a>
+            <a ng-href="/scripts"><i class="fa fa-file-code-o"></i> 脚本管理</a>
         </li>
         <li>
-            <a href="/scriptLogs"><i class="fa fa-history"></i> 执行历史</a>
+            <a ng-href="/scriptLogs"><i class="fa fa-history"></i> 执行历史</a>
         </li>
         <li>
-            <a href="/eventLogs"><i class="fa fa-file-text-o"></i> 操作日志</a>
+            <a ng-href="/eventLogs"><i class="fa fa-file-text-o"></i> 操作日志</a>
         </li>
 
         <li class="dropdown" ng-if="CurrentUser.role==='admin'">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-gears"></i> 系统管理 <b class="caret"></b></a>
             <ul class="dropdown-menu">
-                <li> <a href="/users"><i class="fa fa-users"></i> 用户管理</a> </li>
-                <li> <a href="/settings"><i class="fa fa-wrench"></i> 参数设置</a> </li>
-                <li> <a href="/manageData"><i class="fa fa-database"></i> 数据备份</a> </li>
+                <li> <a ng-href="/users"><i class="fa fa-users"></i> 用户管理</a> </li>
+                <li> <a ng-href="/settings"><i class="fa fa-wrench"></i> 参数设置</a> </li>
+                <li> <a ng-href="/manageData"><i class="fa fa-database"></i> 数据备份</a> </li>
             </ul>
         </li>
         <li>
-            <a href="/logout"><i class="fa fa-sign-out"></i> 安全退出</a>
+            <a ng-href="/logout"><i class="fa fa-sign-out"></i> 安全退出</a>
         </li>
 
         <li class="copyright">
