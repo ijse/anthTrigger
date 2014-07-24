@@ -31,7 +31,7 @@
             ng-include="'/page/globals/header.html'">
         </nav>
 
-        <div id="page-wrapper">
+        <div id="page-wrapper"  ng-controller="dashboardController">
 
             <!-- /.row -->
             <div class="row" ng-view> </div>
@@ -60,6 +60,7 @@
     <script src="/modules/ansiToHtml.js"></script>
     <script src="/modules/begModule.js"></script>
 
+    <script src="/page/globals/dashboardController.js"></script>
     <script src="/page/scripts/js/createScriptController.js"></script>
     <script src="/page/scripts/js/editScriptController.js"></script>
     <script src="/page/scripts/js/listScriptController.js"></script>

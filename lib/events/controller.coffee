@@ -22,6 +22,13 @@ exports.listByPage = (crital, opts)->
 	    	return cont(err) if err
 	    	cont(null, list, count)
 
+exports.countEvents = ->
+  Thenjs (cont)->
+    eventModel.count {}, (err, count)->
+      return cont(err) if err
+      cont(null, count)
+
+
 exports.record = {
 	user_login: (name, success)->
 		if success

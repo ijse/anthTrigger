@@ -37,6 +37,12 @@ exports.findById = (id)->
       return cont('Not found.') if not doc
       cont(null, doc)
 
+exports.countScripts = ->
+  Thenjs (cont)->
+    scriptModel.count {}, (err, count)->
+      return cont(err) if err
+      cont(null, count)
+
 exports.editScript = (id, updates, uid)->
   delete updates._id
   updates.lastUpdateByUser = uid

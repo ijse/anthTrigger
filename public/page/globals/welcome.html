@@ -1,4 +1,90 @@
-
 <div class="well">
-	<h2>Welcome to anthTrigger!!</h2>
+    <h2>Welcome to anthTrigger!!</h2>
+</div>
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <i class="fa fa-file-code-o fa-5x"></i>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <p class="announcement-heading">{{stat[0]}}</p>
+                        <p class="announcement-text">脚本总数量</p>
+                    </div>
+                </div>
+            </div>
+            <a ng-href="/scripts">
+                <div class="panel-footer announcement-bottom">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            查看所有脚本
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <i class="fa fa-arrow-circle-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <i class="fa fa-history fa-5x"></i>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <p class="announcement-heading">{{stat[1]}}</p>
+                        <p class="announcement-text">脚本总执行次数</p>
+                    </div>
+                </div>
+            </div>
+            <a ng-href="/scriptLogs">
+                <div class="panel-footer announcement-bottom">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            查看执行历史
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <i class="fa fa-arrow-circle-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <i class="fa fa-file-text-o fa-5x"></i>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <p class="announcement-heading">{{stat[2]}}</p>
+                        <p class="announcement-text">历史操作日志</p>
+                    </div>
+                </div>
+            </div>
+            <a ng-href="/eventLogs">
+                <div class="panel-footer announcement-bottom">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            查看操作日志
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <i class="fa fa-arrow-circle-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
 </div>

@@ -17,3 +17,4 @@ exports.attach = (app)->
 	require('./script').route(app)
 	require('./scriptLogs').route(app)
 	require('./events').route(app)
+	require('./dashboard').route(app)
