@@ -30,6 +30,11 @@
 		</thead>
 
 		<tbody>
+			<tr ng-if="st.list == 'loading'">
+			    <td colspan='6' style="text-align: center">
+			        Loading...
+			    </td>
+			</tr>
 			<tr ng-repeat="u in list">
 				<td>{{u._id.substring(0,7)}}</td>
 				<td>{{u.name}}
