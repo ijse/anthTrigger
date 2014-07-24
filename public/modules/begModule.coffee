@@ -12,6 +12,7 @@ angular.module('anthTrigger')
           \/users$|
           view_userManage|
           script_add|
+          script_delete|
           script_edit
         )$///
   }
@@ -29,6 +30,7 @@ angular.module('anthTrigger')
     thing = attrs.beg
     hidden = attrs.begHide
     NO = begService.beg(thing)
-    elem.hide() if NO
+    elem.hide() if NO and hidden
     elem.attr('disabled', 'disabled') if NO
 }
+
