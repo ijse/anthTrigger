@@ -89,9 +89,13 @@ angular
     .get('/user/find?id=' + $cookies.uid)
     .success(function(data) {
       if (data.success) {
-        ldate = moment(data.user.lastLoginAt).format('YYYY-MM-DD HH:mm:ss');
+        var ldate = moment(data.user.lastLoginAt).format('YYYY-MM-DD HH:mm:ss');
         $rootScope.CurrentUser = data.user;
-        notify('欢迎回来，' + data.user.name + '. 上次登陆时间：' + ldate);
+        var nstr = '欢迎回来，' + data.user.name + '. 上次登录时间：' + ldate + ".";
+        if(data.user.lastLoginIp) {
+          nstr = nstr + "<br>上次登录IP地址：" + data.user.lastLoginIp;
+        }
+        notify(nstr);
       }
 
       // Check permissions after we have got current user infomation

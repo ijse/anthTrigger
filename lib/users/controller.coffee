@@ -3,15 +3,6 @@ userModel = require './UserModel'
 
 exports.model = userModel
 
-exports.login = (uname, upass)->
-  # todo...
-
-  userModel.find {
-  	name: uname
-  	password: upass
-  }, (err, doc)->
-
-
 exports.addUser = (user)->
 
 	Thenjs (cont)->
@@ -48,7 +39,7 @@ exports.frozeUser = (id)->
 			return cont(err) if err
 			cont(null)
 
-exports.login = (name, pass)->
+exports.login = (name, pass, ip)->
 	Thenjs (cont)->
 		userModel.findOne {
 			name: name,
@@ -60,6 +51,7 @@ exports.login = (name, pass)->
 	.then (cont, doc)->
 		# Update last login time
 		doc.lastLoginAt = new Date()
+		doc.lastLoginIp = ip
 		doc.save (err)-> cont(err, doc)
 
 exports.listUser = (critcal, fields, opts={})->

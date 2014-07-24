@@ -5,12 +5,13 @@ exports.route = (app)->
 	app.post '/login', (req, res)->
 		uname = req.body.username
 		upass = req.body.password
+		uip = req.ip
 
 		Ctrl
-		.login uname, upass
+		.login uname, upass, uip
 		.fin (cont, err, user)->
 			if err
-				_evt.user_login uname, false
+				_evt.user_login uname, false, uip
 
 				res.json {
 					success: false
@@ -19,7 +20,7 @@ exports.route = (app)->
 				return
 
 			if user.frozen
-				_evt.user_login uname, false
+				_evt.user_login uname, false, uip
 				res.json {
 					success: false
 					error: 'frozen user'
@@ -36,9 +37,9 @@ exports.route = (app)->
 				success: true
 				user: user
 			}
-			_evt.user_login user.name, true
+			_evt.user_login user.name, true, uip
 		.fail ->
-			_evt.user_login uname, false
+			_evt.user_login uname, false, uip
 			res.json { success: false }
 
 

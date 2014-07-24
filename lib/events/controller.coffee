@@ -30,11 +30,11 @@ exports.countEvents = ->
 
 
 exports.record = {
-	user_login: (name, success)->
+	user_login: (name, success, ip)->
 		if success
-			s = "用户#{name}登陆成功！"
+			s = "用户#{name}登陆成功！IP: #{ip}"
 		else
-			s = "用户#{name}登陆失败。"
+			s = "用户#{name}登陆失败。IP: #{ip}"
 		_add name, s
 
 	user_logout: (name)->

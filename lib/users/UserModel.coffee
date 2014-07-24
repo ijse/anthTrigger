@@ -14,6 +14,7 @@ schema = mongoose.Schema {
 	}
 	tags: [ String ]
 	lastLoginAt: Date
+	lastLoginIp: String
 	frozen: {
 		type: Boolean
 		default: false
