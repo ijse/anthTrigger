@@ -78,6 +78,7 @@ angular
     });
 
   }
+  getServerLocation();
 
   function getUser() {
     if(!$cookies.uid) {
@@ -101,6 +102,9 @@ angular
       }
     });
   }
+  getUser();
+  $rootScope.ReloadCurrentUser = getUser;
+
 
   function checkLogin() {
     return !!$cookies.user;
@@ -110,7 +114,7 @@ angular
       return location.href = $location.url()
     }
     if (next.auth && !checkLogin()) {
-      location.href = '/page/login.html';
+      $location.url('/');
     }
   });
   $rootScope.$on('$locationChangeStart', function(event, next) {
@@ -122,11 +126,10 @@ angular
 
   $rootScope.ansi2html = ansi2html;
 
-  getServerLocation();
-  getUser();
 
   notify.config({
     duration: 60000,
     template: "/page/globals/notify-template.html"
   });
+
 });
