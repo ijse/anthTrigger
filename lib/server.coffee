@@ -24,8 +24,10 @@ module.exports = (configs)->
 	  resave: false, # don't save session if unmodified
 	  saveUninitialized: false, # don't create session until something stored
 	  secret: 'AnthTrigger session secret'
-	  url: configs.mongodb
-	  auto_reconnect: true
+	  store: new MongoStore({
+		  url: configs.mongodb
+		  auto_reconnect: true
+	  })
 	})
 
 
