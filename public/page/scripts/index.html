@@ -34,7 +34,7 @@
                     <th width="120">上次运行时间 </th>
                     <th>备注说明 </th>
                     <th>权限标签 </th>
-                    <th width="240">操作 </th>
+                    <th width="300">操作 </th>
                 </tr>
             </thead>
             <tbody>
@@ -63,9 +63,9 @@
                 <pre>{{script.description}}</pre>
             </td>
             <td>
-                <span class="label label-default"
+                <a class="label label-default" ng-href="/scripts?q={{t}}"
                 ng-class="{ 'label-warning': CurrentUser.tags.indexOf(t) !== -1 }"
-                ng-repeat="t in script.tags">{{t}}</span>
+                ng-repeat="t in script.tags">{{t}}</a>
             </td>
             <td>
                 <a beg="script_edit" ng-href="/scripts/edit/{{script._id}}" class="btn btn-primary">
@@ -84,7 +84,7 @@
 
                 <div class="btn-group" dropdown ng-if="script.status !== 'ready'">
                     <button type="button" disabled class="btn btn-success">
-                        运行中
+                        <i class="fa fa-spinner fa-spin"></i> 运行中
                     </button>
                     <button type="button"
                     class="btn btn-success dropdown-toggle">
