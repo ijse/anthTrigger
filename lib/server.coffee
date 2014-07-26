@@ -36,7 +36,7 @@ module.exports = (configs)->
 	# Load routes
 	router.attach(app)
 
-	app.use express.static(path.join(__dirname + '../.tmp'))
+	app.use express.static(path.join(__dirname, '../.tmp'))
 	app.use express.static(path.join(__dirname, '../public'))
 	app.get "*", (req, res, next)->
 		res.sendfile path.join(__dirname, '../public/index.html')
