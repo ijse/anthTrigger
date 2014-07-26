@@ -117,8 +117,8 @@ switch(_argv._[0]) {
 
   case 'start':
     pm2.connect(function(err) {
-
-      pm2.start('./index.js', { name: 'anthTrigger' }, function(err, proc) {
+      var appEntryFile = path.join(__dirname, './index.js');
+      pm2.start(appEntryFile, { name: 'anthTrigger' }, function(err, proc) {
         if(err) {
           console.error(err);
           throw new Error(err);
