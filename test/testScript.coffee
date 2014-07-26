@@ -57,7 +57,7 @@ describe "Test scripts", ->
 				count.should.be.above(0)
 				done()
 			.fail (cont, err)->
-				console.log err, err.stacks
+				console.log err
 
 	it 'Run the script and get the result.', (done)->
 		scriptCtrl
