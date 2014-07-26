@@ -18,7 +18,7 @@ var config = {
 };
 
 // Read defaults from exist config file
-var configFile = path.join(__dirname, './configs.json');
+var configFile = path.join(process.env.HOME, './.anthTrigger.config.json');
 if(fs.existsSync(configFile)) {
   config = require(configFile);
 }
