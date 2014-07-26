@@ -17,7 +17,7 @@ var config = {
 };
 
 // Read defaults from exist config file
-var configFile = './config.json';
+var configFile = './configs.json';
 if(fs.existsSync(configFile)) {
   config = require(configFile);
 }
@@ -118,8 +118,10 @@ switch(_argv._[0]) {
     pm2.connect(function(err) {
 
       pm2.start('./index.js', { name: 'anthTrigger' }, function(err, proc) {
-        if(err) throw new Error(err);
-
+        if(err) {
+          console.error(err);
+          throw new Error(err);
+        }
         // Get all processes running
         pm2.list(function(err, process_list) {
           console.log(process_list);
