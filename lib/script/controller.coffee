@@ -54,7 +54,7 @@ exports.editScript = (id, updates, uid)->
     }, (err, count)->
       return cont(err) if err
       updates._id = id
-      cont(null, updates)
+      cont(null, count, updates)
 
 exports.getTags = (q)->
   Thenjs (cont)->
@@ -100,7 +100,7 @@ exports.deleteScript = (id)->
     }, (err, count)->
       return cont(err) if err
       return cont(new Error('Not found')) if count <= 0
-      cont(null, script)
+      cont(null, count, script)
 
 # We cant ensure pid be unique, but for sure we have scriptId when kill the script running
 exports.killScript = (scriptId)->

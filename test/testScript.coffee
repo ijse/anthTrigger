@@ -52,17 +52,19 @@ describe "Test scripts", ->
 			.editScript scriptId, {
 				title: 'hello modifyed'
 			}
-			.fin (cont, err, result)->
+			.fin (cont, err, count, result)->
 				(err is null).should.be.ok
-				result.should.be.above(0)
+				count.should.be.above(0)
 				done()
+			.fail (cont, err)->
+				console.log err, err.stacks
 
 	it 'Run the script and get the result.', (done)->
 		scriptCtrl
 			.runScript scriptId, [ 'arg1']
 			.fin (cont, err, result)->
 				(err is null).should.be.ok
-				result.logs.should.be.eql 'hello - arg1\n'
+				result.logs.should.be.eql '+ echo hello - arg1\nhello - arg1\n'
 				done()
 
 	it 'Kill the process with scriptId ' + scriptId, (done)->

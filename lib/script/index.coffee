@@ -106,7 +106,7 @@ exports.route = (app)->
 		Ctrl
 		.editScript(sid, req.body, req.cookies.uid)
 
-		.fin (cont, err, script)->
+		.fin (cont, err, count, script)->
 			res.json {
 				success: !!!err
 				script: script
@@ -119,7 +119,7 @@ exports.route = (app)->
 
 		Ctrl
 		.deleteScript(key)
-		.fin (cont, err, script)->
+		.fin (cont, err, count, script)->
 			res.json {
 				success: !!!err
 				error: err

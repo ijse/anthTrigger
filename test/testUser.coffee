@@ -22,33 +22,33 @@ describe 'Test User', ->
 	it 'Create one user', (done)->
 
 		userMdl.addUser {
-			name: 'admin'
+			name: 'testAdmin'
 			password: '123'
 			role: 'admin'
 		}
 		.then (cb, user)->
-			user.name.should.be.eql 'admin'
+			user.name.should.be.eql 'testAdmin'
 			cb()
 		.fail (err)->
 			console.log err
 			throw err
 		.fin (cb, err, result)->
 			done()
-	it 'Find the user named admin', (done)->
+	it 'Find the user named testAdmin', (done)->
 
 		userMdl.findUser {
-			name: 'admin'
+			name: 'testAdmin'
 		}
 		.then (cont, user)->
-			user.name.should.be.eql 'admin'
+			user.name.should.be.eql 'testAdmin'
 			user.password.should.be.eql '123'
 			cont()
 		.fin (cb, err, result)->
 			done()
 
-	it 'User login success with name admin', (done)->
+	it 'User login success with name testAdmin', (done)->
 
-		userMdl.login  'admin','123'
+		userMdl.login  'testAdmin','123'
 		.fin (cont, err, result)->
 			(err is null).should.be.ok
 			done()
@@ -56,13 +56,14 @@ describe 'Test User', ->
 	it 'User login fail with wrong name', (done)->
 
 		userMdl.login  'xxx','123'
-		.fin (cb, err)->
+		.fail (cb, err)->
 			err.should.be.ok;
 			done()
+
 	it 'User login fail with wrong password', (done)->
 
-		userMdl.login  'admin','12345'
-		.fin (cb, err)->
+		userMdl.login  'testAdmin','12345'
+		.fail (cb, err)->
 			err.should.be.ok;
 			done()
 
