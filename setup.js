@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var pm2 = require('pm2');
 var os = require('os');
 var fs = require('fs');
+var path = require('path');
 
 var config = {
   listen: 5678,
@@ -17,7 +18,7 @@ var config = {
 };
 
 // Read defaults from exist config file
-var configFile = './configs.json';
+var configFile = path.join(__dirname, './configs.json');
 if(fs.existsSync(configFile)) {
   config = require(configFile);
 }
