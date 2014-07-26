@@ -129,12 +129,9 @@ module.exports = function(grunt) {
                     cwd: '<%= yeoman.app %>',
                     dest: '<%= yeoman.dist %>',
                     src: [
-                        'database/**/*',
                         'lib/**/*',
-                        'test/**/*',
                         'index.js',
                         'setup.js',
-                        'configs.js',
                         'package.json'
                     ]
                 }]
