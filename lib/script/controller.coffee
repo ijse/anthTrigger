@@ -137,6 +137,42 @@ exports.killScript = (scriptId)->
     cont(null, script, logs)
 
 
+exports.callScript = (sid, arg=[], options, env)->
+
+  Thenjs (cont)->
+
+    # find script by id
+    scriptModel
+    .findOne {
+      scriptId: sid
+    }, (err, script)->
+      return cont(err) if err
+      return cont('Not found') if not script
+      cont(null, script)
+  .then (cont, script)->
+    # Generate script file
+    tmpDir = os.tmpDir()
+    tmpShellFile = path.join(tmpDir, 'shell-' + script._id + '.sh')
+    fs.writeFile tmpShellFile, script.codes, (err)->
+      return cont(err) if err
+      cont(null, tmpShellFile, script)
+  .then (cont, shellFile, script)->
+
+    output = ''
+
+    # execute the script
+    exc = spawn options.shell, [
+      shellFile
+    ].concat(arg), env
+
+    exc.stdout.on 'data', (d)-> output += d
+    exc.stderr.on 'data', (d)-> output += d
+    exc.on 'close', (code)->
+      # Remove tmpfile
+      fs.unlink shellFile
+
+      return cont(null, code, output, script)
+
 
 
 exports.runScript = (id, arg=[], options={}, uid)->

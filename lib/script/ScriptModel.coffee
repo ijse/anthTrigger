@@ -1,7 +1,9 @@
 
 mongoose = require 'mongoose'
+autoinc = require 'mongoose-id-autoinc2'
 
 schema = mongoose.Schema {
+	scriptId: Number
 	title: {
 		type: String
 	}
@@ -48,6 +50,14 @@ schema = mongoose.Schema {
 		enum: 'ready,running'.split(',')
 		default: 'ready'
 	}
+}
+autoinc.init(mongoose.connection, 'counter', mongoose)
+schema.plugin autoinc.plugin, {
+	model: 'script'
+	field: 'scriptId'
+	start: 1
+	step: 1
+	once: true
 }
 
 model = mongoose.model 'script', schema
