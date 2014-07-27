@@ -137,7 +137,7 @@ exports.killScript = (scriptId)->
     cont(null, script, logs)
 
 
-exports.callScript = (sid, arg=[], options, env)->
+exports.callScript = (sid, arg=[], options)->
 
   Thenjs (cont)->
 
@@ -163,7 +163,13 @@ exports.callScript = (sid, arg=[], options, env)->
     # execute the script
     exc = spawn options.shell, [
       shellFile
-    ].concat(arg), env
+    ].concat(arg), options
+
+    exc.on 'close', (code)->
+      # Remove tmpfile
+      fs.unlink shellFile
+
+    return cont(null, exc, script)
 
     exc.stdout.on 'data', (d)-> output += d
     exc.stderr.on 'data', (d)-> output += d

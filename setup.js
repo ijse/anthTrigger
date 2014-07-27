@@ -58,7 +58,7 @@ var schema = {
       description: 'Which shell to run the script',
       type: 'string',
       hidden: false,
-      default: config.shell
+      default: config.shell,
       required: true
     },
     'adminPass': {
@@ -87,6 +87,31 @@ function updateAdmin(dburl, pass, cb) {
         cb('Update administrator password fail!');
       }
       cb(null);
+      con.disconnect();
+    });
+  });
+}
+
+function callScript(dburl, shell, sid, args) {
+  var con = mongoose.connect(dburl);
+  con.connection.once('open', function() {
+    scriptCtrl = require('./lib/script/controller');
+    scriptCtrl
+    .callScript(sid, args, {
+      cwd: process.cwd(),
+      env: process.env,
+      shell: shell,
+      stdio: 'inherit'
+    })
+    .then(function(cont, exc) {
+      exc.on('close', function(code) {
+        cont(null);
+      })
+    })
+    .fail(function(cont, err) {
+      console.error(err);
+    })
+    .fin(function() {
       con.disconnect();
     });
   });
@@ -152,7 +177,10 @@ switch(_argv._.shift()) {
   case 'run':
     var scriptId = _argv._.shift();
     var runArgs = _argv._;
+
     //Todo: call script by id
+    callScript(config.mongodb, config.shell, scriptId, runArgs);
+    break;
 
   default:
     console.log('Syntax: ');
