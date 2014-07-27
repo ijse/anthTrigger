@@ -1,6 +1,6 @@
 {
   "name": "anthtrigger",
-  "version": "0.0.11",
+  "version": "1.0.0",
   "description": "Trigger events via http service",
   "main": "index.js",
   "scripts": {
