@@ -62,16 +62,31 @@ angular.module 'anthTrigger'
 
 
 	$scope.runScript = (script, index)->
-		return if not confirm("确定要【执行】脚本:\n\n\t'#{script.title}'\n\n吗?")
+		# Open modal, ask for script arguments
 
-		script.status = 'running'
-		notify "正在执行脚本 (#{script.title})..."
+		$modal.open {
+			templateUrl: '/page/scripts/run_scripts.html'
+			controller: 'runScriptController'
+			resolve: {
+				script: ()-> script
+			}
+			backdrop: 'static'
+			keyboard: false
+		}
+		.result.then (result)->
 
-		$http
-		.put '/scripts/run/' + script._id
-		.success (result)->
-			notify "脚本(#{result.script.title})执行完成！请到【执行历史】中查看！"
-			$scope.list[index] = result.script
+			# return if not confirm("确定要【执行】脚本:\n\n\t'#{script.title}'\n\n吗?")
+			script.status = 'running'
+			notify "正在执行脚本 (#{script.title})..."
+
+			$http
+			.put '/scripts/run/' + script._id, {
+				args: result
+			}
+			.success (result)->
+				notify "脚本(#{result.script.title})执行完成！请到【执行历史】中查看！"
+				$scope.list[index] = result.script
+
 
 	$scope.killScript = (script, index)->
 
