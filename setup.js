@@ -16,6 +16,7 @@ var Package = require('./package.json');
 var config = {
   listen: 5678,
   serverName: os.hostname(),
+  shell: 'sh',
   mongodb: "mongodb://127.0.0.1:27017/anthTrigger"
 };
 
@@ -39,7 +40,6 @@ var schema = {
     'serverName': {
       description: 'Enter the server name',
       type: 'string',
-      pattern: /^\w+$/,
       message: 'Server name must be letters',
       hidden: false,
       default: config.serverName,
@@ -52,6 +52,13 @@ var schema = {
       message: 'Mongodb url like: mongodb://127.0.0.1:27017/anthTrigger',
       hidden: false,
       default: config.mongodb,
+      required: true
+    },
+    'shell': {
+      description: 'Which shell to run the script',
+      type: 'string',
+      hidden: false,
+      default: config.shell
       required: true
     },
     'adminPass': {
@@ -87,7 +94,7 @@ function updateAdmin(dburl, pass, cb) {
 
 var _argv = prompt.override = optimist.argv
 
-switch(_argv._[0]) {
+switch(_argv._.shift()) {
   case 'setup':
     prompt.start();
     prompt.get(schema, function(err, result) {
@@ -142,8 +149,13 @@ switch(_argv._[0]) {
     console.log('Current version: ' + Package.version);
     break;
 
+  case 'run':
+    var scriptId = _argv._.shift();
+    var runArgs = _argv._;
+    //Todo: call script by id
+
   default:
-    console.log('Syntax: \n');
+    console.log('Syntax: ');
     console.log('\t anthtrigger <setup|start>');
     break;
 }
