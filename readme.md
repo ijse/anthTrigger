@@ -1,16 +1,73 @@
 anthTrigger
 ===
 
-A tool provides http api to execute shells on server.
+A tool with web interface to manage and execute shells on server.
+
+管理和执行服务器端脚本命令工具。
+
+# 功能简介
+
+* npm一条命令安装，配置简单
+* 用户权限，分为普通用户、管理用户和超级管理员，普通用户只具有执行权限；管理员可以撰写脚本，超级管理员可以管理用户和进行系统设置。
+* 脚本在线编写，可以实现接受执行参数，及脚本间的相互调用
+* 脚本执行，系统会记录下每次执行的相关信息，如触发用户，执行参数，脚本内容，执行结果等
+* 脚本执行日志，脚本执行时输出所有日志信息
+* 系统操作日志，记录下每位用户的系统操作信息
+
+# 系统依赖
+
+> 1. MongoDB
+> 2. Node.js
+> 3. pm2
+
+# 安装方式
+```
+npm install anthtrigger -g
+```
+
+# 配置方法
+```
+anthtrigger setup
+```
+然后会有交互式命令提示，根据提示输入一些配置信息，如：
+
+> 1. 服务监听端口号
+> 2. MongoDB服务器配置
+> 3. 脚本执行shell
+> 4. 超级管理员密码
+
+执行完毕后，anthtrigger会在用户HOME目录下创建`.anthTrigger.config.json`文件，此文件中记录配置信息（不包括管理员密码），并会初始化数据库。
+
+# 运行程序
+配置完成后，执行以下命令将使用pm2启动起来：
+```
+anthtrigger start
+```
+然后可以在浏览器中访问服务器地址对应端口号，即可打开Web管理页面，输入超级管理员账户`admin`和刚才配置的密码，即可登陆并添加和配置其它用户，以及添加配置脚本。
+
+# 更新升级
+
+```
+pm2 stop anthTrigger
+npm install anthtrigger@latest -g
+anthtrigger setup
+pm2 restart anthTrigger
+```
+
+(更便捷的更新方式在开发中。。。)
+
+# 开源协议
+
+MIT
+
+# 更多信息
+
+> 1. 脚本权限控制： 采用“权限标签”方式，创建脚本时可以为脚本指定标签，只有拥有此标签的用户（除超级管理员）才有权限操作它，这样可以灵活地设定不同脚本与用户的权限关系；同时还可以根据标签来检索脚本。
+
+> 2. 脚本执行参数： 触发脚本执行时，可以在弹出的面板中为脚本指定执行时传入的参数，在脚本中通过标准的shell语法($1-$9)来获取到这些参数。
+
+> 3. 脚本间互相调用： 每个脚本添加时会有一个自增长的数字脚本ID, 在编写脚本时，添加命令如：`anthtrigger run 8 arg1 arg2`, 即可调用脚本ID=8的脚本，并且执行时会传入两个参数`arg1`,`arg2`。
+
+> 4. 功能在继续完善中。。。
 
 
-## Intro
-
-1. http post request ->
-2. parse post payloads ->
-3. filter requests ->
-4. read configs, find the shell file ->
-5. execute shell file, collect outputs ->
-6. return outputs as the result.
-
-update!
