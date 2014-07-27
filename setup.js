@@ -110,6 +110,7 @@ function callScript(dburl, shell, sid, args) {
     })
     .fail(function(cont, err) {
       console.error(err);
+      cont(err)
     })
     .fin(function() {
       con.disconnect();
