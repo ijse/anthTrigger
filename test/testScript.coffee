@@ -87,7 +87,7 @@ describe "Test scripts", ->
 				console.log "Got error: ", err
 				done(err)
 
-	it.skip 'Delete the script', (done)->
+	it 'Delete the script', (done)->
 		scriptCtrl
 			.deleteScript script_id
 			.fin (cont, err, result)->

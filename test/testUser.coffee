@@ -9,12 +9,12 @@ describe 'Test User', ->
 
 	before (done)->
 		if mongoose.connection.db
-			userMdl.model.remove {}, done
+			userMdl.model.remove { name: 'testAdmin' }, done
 			return
 		util
 		.connectDB configs.mongodb
 		.then ->
-			userMdl.model.remove {}, done
+			userMdl.model.remove { name: 'testAdmin' }, done
 		.fail (err)->
 			console.log arguments
 			throw err
