@@ -11,6 +11,8 @@ var os = require('os');
 var fs = require('fs');
 var path = require('path');
 
+var Package = require('./package.json');
+
 var config = {
   listen: 5678,
   serverName: os.hostname(),
@@ -133,6 +135,11 @@ switch(_argv._[0]) {
 
       });
     })
+    break;
+
+  case 'version':
+    console.log('anthTrigger (c) 网研(NAD)cLauncher');
+    console.log('Current version: ' + Package.version);
     break;
 
   default:
