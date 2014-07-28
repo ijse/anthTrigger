@@ -81,6 +81,7 @@ function updateAdmin(dburl, pass, cb) {
     }, {
       $set: {
         password: pass
+        role: 'admin'
       }
     }, { upsert: true }, function(err, aff) {
       if(err) {
