@@ -13,6 +13,10 @@ modl.controller 'runScriptController',
 ($scope, $modalInstance, script)->
 	$scope.script = script
 
-	$scope.runScript = (args='')->
+	$scope.runScript = (args='', notes)->
 		argsInArray = args.split('\n')
-		$modalInstance.close(argsInArray)
+
+		$modalInstance.close {
+			args: argsInArray,
+			notes: notes
+		}

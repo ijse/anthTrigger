@@ -3,27 +3,36 @@
   <h3 class="modal-title">{{script.title}}</h3>
 </div>
 <div class="modal-body clearfix">
-	<form class="form-horizontal" role="form">
-		<div class="form-group">
-			<label for="args" class="col-lg-2 control-label text-right">执行参数</label>
-			<div class="col-lg-10">
-				<textarea name="args" cols="30" rows="10" ng-model="args" class="form-control" placeholder="每行一个参数"></textarea>
+	<form class="form" role="form">
+		<div class="row">
+			<div class="col-lg-6 form-group">
+				<label for="args" class="control-label text-right">执行参数</label>
+				<div>
+					<textarea name="args" rows="5" ng-model="args" class="form-control" placeholder="每行一个参数"></textarea>
+				</div>
+			</div>
+			<div class="col-lg-6 form-group">
+				<label class="control-label text-right">
+					备注说明
+				</label>
+				<div>
+					<textarea name="notes" rows="5" ng-model="notes" class="form-control" placeholder="本次执行的相关说明"></textarea>
+				</div>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label text-right">
+			<label class="control-label text-right">
 				执行预览
 			</label>
-			<div class="col-lg-10">
-				<pre class="form-conrol">$> SHELLNAME {{args | cmdArgsFormatFilter}}
+			<div>
+				<pre class="form-conrol">$> COMMAND {{args | cmdArgsFormatFilter}}
 				</pre>
 			</div>
 		</div>
-
 	</form>
 </div>
 
 <div class="modal-footer">
-	<button class="btn btn-primary" ng-click="runScript(args)">执行脚本</button>
+	<button class="btn btn-primary" ng-click="runScript(args, notes)">执行脚本</button>
 	<button class="btn btn-default" ng-click="$dismiss()">取消</button>
 </div>

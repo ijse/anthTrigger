@@ -181,7 +181,7 @@ exports.callScript = (sid, arg=[], options)->
 
 
 
-exports.runScript = (id, arg=[], options={}, uid)->
+exports.runScript = (id, arg=[], options={}, uid, notes='')->
 
   options.shell = options.shell or 'sh'
 
@@ -190,7 +190,8 @@ exports.runScript = (id, arg=[], options={}, uid)->
   _createLogsModel = (cont)->
     scriptLogs = new logsModel {
       scriptId: id,
-      runByUser: uid
+      runByUser: uid,
+      notes: notes
     }
     scriptLogs.save (err)->
       return cont(err) if err

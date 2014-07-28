@@ -25,6 +25,7 @@ schema = mongoose.Schema {
 	endAt: {
 		type: Date
 	}
+	notes: String
 	content: String
 }
 model = mongoose.model 'scriptLogs', schema

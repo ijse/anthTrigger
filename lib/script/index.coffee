@@ -129,9 +129,10 @@ exports.route = (app)->
 	app.put '/scripts/run/:id', (req, res)->
 		sid = '' + req.param('id')
 		args = req.body.args
+		notes = req.body.notes
 
 		Ctrl
-		.runScript sid, args, app.get('configs').spawnOptions, req.cookies.uid
+		.runScript sid, args, app.get('configs').spawnOptions, req.cookies.uid, notes
 		.then (cb, result, doc, logs)->
 			res.json {
 				success: true,

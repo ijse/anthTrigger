@@ -81,7 +81,8 @@ angular.module 'anthTrigger'
 
 			$http
 			.put '/scripts/run/' + script._id, {
-				args: result
+				args: result.args
+				notes: result.notes
 			}
 			.success (result)->
 				notify "脚本(#{result.script.title})执行完成！请到【执行历史】中查看！"
