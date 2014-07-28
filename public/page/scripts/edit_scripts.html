@@ -48,7 +48,17 @@
             <div class="form-group">
                 <label for="codes" class="col-sm-2 control-label text-right">脚本代码</label>
                 <div class="col-sm-10">
-                    <textarea name="codes" ng-model="script.codes" class="form-control" cols="30" rows="20"></textarea>
+                    <!-- <textarea name="codes" ng-model="script.codes" class="form-control" cols="30" rows="20"></textarea> -->
+                    <ui-codemirror
+                        ng-model="script.codes"
+                        ui-codemirror-opts="{
+                            lineWrapping: true,
+                            lineNumbers: true,
+                            theme: 'monokai',
+                            mode: 'shell'
+                        }"
+
+                    ></ui-codemirror>
                 </div>
             </div>
         </form>

@@ -8,6 +8,7 @@ angular
   'cgNotify',
   'ansiToHtml',
   'angularMoment',
+  'ui.codemirror',
   'ui.bootstrap'
   ])
 .config(function($routeProvider, $locationProvider) {
