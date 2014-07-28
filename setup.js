@@ -80,7 +80,8 @@ function updateAdmin(dburl, pass, cb) {
       name: 'admin'
     }, {
       $set: {
-        password: pass
+        password: pass,
+        role: 'admin'
       }
     }, { upsert: true }, function(err, aff) {
       if(err) {
