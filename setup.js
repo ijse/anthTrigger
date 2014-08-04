@@ -119,6 +119,10 @@ function callScript(dburl, shell, sid, args) {
   });
 }
 
+function exitPm2() {
+  pm2.disconnect(function() { process.exit(0) });
+}
+
 var _argv = prompt.override = optimist.argv
 
 switch(_argv._.shift()) {
@@ -154,20 +158,82 @@ switch(_argv._.shift()) {
   case 'start':
     pm2.connect(function(err) {
       var appEntryFile = path.join(__dirname, './index.js');
-      pm2.start(appEntryFile, { name: 'anthTrigger' }, function(err, proc) {
+      pm2.start(appEntryFile, {name: 'anthTrigger' }, function(err, proc) {
         if(err) {
           console.error(err);
-          throw new Error(err);
+          // throw new Error(err);
+          exitPm2();
+          return
         }
         // Get all processes running
         pm2.list(function(err, process_list) {
-          console.log(process_list);
+          console.log('AnthTrigger start successful!');
+          console.log('>> With pid: ', process_list[0].pid);
 
           // Disconnect to PM2
-          pm2.disconnect(function() { process.exit(0) });
+          exitPm2();
         });
 
       });
+    });
+    break;
+
+  case 'pause':
+    pm2.connect(function(err) {
+      pm2.stop('anthTrigger', function(err, proc) {
+        if(err) {
+          console.error(err);
+        }
+        exitPm2();
+      });
+    });
+
+    break;
+
+  case 'stop':
+    pm2.connect(function(err) {
+      pm2.delete('anthTrigger', function(err, proc) {
+        if(err) {
+          console.error(err);
+        }
+        exitPm2();
+      })
+    })
+    break;
+
+  case 'kill':
+    pm2.connect(function(err) {
+      pm2.delete('anthTrigger', function(err, result) {
+        if(err) {
+          console.error(err);
+        }
+        exitPm2();
+      });
+    });
+    break;
+
+  case 'status':
+    pm2.connect(function(err) {
+      pm2.describe('anthTrigger', function(err, list) {
+        if(err) {
+          console.error(err);
+        }
+        if(!list || !list.length) {
+          console.log('AnthTrigger not running...');
+        } else {
+          console.log(list);
+        }
+        exitPm2();
+      });
+    });
+    break;
+
+  case 'update':
+    pm2.connect(function(err) {
+      pm2.restart('anthTrigger', function(err, result) {
+        if(err) { console.error(err); }
+        exitPm2();
+      })
     })
     break;
 
