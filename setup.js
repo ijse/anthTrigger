@@ -246,7 +246,12 @@ switch(_argv._.shift()) {
     var scriptId = _argv._.shift();
     var runArgs = _argv._;
 
-    //Todo: call script by id
+    if(!scriptId) {
+      console.error('Need scriptId as first argument');
+      exitPm2();
+      return ;
+    }
+
     callScript(config.mongodb, config.shell, scriptId, runArgs);
     break;
 
