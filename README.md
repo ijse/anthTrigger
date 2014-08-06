@@ -18,7 +18,6 @@ A tool with web interface to manage and execute shells on server.
 
 > 1. MongoDB
 > 2. Node.js
-> 3. pm2
 
 # 安装方式
 ```
@@ -44,6 +43,7 @@ anthtrigger setup
 anthtrigger start
 ```
 然后可以在浏览器中访问服务器地址对应端口号，即可打开Web管理页面，输入超级管理员账户`admin`和刚才配置的密码，即可登陆并添加和配置其它用户，以及添加配置脚本。
+
 
 # 更新升级
 
