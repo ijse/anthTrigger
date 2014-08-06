@@ -228,7 +228,7 @@ switch(_argv._.shift()) {
     });
     break;
 
-  case 'update':
+  case 'restart':
     pm2.connect(function(err) {
       pm2.restart('anthTrigger', function(err, result) {
         if(err) { console.error(err); }
@@ -257,7 +257,7 @@ switch(_argv._.shift()) {
 
   default:
     console.log('Syntax: ');
-    console.log('\t anthtrigger <setup|start>');
+    console.log('\t anthtrigger <setup|start|pause|restart|stop|kill|version>');
     break;
 }
 
