@@ -157,6 +157,23 @@ exports.route = (app)->
 			}
 			_evt.script_kill req.cookies.user, logs
 
+	app.get '/scripts/export', (req, res)->
+
+		Ctrl
+		.exportAsZip()
+		.then (cb, zipFileBuf)->
+			res.set {
+				'Content-Type': 'application/zip; charset=utf8'
+				'Content-disposition': 'attachment; filename=' + 'scriptPack.zip'
+			}
+
+			res.send(zipFileBuf)
+
+		.fail (cb, err)->
+			res.json {
+				success: false,
+				error: err
+			}
 
 	app.post '/hook', (req, res)->
 		shellOutput = ''

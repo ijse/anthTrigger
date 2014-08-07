@@ -1,11 +1,14 @@
 
 Thenjs = require 'thenjs'
-scriptModel = require './ScriptModel'
-logsModel = require '../scriptLogs/logsModel'
-spawn = require('child_process').spawn
 fs = require 'fs'
 path = require 'path'
 os = require 'os'
+
+scriptModel = require './ScriptModel'
+logsModel = require '../scriptLogs/logsModel'
+spawn = require('child_process').spawn
+
+zipUtil = require './zipUtil'
 
 killProcess = (pid)-> spawn 'pkill', [ '-P', pid ]
 
@@ -101,6 +104,17 @@ exports.deleteScript = (id)->
       return cont(err) if err
       return cont(new Error('Not found')) if count <= 0
       cont(null, count, script)
+
+exports.exportAsZip = (critial={})->
+
+  Thenjs (cont)->
+    scriptModel.find critial, (err, result)-> cont(err, result)
+  .then (cont, list)->
+    zipBuf = zipUtil.getZipBuffer(list)
+    cont(null, zipBuf)
+  .fail (cont, err)->
+    cont(err)
+
 
 # We cant ensure pid be unique, but for sure we have scriptId when kill the script running
 exports.killScript = (scriptId)->
