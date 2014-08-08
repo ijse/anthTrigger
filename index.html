@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Anthtrigger by ijse</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Anthtrigger</h1>
+        <p>A tool with web interface to manage and execute shells on server.</p>
+        <p class="view"><a href="https://github.com/ijse/anthTrigger">View the Project on GitHub <small>ijse/anthTrigger</small></a></p>
+        <ul>
+          <li><a href="https://github.com/ijse/anthTrigger/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ijse/anthTrigger/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/ijse/anthTrigger">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="anthtrigger" class="anchor" href="#anthtrigger"><span class="octicon octicon-link"></span></a>anthTrigger</h1>
+
+<p>A tool with web interface to manage and execute shells on server.</p>
+
+<p>管理和执行服务器端脚本命令工具。</p>
+
+<h1>
+<a name="%E5%8A%9F%E8%83%BD%E7%AE%80%E4%BB%8B" class="anchor" href="#%E5%8A%9F%E8%83%BD%E7%AE%80%E4%BB%8B"><span class="octicon octicon-link"></span></a>功能简介</h1>
+
+<ul>
+<li>npm一条命令安装，配置简单</li>
+<li>用户权限，分为普通用户、管理用户和超级管理员，普通用户只具有执行权限；管理员可以撰写脚本，超级管理员可以管理用户和进行系统设置。</li>
+<li>脚本在线编写，可以实现接受执行参数，及脚本间的相互调用</li>
+<li>脚本执行，系统会记录下每次执行的相关信息，如触发用户，执行参数，脚本内容，执行结果等</li>
+<li>脚本执行日志，脚本执行时输出所有日志信息</li>
+<li>系统操作日志，记录下每位用户的系统操作信息</li>
+</ul><h1>
+<a name="%E7%B3%BB%E7%BB%9F%E4%BE%9D%E8%B5%96" class="anchor" href="#%E7%B3%BB%E7%BB%9F%E4%BE%9D%E8%B5%96"><span class="octicon octicon-link"></span></a>系统依赖</h1>
+
+<blockquote>
+<ol>
+<li>MongoDB</li>
+<li>Node.js</li>
+</ol>
+</blockquote>
+
+<h1>
+<a name="%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F" class="anchor" href="#%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F"><span class="octicon octicon-link"></span></a>安装方式</h1>
+
+<pre><code>npm install anthtrigger -g
+</code></pre>
+
+<h1>
+<a name="%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95" class="anchor" href="#%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95"><span class="octicon octicon-link"></span></a>配置方法</h1>
+
+<pre><code>anthtrigger setup
+</code></pre>
+
+<p>然后会有交互式命令提示，根据提示输入一些配置信息，如：</p>
+
+<blockquote>
+<ol>
+<li>服务监听端口号</li>
+<li>MongoDB服务器配置</li>
+<li>脚本执行shell</li>
+<li>超级管理员密码</li>
+</ol>
+</blockquote>
+
+<p>执行完毕后，anthtrigger会在用户HOME目录下创建<code>.anthTrigger.config.json</code>文件，此文件中记录配置信息（不包括管理员密码），并会初始化数据库。</p>
+
+<h1>
+<a name="%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F" class="anchor" href="#%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F"><span class="octicon octicon-link"></span></a>运行程序</h1>
+
+<p>配置完成后，执行以下命令将使用pm2启动起来：</p>
+
+<pre><code>anthtrigger start
+</code></pre>
+
+<p>然后可以在浏览器中访问服务器地址对应端口号，即可打开Web管理页面，输入超级管理员账户<code>admin</code>和刚才配置的密码，即可登陆并添加和配置其它用户，以及添加配置脚本。</p>
+
+<h1>
+<a name="%E6%9B%B4%E6%96%B0%E5%8D%87%E7%BA%A7" class="anchor" href="#%E6%9B%B4%E6%96%B0%E5%8D%87%E7%BA%A7"><span class="octicon octicon-link"></span></a>更新升级</h1>
+
+<pre><code>pm2 stop anthTrigger
+npm install anthtrigger@latest -g
+anthtrigger setup
+pm2 restart anthTrigger
+</code></pre>
+
+<p>(更便捷的更新方式在开发中。。。)</p>
+
+<h1>
+<a name="%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE" class="anchor" href="#%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE"><span class="octicon octicon-link"></span></a>开源协议</h1>
+
+<p>MIT</p>
+
+<h1>
+<a name="%E6%9B%B4%E5%A4%9A%E4%BF%A1%E6%81%AF" class="anchor" href="#%E6%9B%B4%E5%A4%9A%E4%BF%A1%E6%81%AF"><span class="octicon octicon-link"></span></a>更多信息</h1>
+
+<blockquote>
+<ol>
+<li><p>脚本权限控制： 采用“权限标签”方式，创建脚本时可以为脚本指定标签，只有拥有此标签的用户（除超级管理员）才有权限操作它，这样可以灵活地设定不同脚本与用户的权限关系；同时还可以根据标签来检索脚本。</p></li>
+<li><p>脚本执行参数： 触发脚本执行时，可以在弹出的面板中为脚本指定执行时传入的参数，在脚本中通过标准的shell语法($1-$9)来获取到这些参数。</p></li>
+<li><p>脚本间互相调用： 每个脚本添加时会有一个自增长的数字脚本ID, 在编写脚本时，添加命令如：<code>anthtrigger run 8 arg1 arg2</code>, 即可调用脚本ID=8的脚本，并且执行时会传入两个参数<code>arg1</code>,<code>arg2</code>。</p></li>
+<li><p>功能在继续完善中。。。</p></li>
+</ol>
+</blockquote>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/ijse">ijse</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
