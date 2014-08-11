@@ -26,6 +26,8 @@ angular.module 'anthTrigger'
 		else
 			$interval.cancel t if angular.isDefined(t)
 
+	$scope.setAuto(true)
+
 	$scope.$on '$locationChangeStart', ->
 		$interval.cancel t if angular.isDefined(t)
 

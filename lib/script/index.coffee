@@ -139,7 +139,7 @@ exports.route = (app)->
 				error: result.error
 				script: doc
 				code: result.code
-				logs: result.logs
+				logs: logs
 			}
 			_evt.script_run req.cookies.user, true, doc, logs
 
