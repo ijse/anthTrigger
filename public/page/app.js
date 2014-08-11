@@ -68,6 +68,11 @@ angular
       }
     }
   })
+
+  .when('/manageData', {
+    templateUrl: '/page/settings/backup.html',
+    auth: true
+  })
   .when('/eventLogs', {
     templateUrl: '/page/eventLogs/index.html',
     controller: 'eventLogsController',
