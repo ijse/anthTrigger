@@ -11,9 +11,22 @@ angular
   'ui.codemirror',
   'ui.bootstrap'
   ])
-.config(function($routeProvider, $locationProvider) {
+.config(function($routeProvider, $httpProvider, $locationProvider) {
 
   $locationProvider.html5Mode(true).hashPrefix('!');
+
+  // Check user session
+  $httpProvider.defaults.headers.common['X-Requested-With'] = "XMLHttpRequest";
+  $httpProvider.interceptors.push(function($q) {
+    return {
+      'response': function(resp) {
+        if(resp.data.error === 'Not login') {
+          location.href="/page/login.html";
+        }
+        return resp;
+      }
+    }
+  })
 
   $routeProvider
   .when('/', {
@@ -70,6 +83,7 @@ angular
   // });
 })
 .run(function($rootScope, $location, $cookies, $http, amMoment, begService, ansi2html, notify) {
+
   amMoment.changeLanguage('de');
   function getServerLocation() {
     $http
@@ -136,5 +150,7 @@ angular
     duration: 60000,
     template: "/page/globals/notify-template.html"
   });
+
+  window.notify = notify
 
 });

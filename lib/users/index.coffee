@@ -38,7 +38,8 @@ exports.route = (app)->
 				user: user
 			}
 			_evt.user_login user.name, true, uip
-		.fail ->
+		.fail (cont, err)->
+			console.log(err)
 			_evt.user_login uname, false, uip
 			res.json { success: false }
 
