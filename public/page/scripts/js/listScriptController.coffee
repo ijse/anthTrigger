@@ -11,7 +11,7 @@ angular.module 'anthTrigger'
 
 	$scope.q = searchParams.q or ''
 	$scope.page = 1
-	$scope.pageSize = 10
+	$scope.pageSize = 20
 	$scope.totalItems = 0
 
 	loadList = ()->

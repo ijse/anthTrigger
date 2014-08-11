@@ -4,7 +4,7 @@ angular.module 'anthTrigger'
 
 	$scope.page = 1
 	$scope.totalItems = 0
-	$scope.pageSize = 10
+	$scope.pageSize = 20
 
 	$scope.status = _st = {}
 	$scope.list = []
