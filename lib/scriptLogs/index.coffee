@@ -1,5 +1,6 @@
 
 Ctrl = require './controller'
+userCtrl = require '../users/controller'
 
 exports.route = (app)->
 
@@ -31,8 +32,27 @@ exports.route = (app)->
 
 		Ctrl
 		.findById lid
-		.fin (cont, err, logs)->
+		.then (cont, logs)->
+
+			# Populate the user
+			userCtrl.findById {
+				_id: logs.runByUser
+			}
+			.then (cont2, user)-> cont2(null, user or {})
+			.fail (cont2, err)-> cont2(null, {})
+			.fin (cont2, err, user)->
+				user.password = null
+
+				cont(null, logs, user)
+
+		.fin (cont, err, logs, user)->
+			data = logs.toObject()
+			data.runByUser = {
+				name: user.name
+				role: user.role
+				_id: user._id
+			}
 			res.json {
 				success: !!!err
-				data: logs
+				data: data
 			}

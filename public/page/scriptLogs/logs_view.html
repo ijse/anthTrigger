@@ -27,8 +27,21 @@
             <pre style="word-wrap: normal;">{{logs.snapshot.codes}}
             </pre>
         </tab>
-        <tab heading="备注说明">
-            <pre>{{logs.notes}}</pre>
+        <tab heading="其它信息">
+            <div class="well">
+                <div class="text-default row">
+                    <label class="col-md-3">
+                        执行用户: <span class="text-warning">{{logs.runByUser.name}}</span>
+                    </label>
+                    <label class="col-md-4">
+                        开始：<span class="text-warning">{{logs.startAt | amDateFormat:'YYYY-MM-DD HH:mm:ss.SSS'}}</span>
+                    </label>
+                    <label class="col-md-4">
+                        结束：<span class="text-warning">{{logs.endAt | amDateFormat:'YYYY-MM-DD HH:mm:ss.SSS'}}</span>
+                    </label>
+                </div>
+                <pre>{{logs.notes}}</pre>
+            </div>
         </tab>
         <div class="pull-right">
             <label>

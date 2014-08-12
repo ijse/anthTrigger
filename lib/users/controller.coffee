@@ -15,6 +15,10 @@ exports.findUser = (critcal)->
 	Thenjs (cont)->
 		userModel.findOne critcal, cont
 
+exports.findById = (id)->
+	Thenjs (cont)->
+		userModel.findById id, cont
+
 exports.editUser = (user)->
 	Thenjs (cont)->
 		id = user._id
