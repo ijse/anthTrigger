@@ -72,6 +72,7 @@ angular
 
   .when('/manageData', {
     templateUrl: '/page/settings/backup.html',
+    controller: 'backupController',
     auth: true
   })
   .when('/eventLogs', {

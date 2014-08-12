@@ -13,11 +13,19 @@
   <div class="col-lg-6">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title"><i class="fa fa-arrow-down"></i> 导出脚本 </h3>
+        <label class="panel-title"><i class="fa fa-arrow-down"></i> 导出脚本 </label>
       </div>
       <div class="panel-body">
-        <span>将所有脚本导出为zip文件</span>
-        <a href="/scripts/export" target="_blank" class="btn btn-primary" download>下载</a>
+        <p>将所有脚本导出为zip文件</p>
+        <div class="text-center">
+          <a href ng-click="exportZip()"
+            class="btn btn-primary"
+            ng-if="_st.export !== 'processing'">
+            生成
+          </a>
+          <span class="btn btn-default disabled" ng-if="_st.export === 'processing'">生成中...</span>
+          <a href="/scripts/export_download" target="_blank" class="btn btn-primary" download>下载</a>
+        </div>
       </div>
     </div>
   </div>

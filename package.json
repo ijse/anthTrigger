@@ -31,7 +31,8 @@
     "pm2": "~0.9.2",
     "mongoose-id-autoinc2": "~1.0.3",
     "adm-zip": "~0.4.4",
-    "pinyin": "~2.3.3"
+    "pinyin": "~2.3.3",
+    "moment": "~2.8.1"
   },
   "devDependencies": {
     "mocha": "~1.20.1",

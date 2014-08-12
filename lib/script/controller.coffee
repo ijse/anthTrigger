@@ -105,7 +105,7 @@ exports.deleteScript = (id)->
       return cont(new Error('Not found')) if count <= 0
       cont(null, count, script)
 
-exports.exportAsZip = (critial={})->
+exports.exportAsZipBuffer = (critial={})->
 
   Thenjs (cont)->
     scriptModel.find critial, (err, result)-> cont(err, result)
@@ -115,6 +115,16 @@ exports.exportAsZip = (critial={})->
   .fail (cont, err)->
     cont(err)
 
+exports.exportAsZipToDisk = (critial={}, zipFileName)->
+
+  Thenjs (cont)->
+    scriptModel.find critial, (err, result)-> cont(err, result)
+  .then (cont, list)->
+
+    zipUtil.writeZipFile(list, zipFileName)
+    cont(null)
+  .fail (cont, err)->
+    cont(err)
 
 # We cant ensure pid be unique, but for sure we have scriptId when kill the script running
 exports.killScript = (scriptId)->
