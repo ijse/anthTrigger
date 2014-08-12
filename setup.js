@@ -13,12 +13,7 @@ var path = require('path');
 
 var Package = require('./package.json');
 
-var config = {
-  listen: 5678,
-  serverName: os.hostname(),
-  shell: 'sh',
-  mongodb: "mongodb://127.0.0.1:27017/anthTrigger"
-};
+var config = require('./config.default.js');
 
 // Read defaults from exist config file
 var configFile = path.join(process.env.HOME, './.anthTrigger.config.json');
