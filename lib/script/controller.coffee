@@ -254,7 +254,7 @@ exports.runScript = (id, arg=[], options={}, uid, notes='')->
   _runScriptFile = (cont, shellFile, doc, scriptLogs)->
     shellOutput = ''
     exc = spawn options.shell, [
-     '-x'
+     # '-x'
       shellFile
     ].concat(arg), options
 
