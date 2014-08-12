@@ -36,7 +36,7 @@
                         {{slog._id.substring(0, 7)}}/{{slog.pid}}
                     </td>
                     <td>
-                        <a href ng-click="viewScript(script)">
+                        <a ng-href="/scriptLogs/view/{{slog._id}}">
                             {{slog.snapshot.title}}
                         </a>
                     </td>
