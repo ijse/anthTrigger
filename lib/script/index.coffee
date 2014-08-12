@@ -58,7 +58,7 @@ exports.route = (app)->
 				{ 'title': q_reg },
 				{
 					'tags': {
-						'$elemMatch': { $in: [q_reg] }
+						'$elemMatch': { $in: [ q ] }
 					}
 				}
 			]
