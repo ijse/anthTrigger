@@ -7,6 +7,7 @@ angular
   'ngTagsInput',
   'cgNotify',
   'ansiToHtml',
+  'angular-loading-bar',
   'angularMoment',
   'ui.codemirror',
   'ui.bootstrap'
