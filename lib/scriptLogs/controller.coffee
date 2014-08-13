@@ -11,7 +11,12 @@ exports.list = (crital={})->
 exports.listByPage = (crital, opts)->
 	Thenjs (cont)->
 		logsModel
-		.find crital, null, opts, (err, list)->
+		.find crital, {
+        _id: 1
+        snapshot: 1
+        startAt: 1
+        endAt: 1
+      }, opts, (err, list)->
 			return cont(err) if err
 			cont(null, list)
 	.then (cont, list)->
