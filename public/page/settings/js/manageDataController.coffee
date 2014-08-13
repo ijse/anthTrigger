@@ -1,6 +1,6 @@
 angular.module 'anthTrigger'
 .controller 'manageDataController',
-($scope, $http, notify)->
+($scope, $http, notify, $modal)->
 
   $scope._st = _st = {}
 
@@ -59,3 +59,37 @@ angular.module 'anthTrigger'
       _st.dumpDatabase = null
       notify('数据库备份失败。')
 
+  $scope.restoreDatabase = ->
+
+    $modal.open {
+      backdrop: 'static'
+      keyboard: false
+      templateUrl: "/page/settings/restoreDatabaseModal.html"
+      controller: ['$scope', '$modalInstance', (scope, $modalInstance)->
+
+        scope._st = _st = {}
+        _st.list = 'loading'
+
+        $http
+        .get '/settings/database_bak/list'
+        .success (resp)->
+          scope.list = resp.list
+          _st.list = null
+        .error ->
+          notify('查询数据库备份文件出错！')
+          $modalInstance.dismiss()
+
+        scope.restore = (file)->
+
+          $http
+          .put '/settings/restore_database', {
+            file: file
+          }
+          .success (result)->
+            notify('恢复数据库成功 ！')
+            $modalInstance.dismiss()
+          .error ->
+            notify('恢复失败！')
+            $modalInstance.dismiss()
+      ]
+    }

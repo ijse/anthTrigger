@@ -47,7 +47,7 @@ exports.removeEventLogs = (days)->
         console.log ">>", result
         cont(err, result)
 
-exports.dumpDatabase = (slot, dbaddr, bkDir)->
+exports.dumpDatabase = (dbaddr, bkDir)->
 
   Thenjs (cont)->
 
@@ -61,6 +61,29 @@ exports.dumpDatabase = (slot, dbaddr, bkDir)->
     cmd.push('-p', dbaddr.password) if dbaddr.password
 
     cmd.push('-o', bkDir)
+
+    cmdStr = cmd.join(' ')
+
+    exec cmdStr, (error, stdout, stderr)->
+      console.error error, stderr if error
+      cont(error, stdout, stderr)
+
+    return
+
+exports.restoreDatabase = (dbaddr, file)->
+  Thenjs (cont)->
+
+    cmd = [
+      'mongorestore'
+      '--host', dbaddr.hostname
+      '--port', dbaddr.port
+      '-d', dbaddr.dbname
+      '--drop'
+    ]
+    cmd.push('-u', dbaddr.username) if dbaddr.username
+    cmd.push('-p', dbaddr.password) if dbaddr.password
+
+    cmd.push(file + '/' + dbaddr.dbname)
 
     cmdStr = cmd.join(' ')
 

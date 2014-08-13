@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h3 class="modal-title">恢复数据库</h3>
+</div>
+<div class="modal-body">
+
+  <div class="text-center text-info" ng-if="_st.list==='loading'">
+    载入中。。。
+  </div>
+  <div class="text-center text-danger" ng-if="_st.list==='error'">
+    载入失败
+  </div>
+
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="item in list">
+      <a href class="btn btn-link btn-xs pull-right" ng-click="restore(item.name)">恢复</a>
+
+      <span class="badge">{{item.date | amCalendar }}</span>
+      {{item.name}}
+    </li>
+  </ul>
+
+</div>
+
+<div class="modal-footer text-center">
+  <button class="btn btn-default" ng-click="$dismiss()">
+    <i class="fa fa-times"></i> 关闭</button>
+</div>
