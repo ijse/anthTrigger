@@ -1,7 +1,6 @@
 AdmZip = require('adm-zip')
 pinyin = require 'pinyin'
 
-
 buildZip = (scriptList)->
   zip = new AdmZip()
 

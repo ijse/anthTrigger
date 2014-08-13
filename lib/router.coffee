@@ -38,3 +38,4 @@ exports.attach = (app)->
 	require('./scriptLogs').route(app)
 	require('./events').route(app)
 	require('./dashboard').route(app)
+	require('./settings').route(app)

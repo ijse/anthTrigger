@@ -1,5 +1,5 @@
 angular.module 'anthTrigger'
-.controller 'backupController',
+.controller 'manageDataController',
 ($scope, $http, notify)->
 
   $scope._st = _st = {}
@@ -8,7 +8,7 @@ angular.module 'anthTrigger'
 
     _st.export = 'processing'
     $http
-    .put '/script/export'
+    .put '/settings/export_scripts'
     .success (result)->
       _st.export = null
       notify('脚本备份文件已经生成到：' + result.file)

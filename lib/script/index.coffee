@@ -2,7 +2,6 @@
 Ctrl = require './controller.coffee'
 spawn = require('child_process').spawn
 path = require 'path'
-moment = require 'moment'
 
 exports.route = (app)->
 
@@ -157,42 +156,6 @@ exports.route = (app)->
 				logs: logs
 			}
 			_evt.script_kill req.cookies.user, logs
-
-	app.get '/scripts/export_download', (req, res)->
-
-		Ctrl
-		.exportAsZipBuffer()
-		.then (cb, zipFileBuf)->
-			res.set {
-				'Content-Type': 'application/zip; charset=utf8'
-				'Content-disposition': 'attachment; filename=' + 'scriptPack.zip'
-			}
-
-			res.send(zipFileBuf)
-
-		.fail (cb, err)->
-			res.json {
-				success: false,
-				error: err
-			}
-
-	app.put '/script/export', (req, res)->
-		datetime = moment().format('YYYY-MM-DD')
-		backupFileName = path.join app.get('configs').backupDir, "scripts_#{datetime}.zip"
-
-		Ctrl
-		.exportAsZipToDisk({}, backupFileName)
-		.then (cb)->
-			res.json {
-				success: true,
-				file: backupFileName
-			}
-
-		.fail (cb, err)->
-			res.json {
-				success: false,
-				erorr: err
-			}
 
 	app.post '/hook', (req, res)->
 		shellOutput = ''
