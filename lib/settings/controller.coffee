@@ -3,6 +3,7 @@ zipUtil = require './zipUtil'
 scriptModel = require '../script/ScriptModel'
 scriptLogsModel = require '../scriptLogs/logsModel'
 eventLogsModel = require '../events/EventModel'
+exec = require('child_process').exec
 
 exports.exportScriptAsZipBuffer = (critial={})->
 
@@ -46,3 +47,25 @@ exports.removeEventLogs = (days)->
         console.log ">>", result
         cont(err, result)
 
+exports.dumpDatabase = (slot, dbaddr, bkDir)->
+
+  Thenjs (cont)->
+
+    cmd = [
+      'mongodump'
+      '--host', dbaddr.hostname
+      '--port', dbaddr.port
+      '-d', dbaddr.dbname
+    ]
+    cmd.push('-u', dbaddr.username) if dbaddr.username
+    cmd.push('-p', dbaddr.password) if dbaddr.password
+
+    cmd.push('-o', bkDir)
+
+    cmdStr = cmd.join(' ')
+
+    exec cmdStr, (error, stdout, stderr)->
+      console.error error, stderr if error
+      cont(error, stdout, stderr)
+
+    return

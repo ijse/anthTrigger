@@ -1,4 +1,5 @@
 Thenjs = require 'thenjs'
+url = require 'url'
 
 mongoose = require 'mongoose'
 
@@ -10,6 +11,21 @@ exports.connectDB = (dburl)->
 
 		db.once 'open', ()->
 			cb()
+
+exports.convertMongoUrl = (u)->
+  z = url.parse(u)
+
+  auth = if z.auth then z.auth.split(':') else []
+  username = auth[0]
+  password = auth[1]
+  dbname = if z.pathname then z.pathname.match(/^\/([^\/]+)/)[1] else ''
+
+  z.username = username
+  z.password = password
+  z.dbname = dbname
+
+  return z
+
 
 `
 exports.extend = function () {

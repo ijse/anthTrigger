@@ -21,10 +21,10 @@
         <div class="text-center">
           <a href ng-click="exportZip()"
             class="btn btn-primary"
-            ng-if="_st.export !== 'processing'">
+            ng-if="_st.export !== 'loading'">
             生成
           </a>
-          <span class="btn btn-default disabled" ng-if="_st.export === 'processing'">生成中...</span>
+          <span class="btn btn-default disabled" ng-if="_st.export === 'loading'">生成中...</span>
           <a href="/settings/export_scripts_download" target="_blank" class="btn btn-primary" download>下载</a>
         </div>
       </div>
@@ -66,6 +66,26 @@
           </div>
 
 
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <label class="panel-title"><i class="fa fa-database"></i> 备份数据库 </label>
+      </div>
+      <div class="panel-body">
+        <p>将数据库文件备份到磁盘上</p>
+        <div class="text-center">
+          <a href ng-click="dumpDatabase()"
+            class="btn btn-primary"
+            ng-if="_st.dumpDatabase !== 'loading'">
+            备份
+          </a>
+          <span class="btn btn-default disabled" ng-if="_st.dumpDatabase === 'loading'">备份中...</span>
 
         </div>
       </div>

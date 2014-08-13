@@ -6,7 +6,7 @@ angular.module 'anthTrigger'
 
   $scope.exportZip = ->
 
-    _st.export = 'processing'
+    _st.export = 'loading'
     $http
     .put '/settings/export_scripts'
     .success (result)->
@@ -14,10 +14,11 @@ angular.module 'anthTrigger'
       notify('脚本备份文件已经生成到：' + result.file)
     .error ->
       _st.export = null
+      notify('脚本文件导出失败..')
 
   $scope.clearScriptLogs = (days)->
 
-    _st.clearScriptLogs = 'processing'
+    _st.clearScriptLogs = 'loading'
     $http
     .put '/settings/clear_scriptLogs', {
       days: days
@@ -28,6 +29,7 @@ angular.module 'anthTrigger'
 
     .error ->
       _st.clearScriptLogs = null
+      notify('清理失败..')
 
   $scope.clearEventLogs = (days)->
 
@@ -42,3 +44,18 @@ angular.module 'anthTrigger'
 
     .error ->
       _st.clearEventLogs = null
+      notify('清理失败..')
+
+  $scope.dumpDatabase = ()->
+    _st.dumpDatabase = 'loading'
+    $http
+    .put '/settings/dump_database'
+    .success (result)->
+      _st.dumpDatabase = null
+
+      notify('数据库备份成功！备份文件：' + (result.file))
+
+    .error ->
+      _st.dumpDatabase = null
+      notify('数据库备份失败。')
+

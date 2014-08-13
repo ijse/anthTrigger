@@ -1,6 +1,7 @@
 moment = require 'moment'
 path = require 'path'
 Ctrl = require './controller'
+util = require('../utils')
 
 exports.route = (app)->
 
@@ -17,6 +18,7 @@ exports.route = (app)->
       res.send(zipFileBuf)
 
     .fail (cb, err)->
+      res.status(500)
       res.json {
         success: false,
         error: err
@@ -35,6 +37,7 @@ exports.route = (app)->
       }
 
     .fail (cb, err)->
+      res.status(500)
       res.json {
         success: false,
         erorr: err
@@ -52,6 +55,7 @@ exports.route = (app)->
         count: result
       }
     .fail (cb, err)->
+      res.status(500)
       res.json {
         success: false
       }
@@ -68,7 +72,25 @@ exports.route = (app)->
         count: result
       }
     .fail (cb, err)->
+      res.status(500)
       res.json {
         success: false
       }
+
+
+  app.put '/settings/dump_database', (req, res)->
+
+    slot = moment().format('YYYY-MM-DD')
+    config = app.get('configs')
+
+    dbaddr = util.convertMongoUrl(config.mongodb)
+    fileName = path.join config.backupDir, "db_#{slot}.bson"
+
+    Ctrl
+    .dumpDatabase(slot, dbaddr, fileName)
+    .then (cb, stdout, stderr)->
+      res.json { success: true, file: fileName }
+    .fail (cb, err)->
+      res.status(500)
+      res.json { success: false }
 
