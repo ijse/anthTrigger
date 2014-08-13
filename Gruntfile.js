@@ -132,6 +132,7 @@ module.exports = function(grunt) {
                         'lib/**/*',
                         'index.js',
                         'setup.js',
+                        'config.default.js',
                         'package.json'
                     ]
                 }]
