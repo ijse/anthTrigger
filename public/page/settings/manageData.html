@@ -10,6 +10,7 @@
 </div>
 
 <div class="col-lg-12">
+
   <div class="col-lg-6">
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -25,6 +26,47 @@
           </a>
           <span class="btn btn-default disabled" ng-if="_st.export === 'processing'">生成中...</span>
           <a href="/settings/export_scripts_download" target="_blank" class="btn btn-primary" download>下载</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <label class="panel-title"><i class="fa fa-trash-o"></i> 清理数据 </label>
+      </div>
+      <div class="panel-body">
+        <p>清理没用的旧的日志数据，有利于系统更快的运行。</p>
+        <div class="text-center">
+
+          <div class="list-group">
+
+            <li class="list-group-item">
+              <input type="number" min='1' step='1' ng-model='scriptLogsBeforeDays' ng-init="scriptLogsBeforeDays=3" />
+              <button ng-click="clearScriptLogs(scriptLogsBeforeDays)"
+                  class="btn btn-primary"
+                  ng-disabled="_st.clearScriptLogs==='loading'">
+                清空
+                  <b class="text-default">{{scriptLogsBeforeDays}}</b>
+                天前的执行日志
+              </button>
+            </li>
+            <li class="list-group-item">
+              <input type="number" min='1' step='1' ng-model='eventLogsBeforeDays' ng-init="eventLogsBeforeDays=3" />
+              <button ng-click="clearEventLogs(eventLogsBeforeDays)"
+                  class="btn btn-primary"
+                  ng-disabled="_st.clearEventLogs==='loading'">
+                清空
+                  <b class="text-default">{{eventLogsBeforeDays}}</b>
+                天前的操作历史
+              </button>
+
+            </li>
+          </div>
+
+
+
         </div>
       </div>
     </div>

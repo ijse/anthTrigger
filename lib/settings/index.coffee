@@ -39,3 +39,36 @@ exports.route = (app)->
         success: false,
         erorr: err
       }
+
+  app.put '/settings/clear_scriptLogs', (req, res)->
+
+    days = req.body.days
+
+    Ctrl
+    .removeScriptLogs(days)
+    .then (cb, result)->
+      res.json {
+        success: true,
+        count: result
+      }
+    .fail (cb, err)->
+      res.json {
+        success: false
+      }
+
+  app.put '/settings/clear_eventLogs', (req, res)->
+
+    days = req.body.days
+
+    Ctrl
+    .removeEventLogs(days)
+    .then (cb, result)->
+      res.json {
+        success: true,
+        count: result
+      }
+    .fail (cb, err)->
+      res.json {
+        success: false
+      }
+

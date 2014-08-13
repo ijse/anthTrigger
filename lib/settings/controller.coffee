@@ -1,6 +1,8 @@
 Thenjs = require 'thenjs'
 zipUtil = require './zipUtil'
 scriptModel = require '../script/ScriptModel'
+scriptLogsModel = require '../scriptLogs/logsModel'
+eventLogsModel = require '../events/EventModel'
 
 exports.exportScriptAsZipBuffer = (critial={})->
 
@@ -22,3 +24,25 @@ exports.exportScriptAsZipToDisk = (critial={}, zipFileName)->
     cont(null)
   .fail (cont, err)->
     cont(err)
+
+exports.removeScriptLogs = (days)->
+  d = new Date()
+  d.setDate d.getDate() - days
+
+  Thenjs (cont)->
+    scriptLogsModel.remove {
+        startAt: { $lt: d }
+      }, (err, result)->
+        cont(err, result)
+
+exports.removeEventLogs = (days)->
+  d = new Date()
+  d.setDate d.getDate() - days
+
+  Thenjs (cont)->
+    eventLogsModel.remove {
+        timeAt: { $lt: d }
+      }, (err, result)->
+        console.log ">>", result
+        cont(err, result)
+
