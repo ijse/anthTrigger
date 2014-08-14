@@ -54,71 +54,70 @@
                     <td>
                         <span am-time-ago="script.createAt"
                         title="{{script.createAt}}">
-                    </span>
-                </td>
-                <td>
-                    <span am-time-ago="script.lastRunAt"
-                    title="{{script.lastRunAt}}">
-                </span>
-            </td>
-            <td>
-                <pre>{{script.description}}</pre>
-            </td>
-            <td>
-                <a class="label label-default" ng-href="/scripts?q={{t}}"
-                ng-class="{ 'label-warning': CurrentUser.tags.indexOf(t) !== -1 }"
-                ng-repeat="t in script.tags">{{t}}</a>
-            </td>
-            <td>
-                <a beg="script_edit" ng-href="/scripts/edit/{{script._id}}" class="btn btn-primary">
-                    <i class="fa fa-edit"></i> 编辑
-                </a>
-                <button beg="script_delete" ng-click="deleteScript(script, $index)" class="btn btn-danger">
-                    <i class="fa fa-trash-o"></i> 删除
-                </button>
-                <button
-                    ng-click="runScript(script, $index)"
-                    ng-if="script.status == 'ready'"
-                    beg="script_run"
-                    class="btn btn-success">
-                    <i class="fa fa-play"></i> 执行
-                </button>
-
-                <div class="btn-group" dropdown ng-if="script.status !== 'ready'">
-                    <button type="button" disabled class="btn btn-success">
-                        <i class="fa fa-spinner fa-spin"></i> 运行中
-                    </button>
-                    <button type="button"
-                    class="btn btn-success dropdown-toggle">
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li>
-                        <a href ng-click="killScript(script, $index)">
-                            <i class="fa fa-times"></i> 放弃执行
+                        </span>
+                    </td>
+                    <td>
+                        <span am-time-ago="script.lastRunAt"
+                        title="{{script.lastRunAt}}">
+                        </span>
+                    </td>
+                    <td>
+                        <pre>{{script.description}}</pre>
+                    </td>
+                    <td>
+                        <a class="label label-default" ng-href="/scripts?q={{t}}"
+                        ng-class="{ 'label-warning': CurrentUser.tags.indexOf(t) !== -1 }"
+                        ng-repeat="t in script.tags">{{t}}</a>
+                    </td>
+                    <td>
+                        <a beg="script_edit" ng-href="/scripts/edit/{{script._id}}" class="btn btn-primary">
+                            <i class="fa fa-edit"></i> 编辑
                         </a>
-                    </li>
-                    <li>
-                        <a href ng-click="viewLogs(script)"
-                        <i class="fa fa-file-text-o"></i> 详细日志
-                    </a>
-                </li>
-            </ul>
+                        <button beg="script_delete" ng-click="deleteScript(script, $index)" class="btn btn-danger">
+                            <i class="fa fa-trash-o"></i> 删除
+                        </button>
+                        <button
+                            ng-click="runScript(script, $index)"
+                            ng-if="script.status == 'ready'"
+                            beg="script_run"
+                            class="btn btn-success">
+                            <i class="fa fa-play"></i> 执行
+                        </button>
+
+                        <div class="btn-group" dropdown ng-if="script.status !== 'ready'">
+                            <button type="button" disabled class="btn btn-success">
+                                <i class="fa fa-spinner fa-spin"></i> 运行中
+                            </button>
+                            <button type="button"
+                            class="btn btn-success dropdown-toggle">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href ng-click="killScript(script, $index)">
+                                        <i class="fa fa-times"></i> 放弃执行
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href ng-click="viewLogs(script)"
+                                    <i class="fa fa-file-text-o"></i> 详细日志
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="text-center">
+            <pagination
+            ng-model="page"
+            total-items="totalItems"
+            items-per-page="pageSize"
+            ng-change="pageChange()"></pagination>
         </div>
 
-    </td>
-</tr>
-</tbody>
-</table>
-
-<div class="text-center">
-    <pagination
-    ng-model="page"
-    total-items="totalItems"
-    items-per-page="pageSize"
-    ng-change="pageChange()"></pagination>
-</div>
-
-</div>
+    </div>
 
 </div>
