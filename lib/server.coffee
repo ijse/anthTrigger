@@ -28,6 +28,9 @@ module.exports = (configs)->
 		  url: configs.mongodb
 		  auto_reconnect: true
 	  })
+	  cookie: {
+			maxAge: 60*60*1000 # 1 hour
+	  }
 	})
 
 
