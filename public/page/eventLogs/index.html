@@ -40,8 +40,8 @@
                         {{evt.byUser}}
                     </td>
                     <td>
-                        <span am-time-ago="evt.timeAt"
-                        title="{{evt.timeAt}}">
+                        <span title="{{evt.timeAt}}">
+                        {{evt.timeAt | amCalendar}}
                     </span>
                 </td>
                 <td>
