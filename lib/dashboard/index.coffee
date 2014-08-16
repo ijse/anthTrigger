@@ -7,7 +7,6 @@ eventCtrl = require '../events/controller'
 exports.route = (app)->
 
   app.get '/dashboard/stats', (req, res)->
-    console.log "start count..."
     Thenjs (cont)->
       scriptCtrl
       .countScripts()
