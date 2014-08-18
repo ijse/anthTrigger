@@ -10,6 +10,11 @@ angular.module('anthTrigger')
       $scope.stat = resp.data
     .error ->
 
+    $http
+    .get '/dashboard/recentUser'
+    .success (list)->
+      $scope.recentUser = list
+
   loadStatistic()
 
 

@@ -3,11 +3,11 @@ Thenjs = require 'thenjs'
 scriptCtrl = require '../script/controller'
 scriptLogCtrl = require '../scriptLogs/controller'
 eventCtrl = require '../events/controller'
+userCtrl = require '../users/controller'
 
 exports.route = (app)->
 
   app.get '/dashboard/stats', (req, res)->
-    console.log "start count..."
     Thenjs (cont)->
       scriptCtrl
       .countScripts()
@@ -24,3 +24,13 @@ exports.route = (app)->
     .fail (cont, err)->
       console.log 'err', err
       res.end err
+
+  app.get '/dashboard/recentUser', (req, res, next)->
+
+    userCtrl
+    .getRecentUser()
+    .then (cont, list)->
+      res.json list or []
+    .fail (cont, err)->
+      next(err)
+

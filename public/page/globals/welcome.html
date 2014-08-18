@@ -127,3 +127,25 @@
 
 </div>
 
+<div class="row">
+    <div class="col-lg-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <i class="fa fa-user"></i> 最近登陆用户</div>
+            <div class="panel-body">
+                <ol class="list-group">
+                    <li class="list-group-item"
+                        ng-repeat="user in recentUser">
+                        <span class="badge" tooltip="{{user.lastLoginAt}}">{{user.lastLoginAt | amCalendar}}</span>
+
+                        <a href="/eventLogs?byUser={{user.name}}"
+                            tooltip-placement="right"
+                            tooltip="点击查看操作">
+                            {{user.name}}
+                        </a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>

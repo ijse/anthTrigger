@@ -19,6 +19,22 @@ exports.findById = (id)->
 	Thenjs (cont)->
 		userModel.findById id, cont
 
+exports.getRecentUser = ()->
+	Thenjs (cont)->
+		userModel.find {
+			frozen: false
+		}, {
+			_id: 1
+			name: 1
+			role: 1
+			lastLoginAt: 1
+			lastLoginIp: 1
+		}, {
+			sort: '-lastLoginAt'
+		}, (err, list)->
+
+			cont(err, list)
+
 exports.editUser = (user)->
 	Thenjs (cont)->
 		id = user._id
