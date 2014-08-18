@@ -37,3 +37,18 @@ exports.findById = (id)->
 		logsModel
 		.findById id, (err, doc)->
 			cont(err, doc)
+
+exports.getRecentLog = (count)->
+	Thenjs (cont)->
+		logsModel
+		.find {}, {
+			_id: 1
+			snapshot: 1
+			runByUser: 1
+			startAt: 1
+			endAt: 1
+		}, {
+			sort: '-startAt'
+			limit: count
+		}, (err, list)->
+			cont(null, list)

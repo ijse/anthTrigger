@@ -183,8 +183,9 @@ exports.callScript = (sid, arg=[], options)->
 
 
 
-exports.runScript = (id, arg=[], options={}, uid, notes='')->
+exports.runScript = (id, arg=[], options={}, user, notes='')->
 
+  uid = user._id
   options.shell = options.shell or 'sh'
 
 
@@ -221,6 +222,7 @@ exports.runScript = (id, arg=[], options={}, uid, notes='')->
     scriptLogs.snapshot.runOptions = options
     scriptLogs.snapshot.args = arg
     scriptLogs.snapshot.codes = script.codes
+    scriptLogs.snapshot.runByUser = user.name
     scriptLogs.save (err)->
       return cont(err) if err
 

@@ -19,7 +19,7 @@ exports.findById = (id)->
 	Thenjs (cont)->
 		userModel.findById id, cont
 
-exports.getRecentUser = ()->
+exports.getRecentUser = (count)->
 	Thenjs (cont)->
 		userModel.find {
 			frozen: false
@@ -31,6 +31,7 @@ exports.getRecentUser = ()->
 			lastLoginIp: 1
 		}, {
 			sort: '-lastLoginAt'
+			limit: count
 		}, (err, list)->
 
 			cont(err, list)
