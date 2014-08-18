@@ -1,5 +1,6 @@
 Thenjs = require 'thenjs'
 util = require '../utils'
+moment = require 'moment'
 
 scriptCtrl = require '../script/controller'
 scriptLogCtrl = require '../scriptLogs/controller'
@@ -68,3 +69,16 @@ exports.route = (app)->
       console.log err
       next(err)
 
+
+  app.get '/dashboard/usageStats', (req, res, next)->
+
+    scriptLogCtrl
+    # find last 30 days
+    .getUsageStats moment().subtract(30, 'd')
+    .then (cont, results)->
+      res.json results
+    .fail (cont, err)->
+      console.log err
+
+
+  return
