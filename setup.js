@@ -32,6 +32,15 @@ var schema = {
       default: config.listen,
       required: true
     },
+    'instances': {
+      description: 'run instances',
+      type: 'number',
+      pattern: /^\d+$/,
+      message: 'Port must be numbers',
+      hidden: false,
+      default: config.instances,
+      required: true
+    },
     'serverName': {
       description: 'Enter the server name',
       type: 'string',
@@ -54,6 +63,13 @@ var schema = {
       type: 'string',
       hidden: false,
       default: config.shell,
+      required: true
+    },
+    'backupDir': {
+      description: 'Data backup folder.',
+      type: 'string',
+      hidden: false,
+      default: config.backupDir,
       required: true
     },
     'adminPass': {
@@ -153,7 +169,7 @@ switch(_argv._.shift()) {
   case 'start':
     pm2.connect(function(err) {
       var appEntryFile = path.join(__dirname, './index.js');
-      pm2.start(appEntryFile, {name: 'anthTrigger' }, function(err, proc) {
+      pm2.start(appEntryFile, {name: 'anthTrigger', instances: config.instances }, function(err, proc) {
         if(err) {
           console.error(err);
           // throw new Error(err);
