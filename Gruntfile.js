@@ -155,6 +155,32 @@ module.exports = function(grunt) {
                     src: [ '.tmp' ]
                 }]
             }
+        },
+
+        sonarRunner: {
+            analysis: {
+                options: {
+                    debug: true,
+                    separator: '\n',
+                    sonar: {
+                        host: {
+                            url: 'http://sonar.dev.c-launcher.com'
+                        },
+                        jdbc: {
+                            url: 'jdbc:mysql://sonar.dev.c-launcher.com:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true',
+                            username: 'sonar',
+                            password: 'sonar'
+                        },
+
+                        projectKey: 'sonar:grunt-sonar-runner:0.1.0',
+                        projectName: 'Grunt Sonar Runner',
+                        projectVersion: '0.10',
+                        sources: ['public/modules', 'public/page', 'lib'].join(','),
+                        language: 'js',
+                        sourceEncoding: 'UTF-8'
+                    }
+                }
+            }
         }
     });
 
