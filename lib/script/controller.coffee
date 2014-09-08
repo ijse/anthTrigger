@@ -261,11 +261,18 @@ exports.runScript = (id, arg=[], options={}, user, notes='')->
     exc.on 'close', (code)->
       # Remove tmpfile
       fs.unlink shellFile
+      # Reset script status
+      doc.lastRunEnd = new Date()
+      doc.status = 'ready'
+      doc.save()
 
-      return cont(null, {
-        code: code
-        logs: shellOutput
-      }, doc, scriptLogs)
+      scriptLogs.endAt = new Date()
+      scriptLogs.save()
+      return # on close
+
+    return cont(null, {
+      # logs: shellOutput
+    }, doc, scriptLogs)
 
   Thenjs _createLogsModel
 
@@ -279,16 +286,8 @@ exports.runScript = (id, arg=[], options={}, user, notes='')->
   .then _runScriptFile
 
   .fin (cont, err1, result, doc, scriptLogs)->
-    # Reset script status
-    doc.lastRunEnd = new Date()
-    doc.status = 'ready'
-
-    scriptLogs.endAt = new Date()
-
-    scriptLogs.save (err2)->
-      doc.save (err3)->
-        # Got error when update status after script run
-        result.error = [ err1, err2, err3 ]
-        cont(err1 or err2 or err3, result, doc, scriptLogs)
+    # Got error when update status after script run
+    result.error = err1
+    cont(err1, result, doc, scriptLogs)
 
 

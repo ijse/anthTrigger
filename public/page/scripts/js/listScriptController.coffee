@@ -85,7 +85,7 @@ angular.module 'anthTrigger'
 				notes: result.notes
 			}
 			.success (result)->
-				notify "脚本(#{result.script.title})执行完成！请到<a href='/scriptLogs/view/#{result.logs._id}'>【执行历史】</a>中查看！"
+				notify "脚本(#{result.script.title})执行开始！请到<a href='/scriptLogs/view/#{result.logs._id}'>【执行历史】</a>中查看！"
 				$scope.list[index] = result.script
 
 
