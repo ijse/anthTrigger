@@ -27,6 +27,10 @@ angular.module('anthTrigger')
 
   loadStatistic()
 
+  # Reload statistic when route changed
+  $rootScope.$on '$locationChangeSuccess', ()->
+    loadStatistic()
+
   $scope.login = (user)->
     $http
     .post '/login', user
