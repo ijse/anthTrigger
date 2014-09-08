@@ -25,7 +25,10 @@
             <ansi-html value="logs.content"></ansi-html>
         </tab>
         <tab heading="执行代码">
-            <pre style="word-wrap: normal;">{{logs.snapshot.codes}}
+            <pre style="word-wrap: normal;">#========================================================================
+# Run Args: {{logs.snapshot.args}}
+#========================================================================
+{{logs.snapshot.codes}}
             </pre>
         </tab>
         <tab heading="其它信息">
