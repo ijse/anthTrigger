@@ -1,5 +1,6 @@
 Thenjs = require 'thenjs'
 logsModel = require '../scriptLogs/logsModel'
+moment = require 'moment'
 
 exports.list = (crital={})->
 	Thenjs (cont)->
@@ -37,3 +38,48 @@ exports.findById = (id)->
 		logsModel
 		.findById id, (err, doc)->
 			cont(err, doc)
+
+exports.getRecentLog = (count)->
+	Thenjs (cont)->
+		logsModel
+		.find {}, {
+			_id: 1
+			snapshot: 1
+			runByUser: 1
+			startAt: 1
+			endAt: 1
+		}, {
+			sort: '-startAt'
+			limit: count
+		}, (err, list)->
+			cont(null, list)
+
+exports.getUsageStats = (lastDate)->
+
+	Thenjs (cont)->
+
+		logsModel
+		.aggregate {
+			$group: {
+				_id: {
+					year: { $year: "$startAt" }
+					month: { $month: "$startAt" }
+					day: { $dayOfMonth: "$startAt" }
+				},
+				count: { $sum: 1 }
+			}
+		}
+		.sort({ _id: 1 })
+		.exec (err, result)->
+			result.map (v)->
+				v.date = moment({
+					year: v._id.year
+					month: v._id.month-1
+					day: v._id.day
+				}).toDate()
+				v._id = null
+				delete v._id
+
+			cont(err, result)
+
+		return

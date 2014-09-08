@@ -34,7 +34,8 @@ module.exports = (configs)->
 	})
 
 
-	app.use(bodyParser())
+	app.use(bodyParser.urlencoded( { extended: true }))
+	app.use(bodyParser.json())
 
 	# Load routes
 	router.attach(app)

@@ -132,7 +132,7 @@ exports.route = (app)->
 		notes = req.body.notes
 
 		Ctrl
-		.runScript sid, args, app.get('configs').spawnOptions, req.cookies.uid, notes
+		.runScript sid, args, app.get('configs').spawnOptions, req.session.user, notes
 		.then (cb, result, doc, logs)->
 			res.json {
 				success: true,
