@@ -133,6 +133,7 @@ module.exports = function(grunt) {
                         'index.js',
                         'setup.js',
                         'config.default.js',
+			'README.md',
                         'package.json'
                     ]
                 }]
