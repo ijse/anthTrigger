@@ -50,7 +50,7 @@ exports.attach = (app)->
 		getVersionFromGithub (err, data)->
 			try
 				latestRelease = JSON.parse(data)[0]
-				localVer = "v0.1.13" # "v#{Package.version}"
+				localVer = "v#{Package.version}"
 				curVer = latestRelease.tag_name
 
 				result.hasNew = compareVersion(curVer, localVer) > 0
