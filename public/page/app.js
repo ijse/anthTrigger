@@ -92,13 +92,22 @@ angular
 .run(function($rootScope, $location, $cookies, $http, amMoment, begService, ansi2html, notify) {
 
   amMoment.changeLanguage('de');
+
+  function getLatestVersion() {
+    $http
+    .get('/checkUpdate')
+    .success(function(data) {
+      $rootScope.versionData = data
+    });
+  }
+  getLatestVersion();
+
   function getServerLocation() {
     $http
     .get('/whereAmI')
     .success(function(data) {
       $rootScope.SERVER_INFO = data;
     });
-
   }
   getServerLocation();
 

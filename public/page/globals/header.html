@@ -58,7 +58,12 @@
 
                 <a href="https://github.com/ijse/anthTrigger/issues" target="_blank" class="button-link">反馈</a> |
 
-                <a href="https://github.com/ijse/anthTrigger/releases" target="_blank" class="button-link">更新</a>
+                <a href="https://github.com/ijse/anthTrigger/releases" target="_blank" class="button-link"> 下载 </a>
+
+                <a ng-href="https://github.com/ijse/anthTrigger/releases/tag/{{versionData.curRelease.tag_name}}" target="_blank" class="button-link" tooltip="有新版本 {{versionData.curRelease.tag_name}}！" style="color: yellow" ng-if="versionData.hasNew">
+                    <i class="fa fa-spin fa-star"></i> 更新版本
+                </a>
+
 
             </p>
         </li>

@@ -1,14 +1,37 @@
 
 os = require 'os'
 Package = require '../package.json'
+https = require 'https'
+compareVersion = require 'compare-version'
 
 nonAuthList = [
 	'/assets/css/bootstrap.css'
 	'/components/jquery/dist/jquery.min.js'
 	'/favicon.ico'
+	'/checkUpdate'
 	'/page/login.html'
 	'/login'
 ]
+
+getVersionFromGithub = (callback)->
+	options = {
+		hostname: 'api.github.com',
+		path: '/repos/ijse/anthTrigger/releases',
+		method: 'GET',
+		headers: {
+			'User-Agent': 'node.js, anthTrigger'
+		}
+	}
+
+	https.request options, (resp)->
+		result = ''
+		resp.on 'data', (data)->
+			result += data
+		resp.on 'end', ->
+			callback(null, result)
+	.on 'error', (e)->
+		callback(e)
+	.end()
 
 exports.attach = (app)->
 
@@ -20,6 +43,23 @@ exports.attach = (app)->
 			hostname: os.hostname()
 			version: Package.version
 		}
+
+	app.get '/checkUpdate', (req, res)->
+		result = {}
+
+		getVersionFromGithub (err, data)->
+			try
+				latestRelease = JSON.parse(data)[0]
+				localVer = "v#{Package.version}"
+				curVer = latestRelease.tag_name
+
+				result.hasNew = compareVersion(curVer, localVer)
+				result.curRelease = latestRelease
+
+			catch e
+				result.hasNew = 0
+
+			res.json result
 
 	app.get '*', (req, res, next)->
 		return next() if req.session.user or nonAuthList.indexOf(req.url) isnt -1
