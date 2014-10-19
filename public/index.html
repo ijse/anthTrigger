@@ -21,10 +21,12 @@
     <link rel="stylesheet" href="/assets/css/sb-admin.css">
     <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/page/globals/main.css">
+    <script src="/socket.io/socket.io.js"></script>
     <script>
         window.onerror = function(errType, errContent) {
             notify('ERROR！ 请刷新页面！<br>' + errType + errContent);
         }
+        var socket = io();
     </script>
 </head>
 

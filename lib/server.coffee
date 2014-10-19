@@ -9,12 +9,21 @@ path = require 'path'
 router = require './router'
 utils = require './utils'
 
+socketIO = require 'socket.io'
+http = require 'http'
+
 module.exports = (configs)->
 
 	# connect mongodb
 	utils.connectDB(configs.mongodb)
 
 	app = express()
+
+	# create socket.io service
+	server = http.Server(app)
+	io = socketIO(server)
+	app.set 'socket', io
+
 	app.use logger('dev')
 	app.set 'configs', configs
 
@@ -58,4 +67,4 @@ module.exports = (configs)->
 	# 		error: err
 	# 	}
 
-	return app
+	return server
