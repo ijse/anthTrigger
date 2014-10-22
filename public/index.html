@@ -10,20 +10,25 @@
     <title>AnthTrigger - cLauncher</title>
 
     <!-- Bootstrap core CSS -->
+    <!-- build:css /css/components.css -->
     <link rel="stylesheet" href="/assets/css/bootstrap.css">
     <link rel="stylesheet" href="/components/ng-tags-input/ng-tags-input.min.css">
     <link rel="stylesheet" href="/components/angular-notify/dist/angular-notify.min.css">
     <link rel="stylesheet" href="/components/codemirror/lib/codemirror.css">
     <link rel="stylesheet" href="/components/codemirror/theme/monokai.css">
     <link rel="stylesheet" href="/components/angular-loading-bar/build/loading-bar.min.css">
+    <!-- endbuild -->
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
 
     <!-- Add custom CSS here -->
+    <!-- build:css({.tmp/public,public}) /css/main.css -->
     <link rel="stylesheet" href="/assets/css/sb-admin.css">
-    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/page/globals/main.css">
+    <!-- endbuild -->
+
     <script>
         window.onerror = function(errType, errContent) {
-            notify('ERROR！ 请刷新页面！<br>' + errType + errContent);
+            typeof notify !== 'undefined' && notify('ERROR！ 请刷新页面！<br>' + errType + errContent);
         }
     </script>
 </head>
@@ -50,14 +55,18 @@
     <!-- /#wrapper -->
 
     <!-- JavaScript -->
+
+    <!-- build:js /js/base.js -->
     <script src="/components/jquery/dist/jquery.min.js"></script>
-    <script src="/components/moment/min/moment.min.js"></script>
+    <script src="/components/angular/angular.js"></script>
+    <script src="/components/moment/moment.js"></script>
     <script src="/components/moment/lang/zh-cn.js"></script>
-    <script src="/components/angular/angular.min.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js /js/components.js -->
     <script src="/components/angular-loading-bar/build/loading-bar.min.js"></script>
     <script src="/components/codemirror/lib/codemirror.js"></script>
     <script src="/components/codemirror/mode/shell/shell.js"></script>
-
     <script src="/components/angular-resource/angular-resource.min.js"></script>
     <script src="/components/angular-route/angular-route.min.js"></script>
     <script src="/components/angular-cookies/angular-cookies.min.js"></script>
@@ -70,12 +79,13 @@
     <script src="/components/angular-ui-codemirror/ui-codemirror.js"></script>
     <script src="/components/amcharts/dist/amcharts/amcharts.js"></script>
     <script src="/components/amcharts/dist/amcharts/serial.js"></script>
+    <!-- endbuild -->
 
+    <!-- build:js({.tmp/public,public}) /js/app.js -->
     <script src="/page/app.js"></script>
     <script src="/modules/ansiToHtml.js"></script>
     <script src="/modules/begModule.js"></script>
     <script src="/modules/usageChart.js"></script>
-
     <script src="/page/globals/dashboardController.js"></script>
     <script src="/page/scripts/js/createScriptController.js"></script>
     <script src="/page/scripts/js/editScriptController.js"></script>
@@ -86,6 +96,7 @@
     <script src="/page/eventLogs/js/eventLogsController.js"></script>
     <script src="/page/users/js/userController.js"></script>
     <script src="/page/settings/js/manageDataController.js"></script>
+    <!-- endbuild -->
 
 </body>
 </html>
