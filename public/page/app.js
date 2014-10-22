@@ -9,9 +9,13 @@ angular
   'ansiToHtml',
   'angular-loading-bar',
   'angularMoment',
+  'btford.socket-io',
   'ui.codemirror',
   'ui.bootstrap'
   ])
+.factory('Socket', function(socketFactory) {
+  return socketFactory();
+})
 .config(function($routeProvider, $httpProvider, $locationProvider) {
 
   $locationProvider.html5Mode(true).hashPrefix('!');
