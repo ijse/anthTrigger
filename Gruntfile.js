@@ -51,10 +51,11 @@ module.exports = function(grunt) {
 
         coffee: {
             options: {
-                sourceMap: true,
+                sourceMap: false,
                 sourceRoot: ''
             },
             dev: {
+                sourceMap: true,
                 files: [{
                     expand: true,
                     cwd: '<%= yeoman.public %>/page',
@@ -74,13 +75,13 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: '<%= yeoman.public %>/page',
                     src: '{,**/}*.coffee',
-                    dest: 'dist/public/page',
+                    dest: '.tmp/public/page',
                     ext: '.js'
                 }, {
                     expand: true,
                     cwd: '<%= yeoman.public %>/modules',
                     src: '{,**/}*.coffee',
-                    dest: 'dist/public/modules',
+                    dest: '.tmp/public/modules',
                     ext: '.js'
                 }]
             }
@@ -105,15 +106,83 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: '<%= yeoman.public %>/page',
                     src: '**/*.less',
-                    dest: 'dist/public/page',
+                    dest: '.tmp/public/page',
                     ext: '.css'
                 }]
+            }
+        },
+
+        ngAnnotate: {
+          dist: {
+            options: {
+                singleQuotes: true,
+            },
+            files: [{
+                expand: true,
+                cwd: '<%= yeoman.dist %>/public/modules',
+                src: '{,**}/*.js',
+                dest: '<%= yeoman.dist %>/public/modules'
+            }, {
+                expand: true,
+                cwd: '<%= yeoman.dist %>/public/page',
+                src: '{,**}/*.js',
+                dest: '<%= yeoman.dist %>/public/page'
+            }, {
+                expand: true,
+                cwd: '.tmp',
+                src: '{,**}/*.js',
+                dest: '.tmp'
+            }]
+          }
+        },
+        rev: {
+          dist: {
+            files: {
+              src: [
+                '<%= yeoman.dist %>/public/js/*.js',
+                '<%= yeoman.dist %>/public/css/*.css',
+                '<%= yeoman.dist %>/public/{,**}/*.{png,jpg,jpeg,gif,webp,svg}'
+              ]
+            }
+          }
+        },
+        useminPrepare: {
+            html: [
+                '<%= yeoman.app %>/public/index.html',
+                '<%= yeoman.app %>/public/page/login.html'
+            ],
+            options: {
+                root: 'public',
+                dest: '<%= yeoman.dist %>/public'
+            }
+        },
+        usemin: {
+            html: [
+                '<%= yeoman.dist %>/public/index.html',
+                '<%= yeoman.dist %>/public/page/login.html'
+            ],
+            css: [
+                '<%= yeoman.dist %>/public/{,**}/*.css'
+            ],
+            options: {
+                assetsDirs: [
+                    '.tmp/public',
+                    'public'
+                ]
             }
         },
 
         copy: {
         	dist: {
         		files: [{
+                    expand: true,
+                    dot: true,
+                    cwd: '<%= yeoman.public %>',
+                    dest: '.tmp/public',
+                    src: [
+                        'page/app.js'
+                    ]
+                }, {
         			expand: true,
         			dot: true,
           			cwd: '<%= yeoman.public %>',
@@ -121,7 +190,9 @@ module.exports = function(grunt) {
 					src: [
 						'!**/*.coffee',
 						'!**/*.less',
-                        '**/*'
+                        'components/**/*',
+                        'assets/font-awesome/**/*',
+                        '**/*.html'
 					]
         		}, {
                     expand: true,
@@ -129,11 +200,11 @@ module.exports = function(grunt) {
                     cwd: '<%= yeoman.app %>',
                     dest: '<%= yeoman.dist %>',
                     src: [
-                        'lib/**/*',
+                        'lib/{,**}/*',
                         'index.js',
                         'setup.js',
                         'config.default.js',
-			'README.md',
+                        'README.md',
                         'package.json'
                     ]
                 }]
@@ -174,7 +245,7 @@ module.exports = function(grunt) {
                         },
 
                         projectKey: 'sonar:grunt-sonar-runner:0.1.0',
-                        projectName: 'Grunt Sonar Runner',
+                        projectName: 'anthTrigger',
                         projectVersion: '0.10',
                         sources: ['public/modules', 'public/page', 'lib'].join(','),
                         language: 'js',
@@ -200,8 +271,14 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('build', [
         'clean:dist',
-		'copy:dist',
-		'coffee:dist',
-		'less:dist'
+        'copy:dist',
+        'coffee:dist',
+        'less:dist',
+        'useminPrepare',
+        'concat',
+        'ngAnnotate:dist',
+        'cssmin',
+        'uglify',
+        'usemin'
 	]);
 }

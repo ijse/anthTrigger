@@ -4,14 +4,18 @@ Package = require '../package.json'
 https = require 'https'
 compareVersion = require 'compare-version'
 
-nonAuthList = [
-	'/assets/css/bootstrap.css'
-	'/components/jquery/dist/jquery.min.js'
-	'/favicon.ico'
-	'/checkUpdate'
-	'/page/login.html'
-	'/login'
-]
+nonAuthList = ///
+	(
+		/components/(.*)$|
+		/js/(.*)$|
+		/css/(.*)$|
+		/assets/css/bootstrap.css|
+		/favicon.ico|
+		/checkUpdate|
+		/page/login.html|
+		/login
+	)
+///
 
 getVersionFromGithub = (callback)->
 	options = {
@@ -64,7 +68,8 @@ exports.attach = (app)->
 			res.json result
 
 	app.get '*', (req, res, next)->
-		return next() if req.session.user or nonAuthList.indexOf(req.url) isnt -1
+		return next() if req.session.user
+		return next() if nonAuthList.test(req.url)
 		if req.xhr
 			res.json {
 				success: false
