@@ -167,6 +167,6 @@ angular
     template: "/page/globals/notify-template.html"
   });
 
-  window.notify = notify
+  window.notify = notify;
 
 });
