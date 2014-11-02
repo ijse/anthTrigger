@@ -9,9 +9,17 @@ angular
   'ansiToHtml',
   'angular-loading-bar',
   'angularMoment',
+  'btford.socket-io',
   'ui.codemirror',
+  'btford.socket-io',
   'ui.bootstrap'
   ])
+.factory('io_runlog', function (socketFactory) {
+
+  return socketFactory({
+    ioSocket: io.connect('/runlog')
+  });
+})
 .config(function($routeProvider, $httpProvider, $locationProvider) {
 
   $locationProvider.html5Mode(true).hashPrefix('!');

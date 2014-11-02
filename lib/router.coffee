@@ -40,6 +40,8 @@ getVersionFromGithub = (callback)->
 exports.attach = (app)->
 
 	app.get '/ping', (req, res)-> res.send('pong!')
+	app.get('socket').on 'connection', (socket)->
+		console.log('>>>', socket)
 
 	app.get '/whereAmI', (req, res)->
 		res.json {

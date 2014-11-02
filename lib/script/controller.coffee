@@ -183,7 +183,7 @@ exports.callScript = (sid, arg=[], options)->
 
 
 
-exports.runScript = (id, arg=[], options={}, user, notes='')->
+exports.runScript = (id, arg=[], options={}, user, notes='', io_runlog)->
 
   uid = user._id
   options.shell = options.shell or 'sh'
@@ -254,7 +254,11 @@ exports.runScript = (id, arg=[], options={}, user, notes='')->
       # save to mongodb
       scriptLogs.content = shellOutput
       # scriptLogs.endAt = new Date()
+
+      #TODO: disable write to db instantly
       scriptLogs.save() #! Async problem?
+
+      io_runlog.emit(scriptLogs._id + '-output', shellOutput)
 
     exc.stdout.on 'data', receiveOutput
     exc.stderr.on 'data', receiveOutput
