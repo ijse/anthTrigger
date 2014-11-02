@@ -9,6 +9,7 @@ angular
   'ansiToHtml',
   'angular-loading-bar',
   'angularMoment',
+  'btford.socket-io',
   'ui.codemirror',
   'btford.socket-io',
   'ui.bootstrap'
