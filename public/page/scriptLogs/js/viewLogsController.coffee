@@ -1,10 +1,17 @@
 angular.module 'anthTrigger'
 .controller 'viewLogsController',
-($scope, $location, $interval, $http, ansi2html, $sce, id)->
+($scope, $location, $interval, $http, ansi2html, $sce, id, io_runlog)->
 	$scope.status = _st = {}
 	$scope.logs = {}
 	t = null
 	$scope.autoReload = false
+
+	# io_runlog.join(id)
+
+	io_runlog.forward(id + '-output')
+
+	$scope.$on 'socket:' + id + '-output', ()->
+		console.log(arguments)
 
 	loadLogs = ->
 		_st.load = 'loading'

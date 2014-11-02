@@ -26,11 +26,11 @@
     <link rel="stylesheet" href="/page/globals/main.css">
     <!-- endbuild -->
 
+    <script src="/socket.io/socket.io.js"></script>
     <script>
         window.onerror = function(errType, errContent) {
             typeof notify !== 'undefined' && notify('ERROR！ 请刷新页面！<br>' + errType + errContent);
         }
-        var socket = io();
     </script>
 </head>
 
@@ -80,6 +80,7 @@
     <script src="/components/angular-ui-codemirror/ui-codemirror.js"></script>
     <script src="/components/amcharts/dist/amcharts/amcharts.js"></script>
     <script src="/components/amcharts/dist/amcharts/serial.js"></script>
+    <script src="/components/angular-socket-io/socket.min.js"></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp/public,public}) /js/app.js -->

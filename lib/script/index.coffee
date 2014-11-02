@@ -5,6 +5,9 @@ path = require 'path'
 
 exports.route = (app)->
 
+	io = app.get('socket')
+	io_runlog = io.of('/runlog')
+
 	app.post '/scripts/create', (req, res)->
 		Ctrl
 		.addScript(req.body, req.cookies.uid)
@@ -132,7 +135,7 @@ exports.route = (app)->
 		notes = req.body.notes
 
 		Ctrl
-		.runScript sid, args, app.get('configs').spawnOptions, req.session.user, notes
+		.runScript sid, args, app.get('configs').spawnOptions, req.session.user, notes, io_runlog
 		.then (cb, result, doc, logs)->
 			res.json {
 				success: true,
